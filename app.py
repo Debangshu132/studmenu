@@ -5,19 +5,15 @@ from flask import Flask, request,render_template
 from pymessenger.bot import Bot
 import os
 import requests
-
 import json
 from decisionTree import decision,listOfExams,askQuestion,handleResults,decisionRightWrong
 from intelligence import BRAIN
 import time
-#from sklearn.feature_extraction.text import CountVectorizer
-#from sklearn.metrics.pairwise import euclidean_distances
-#from nltk.stem import PorterStemmer
+
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
-#ps=PorterStemmer()
 RID=''
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
@@ -43,60 +39,9 @@ def receive_message():
                 RID=recipient_id 
                 if message['message'].get('text'):
                     typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
-                    if  message['message'].get('quick_reply'):  
-                      secretcode= message['message']['quick_reply']['payload']
-                      if secretcode=='hint':
-                            hint=getUserInformation(recipient_id,'lasthint')
-                            sendLastOptionsQuickReply(recipient_id,hint)
-                            return "Message Processed"
-                      if secretcode=='right':
-                          
-                        currtopic=getUserInformation(recipient_id,"currenttopic")
-                        #currtotal=str(currtopic)+'total'
-                        #currright=str(currtopic)+'right'
-                        updateUsersInformation(recipient_id,insidequestion=False,totalquestionasked=int(getUserInformation(recipient_id,'totalquestionasked'))+1)
-                        updateUsersInformation(recipient_id,totalquestionright=int(getUserInformation(recipient_id,'totalquestionright'))+1)
-                        updateUsersInformation(recipient_id,**{str(currtopic)+'total':int(getUserInformation(recipient_id,str(str(currtopic)+'total')))+1})
-                        updateUsersInformation(recipient_id,**{str(currtopic)+'right':int(getUserInformation(recipient_id,str(str(currtopic)+'right')))+1})
-                        noofconsecutiveright=getUserInformation(recipient_id,'noofconsecutiveright')
-                        updateUsersInformation(recipient_id,noofconsecutivewrong=0)
-                        updateUsersInformation(recipient_id,noofconsecutiveright=noofconsecutiveright+1)
-                        reply=decisionRightWrong('right', noofconsecutiveright)
-                        #send_message(recipient_id, "dummy","dummy",reply)
-                        if getUserInformation(recipient_id,'currenttopic')=='aptitude':
-                            quickreply(recipient_id,['Another One','Go Back','Results','I am Bored!'], reply)
-                        else:
-                            quickreply(recipient_id,['Another One','Go Back','Results','I am Bored!'], reply+'\n'+getUserInformation(recipient_id,'lastsolution'))
-                        
-                        return "Message Processed"
-                      if secretcode=='wrong':
-                        
-                        updateUsersInformation(recipient_id,insidequestion=False,totalquestionasked=int(getUserInformation(recipient_id,'totalquestionasked'))+1)
-                        rightAns=getUserInformation(recipient_id,'lastRightAnswer')
-                        
-                        noofconsecutivewrong=getUserInformation(recipient_id,'noofconsecutivewrong')
-                        updateUsersInformation(recipient_id,noofconsecutiveright=0)
-                        updateUsersInformation(recipient_id,noofconsecutivewrong=noofconsecutivewrong+1)
-                        
-                        
-                        
-                        currtopic=getUserInformation(recipient_id,"currenttopic")
-                        #currtotal=str(currtopic)+'total'
-                        updateUsersInformation(recipient_id,**{str(currtopic)+'total':int(getUserInformation(recipient_id,str(str(currtopic)+'total')))+1})
-                        
-                        
-                        reply=decisionRightWrong('wrong', noofconsecutivewrong)
-                        #send_message(recipient_id, "dummy","dummy",reply+ ' ,the right answer is: '+'\n'+rightAns)
-                        quickreply(recipient_id,['Try Another','Go Back','Results','I am Bored!'],reply+ ' ,the right answer is: '+'\n'+rightAns+'\n'+getUserInformation(recipient_id,'lastsolution'))
-                        
-                        return "Message Processed"
-                    
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
-                    #checkPostback(output)
                     isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id)
-                    
                     isQuickReplyHint=checkQuickReply(response,recipient_id)
-                    isCalculator=checkCalculator(recipient_id,message['message'].get('text'))
                     if isQuickReply==False and isQuickReplyHint==False and isCalculator==False :
                         quickreply(recipient_id,['Lets test', 'I am Bored!'],response)
                         #sendLastOptionsQuickReply(recipient_id,'kya be')
@@ -123,7 +68,6 @@ def verify_fb_token(token_sent):
 
 #chooses a random message to send to the user
 def get_message(recipient_id,query):
-      
   try:  
     punctuation=[',','.','!','?']
     for i in punctuation:
@@ -173,28 +117,7 @@ def checkPostback(output):
          list=listOfExams('class10')
          list.append('Another Level')   
          quickreply(id,list,exam)   
-def checkCalculator(id,text):
-   try:
-     text=text.lower()
-     text=text.replace('+','%2B')
-     text=text.replace("what is","")
-     text=text.replace("calculate","")
-     text=text.replace("evaluate","")   
-     resultOfCalculation=requests.get("http://api.mathjs.org/v4/?expr="+str(text)) 
-     if str(resultOfCalculation)=="<Response [200]>":   
-      if getUserInformation(id,'insidequestion')==True: 
-         p=sendLastOptionsQuickReply(id,resultOfCalculation.text)
-         return True
-      else:
-         quickreply(id,['Lets test', 'I am Bored!'],resultOfCalculation.text)   
-         return True
-     else:
-        return False
-    
-   
-   except:
-    return False
-    
+
 def checkQuickReply(text,id): 
          try: 
            msges,listofitems=decision(text)
@@ -241,37 +164,7 @@ def checkQuickReply(text,id):
            return True
          except:
             return False    
-def sendQuestion(id):
-    question,options,right,hint,solution,exceeded=askQuestion(getUserInformation(id,'currenttopic'))
-    #options.append("hint")
-    updateUsersInformation(id,insidequestion=True,lastQuestion=question,lastRightAnswer=right,lasthint=hint,lastsolution=solution,lastOptions=options,lastExceeded=exceeded)
-    
-    if exceeded==False:
-      payload = {"recipient": {"id": id}, "message": {"text":question,"quick_replies": [] }}
-      for item in options:
-        if item==right:
-           payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":'right'})
-           
-        else:
-           payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":'wrong'})
-      if hint!='noHint':  
-         payload['message']['quick_replies'].append({"content_type":"text","title":"Give me a hint!","payload":'hint'})   
-      pay(payload)
-      return 'success'
-    if exceeded==True:
-         shortOptions=['A','B','C','D']
-         questionAns=question+'\n'+"A)"+options[0]+"\n"+"B)"+options[1]+"\n"+"C)"+options[2]+"\n"+"D)"+options[3]+"\n"
-         payload = {"recipient": {"id": id}, "message": {"text":questionAns,"quick_replies": []}}
-         for itemindex in range(0,4):
-            if options[itemindex]==right:
-              payload['message']['quick_replies'].append({"content_type":"text","title":shortOptions[itemindex],"payload":'right'})
-              
-            else:
-              payload['message']['quick_replies'].append({"content_type":"text","title":shortOptions[itemindex],"payload":'wrong'})
-         if hint!='noHint':    
-             payload['message']['quick_replies'].append({"content_type":"text","title":"Give me a hint!","payload":'hint'})    
-         pay(payload)
-         return 'success'  
+ 
         
 #uses PyMessenger to send response to user
 def send_message(recipient_id, topic,mood,response):
@@ -298,19 +191,7 @@ def getUserInformation(id,property):
     userInfo = cursor[0]
     return(userInfo[id][property])
 
-def search_gif(text):
-    #get a GIF that is similar to text sent
-    payload = {'s': text, 'api_key': '8uWKU7YtJ4bIzYcAnjRVov8poEHCCj8l'}
-    r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
-    r = r.json()
-    url = r['data']['images']['original']['url']
-    return url
-def send_gif_message(recipient_id, message):
-    gif_url = search_gif(message)
-    data = json.dumps({"recipient": {"id": recipient_id},"message": {"attachment": {"type": "image","payload": {"url": gif_url}}}})
-    params = {"access_token": ACCESS_TOKEN }
-    headers = {"Content-Type": "application/json"}
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
 def sendLastOptionsQuickReply(id,text):
     options=getUserInformation(id,'lastOptions')
     right=getUserInformation(id,'lastRightAnswer')
@@ -372,7 +253,7 @@ def shareme(message):
                 "title": "Chat now"
               }]}]}}}}
     return shareit
-def sendSuperTopic(id):
+def sendBestSellers(id):
     response=   {
      "recipient":{"id":id},
      "message":{
@@ -423,16 +304,7 @@ def sendSuperTopic(id):
              ]}}}}
     r=pay(response)
     return r
-def sendVideo(id,url):
- response={"recipient":{"id":id},
- "message":{
-    "attachment":{
-      "type":"video", 
-      "payload":{
-        "url":"https://www.youtube.com/watch?v=2KKkj-DJWzY", 
-        "is_reusable":True}}}}
- pay(response)    
- return True    
+
 def sendResult(id, gif,message):
     url = search_gif(gif)
     share=shareme(message)
@@ -484,46 +356,12 @@ def sendResult(id, gif,message):
     r=pay(response)
     return r
 @app.route("/result/<id>", methods=['GET', 'POST'])
-def result(id):
-        global RID
-        R=int(getUserInformation(id,'totalquestionright'))
-        T=int(getUserInformation(id,'totalquestionasked'))
-        AR=int(getUserInformation(id,'aptituderight'))
-        AT=int(getUserInformation(id,'aptitudetotal'))
-        VR=int(getUserInformation(id,'verbalabilityright'))
-        VT=int(getUserInformation(id,'verbalabilitytotal'))
-        GR=int(getUserInformation(id,'generalknowledgeright'))
-        GT=int(getUserInformation(id,'generalknowledgetotal'))
-        PR=int(getUserInformation(id,'physicsright'))
-        PT=int(getUserInformation(id,'physicstotal'))
-        CR=int(getUserInformation(id,'chemistryright'))
-        CT=int(getUserInformation(id,'chemistrytotal'))
-        BR=int(getUserInformation(id,'biologyright'))
-        BT=int(getUserInformation(id,'biologytotal'))
-        MR=int(getUserInformation(id,'mathright'))
-        MT=int(getUserInformation(id,'mathtotal'))
-        W=T-R 
-        AW=AT-AR 
-        VW=VT-VR
-        GW=GT-GR 
-        PW=PT-PR
-        BW=BT-BR 
-        CW=CT-CR 
-        MW=MT-MR 
-        
-        return render_template('chart.html',R=R, W=W,PR=PR, PW=PW,CR=CR, CW=CW,MR=MR, MW=MW,BR=BR, BW=BW,AR=AR,AW=AW,GW=GW,GR=GR,VW=VW,VR=VR)
+def menu(id):
+       return render_template('menu.html')
     
 def initializeUser(id):
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
-    data=a.json()
-    name=data['first_name']
-    updateUsersInformation(id,lastQuestion="",lasthint="",lastsolution="",lastOptions="",lastExceeded=False,insidequestion=False,
-                           totalquestionasked=0,totalquestionright=0,currenttopic="",name=name,
-                               noofconsecutivewrong=0,noofconsecutiveright=0,lastRightAnswer= "",physicstotal= 0,
-                           verbalabilityright=0,verbalabilitytotal=0,
-        physicsright= 0,aptitudetotal= 0,aptituderight= 0,chemistrytotal= 0,chemistryright= 0,biologytotal= 0,generalknowledgeright=0,
-        generalknowledgetotal=0,                   
-        biologyright= 0,mathtotal= 0,mathright= 0,supercurrenttopic="")
+    updateUsersInformation(id)
     
 
 if __name__ == "__main__":
