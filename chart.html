@@ -1,0 +1,154 @@
+<html>
+      <head>
+        <!--Load the AJAX API-->
+        <style>
+          html, body {
+                max-width: 100%;overflow-x: hidden;}
+   
+</style>    
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+
+          // Load the Visualization API and the piechart package.
+          google.load('visualization', '1.0', {'packages':['corechart']});
+
+          // Set a callback to run when the Google Visualization API is loaded.
+          google.setOnLoadCallback(drawChart);
+
+          // Callback that creates and populates a data table,
+          // instantiates the pie chart, passes in the data and
+          // draws it.
+          function drawChart() {
+
+            // Create the data table.
+            var data0 = new google.visualization.DataTable();
+            data0.addColumn('string', 'parameter');    
+            data0.addColumn('number', 'value');
+            data0.addRows([
+              ['right', {{AR}}],
+              ['wrong', {{AW}}],
+             
+            ]);    
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'parameter');    
+            data.addColumn('number', 'value');
+            data.addRows([
+              ['right', {{R}}],
+              ['wrong', {{W}}],
+             
+            ]);
+            // Create the data table.
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'parameter');    
+            data2.addColumn('number', 'value');
+            data2.addRows([
+              ['right', {{PR}}],
+              ['wrong', {{PW}}],
+             
+            ]);
+            var data3 = new google.visualization.DataTable();
+            data3.addColumn('string', 'parameter');    
+            data3.addColumn('number', 'value');
+            data3.addRows([
+              ['right', {{CR}}],
+              ['wrong', {{CW}}],
+             
+            ]);
+            var data4 = new google.visualization.DataTable();
+            data4.addColumn('string', 'parameter');    
+            data4.addColumn('number', 'value');
+            data4.addRows([
+              ['right', {{MR}}],
+              ['wrong',{{MW}}],
+             
+            ]);
+            var data5 = new google.visualization.DataTable();
+            data5.addColumn('string', 'parameter');    
+            data5.addColumn('number', 'value');
+            data5.addRows([
+              ['right', {{BR}}],
+              ['wrong', {{BW}}],
+             
+            ]);
+            var data6 = new google.visualization.DataTable();
+            data6.addColumn('string', 'parameter');    
+            data6.addColumn('number', 'value');
+            data6.addRows([
+              ['right', {{GR}}],
+              ['wrong', {{GW}}],
+             
+            ]);   
+            var data7 = new google.visualization.DataTable();
+            data7.addColumn('string', 'parameter');    
+            data7.addColumn('number', 'value');
+            data7.addRows([
+              ['right', {{VR}}],
+              ['wrong', {{VW}}],
+             
+            ]);      
+            
+
+            // Set chart options
+            var options0 = {'title':'Aptitude',
+                           'width':1000,'fontSize': 40,
+                           'height':700};    
+            var options = {'title':'Overall Result',
+                           'width':1000,'fontSize': 40,
+                           'height':700};
+            // Set chart options
+            var options2 = {'title':'Physics',
+                           'width':1000,'fontSize': 40,
+                           'height':700};
+            // Set chart options
+            var options3 = {'title':'Chemistry',
+                           'width':1000,'fontSize': 40,
+                           'height':700};
+            var options4 = {'title':'Math',
+                           'width':1000,'fontSize': 40,
+                           'height':700};   
+            var options5 = {'title':'Biology',
+                           'width':1000,'fontSize': 40,
+                           'height':700}; 
+            var options6 = {'title':'General Knowledge',
+                           'width':1000,'fontSize': 40,
+                           'height':700};  
+            var options7 = {'title':'Verbal Ability',
+                           'width':1000,'fontSize': 40,
+                           'height':700};        
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart0 = new google.visualization.PieChart(document.getElementById('chart_div0'));
+            chart0.draw(data0, options0);    
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+            var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+            chart2.draw(data2, options2);
+            var chart3 = new google.visualization.PieChart(document.getElementById('chart_div3'));
+            chart3.draw(data3, options3);
+            var chart4 = new google.visualization.PieChart(document.getElementById('chart_div4'));
+            chart4.draw(data4, options4);
+            var chart5 = new google.visualization.PieChart(document.getElementById('chart_div5'));
+            chart5.draw(data5, options5);
+             var chart6 = new google.visualization.PieChart(document.getElementById('chart_div6'));
+            chart6.draw(data6, options6);  
+             var chart7 = new google.visualization.PieChart(document.getElementById('chart_div7'));
+            chart7.draw(data7, options7);      
+           
+
+          }
+        </script>
+      </head>
+
+      <body>
+        <!--Divs that will hold the charts-->
+           
+        <div id="chart_div"></div>
+        <div id="chart_div0"></div>
+        <div id="chart_div6"></div> 
+        <div id="chart_div7"></div>     
+        <div id="chart_div2"></div>
+        <div id="chart_div3"></div>
+        <div id="chart_div4"></div>
+        <div id="chart_div5"></div>
+      </body>
+    </html>
