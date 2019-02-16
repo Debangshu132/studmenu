@@ -10,9 +10,6 @@ import json
 from decisionTree import decision,listOfExams,askQuestion,handleResults,decisionRightWrong
 from intelligence import BRAIN
 import time
-#from sklearn.feature_extraction.text import CountVectorizer
-#from sklearn.metrics.pairwise import euclidean_distances
-#from nltk.stem import PorterStemmer
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -153,26 +150,11 @@ def checkPostback(output):
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
       data=a.json()
       name=data['first_name']
-      if output['entry'][0]['messaging'][0]['postback']['payload']=='Startyaar':
-         welcome='Welcome! '+name+' I am AI-powered bot Brilu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
-         initializeUser(id)
+      if output['entry'][0]['messaging'][0]['postback']['referral']['ref']=='debangshutable1':
+         welcome='Welcome! debangshutable1 I am AI-powered bot studmenu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
          send_message(id,'a','a', welcome)
-         pay({"recipient":{"id":id},"sender_action":"typing_on"})
-         exam='Choose any level to start practising problems!'   
-         time.sleep(2)
-         sendSuperTopic(id)
-      if output['entry'][0]['messaging'][0]['postback']['payload']=='jobPrep':
-         updateUsersInformation(id,supercurrenttopic='jobPrep')
-         exam='Choose any topic to start practising problems!'
-         list=listOfExams('jobPrep')
-         list.append('Another Level')   
-         quickreply(id,list,exam) 
-      if output['entry'][0]['messaging'][0]['postback']['payload']=='class10':
-         updateUsersInformation(id,supercurrenttopic='class10')
-         exam='Choose any topic to start practising problems!'
-         list=listOfExams('class10')
-         list.append('Another Level')   
-         quickreply(id,list,exam)   
+        
+      
 def checkCalculator(id,text):
    try:
      text=text.lower()
