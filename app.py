@@ -205,42 +205,9 @@ def checkCalculator(id,text):
 def checkQuickReply(text,id): 
          try: 
            msges,listofitems=decision(text)
-           if msges[0]=='okay,Lets start':
-                sendQuestion(id)
-                updateUsersInformation(id,noofconsecutivewrong=0,noofconsecutiveright=0)
-                return True  
-           if msges[0]=='okay,Lets start again':
-                sendQuestion(id)
-                return True  
-          
-           if listofitems[0]=='checkcurrenttopics':
-               updateUsersInformation(id,noofconsecutivewrong=0,noofconsecutiveright=0)
-               supertopic= getUserInformation(id,'supercurrenttopic') 
-               if supertopic=="":
-                    sendSuperTopic(id)
-                    return True
-               listofitems=listOfExams(supertopic)
-               listofitems.append('Another Level') 
-           if msges[0]=='Another Level':
-               
-               sendSuperTopic(id)
-               return True
-            
-            
-           if msges[0]=="Results":
-               send_message(id,'a','a', msges[1])
-               total=int(getUserInformation(id,'totalquestionasked')) 
-               right=int(getUserInformation(id,'totalquestionright'))
-               result="You got "+str(right)+' out of '+str(total)+' correct!'
-               send_gif_message(id, handleResults(total,right))
-               print(sendResult(id,handleResults(total,right),result)) 
-               #quickreply(id,listofitems,result)
-               return True 
-           
            for msg in range(0,len(msges)-2):
               send_message(id,'a','a', msges[msg])
-              time.sleep(1)
-           updateUsersInformation(id, currenttopic=str(msges[len(msges)-1])) 
+              time.sleep(1) 
            quickreply(id,listofitems,msges[len(msges)-2]) 
            return True
          except:
