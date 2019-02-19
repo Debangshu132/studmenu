@@ -208,7 +208,6 @@ def checkQuickReply(text,id):
            if len(msges)>1:
             for msg in range(0,len(msges)-1):
               send_message(id,'a','a', msges[msg])
-              time.sleep(1) 
            quickreply(id,listofitems,msges[len(msges)-1]) 
            return True
          except:
