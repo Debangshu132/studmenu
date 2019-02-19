@@ -155,7 +155,7 @@ def checkReferral(output):
       fulladdress=fulladdress.split("_")
       restaurant=fulladdress[0]
       tableno=fulladdress[1]    
-      welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today"
+      welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
       send_message(id,'a','a', welcome)
       quickreply(id,['Open Menu','Call Waiter'],instruction)
@@ -171,7 +171,7 @@ def checkPostback(output):
          fulladdress=fulladdress.split("_")
          restaurant=fulladdress[0]
          tableno=fulladdress[1]   
-         welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today"
+         welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        else:
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
        send_message(id,'a','a', welcome)
