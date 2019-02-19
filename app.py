@@ -211,10 +211,7 @@ def checkQuickReply(text,id):
            if msges[0]=='okay,Lets start again':
                 sendQuestion(id)
                 return True  
-           if msges[0]==  'Call Waiter':
-                 message="What do you want?"
-                 quickreply(id,["napkin","spoon","water","talk to waiter"],message)
-                 return True  
+          
            if listofitems[0]=='checkcurrenttopics':
                updateUsersInformation(id,noofconsecutivewrong=0,noofconsecutiveright=0)
                supertopic= getUserInformation(id,'supercurrenttopic') 
