@@ -102,7 +102,7 @@ def receive_message():
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
                     response = ['(y)',':)',":D"]
-                    sendVideo(recipient_id,'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4')
+                    
                     quickreply(recipient_id,['Lets test', 'I am Bored!'],random.choice(response))
                 """try:
                     dummy=getUserInformation(recipient_id,'name')
@@ -209,13 +209,8 @@ def checkQuickReply(text,id):
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
            if text=="Open Menu": 
-                 response= [
-              {
-                "type": "web_url",
-                "url": "https://www.google.com/", 
-                "title": "Open Menu"
-              }]
-                 bot.send_button_message(id,'To open menu press Open Menu ',response)
+                 button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" }]
+                 bot.send_button_message(id,'To open menu press Open Menu ',button)
                  return True
          except:
             return False    
