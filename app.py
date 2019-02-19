@@ -205,9 +205,9 @@ def checkCalculator(id,text):
 def checkQuickReply(text,id): 
          try: 
            msges,listofitems=decision(text)
-           
-           quickreply(id,listofitems,msges) 
-           return True
+           if text=="Call Waiter":
+             quickreply(id,["napkins","spoon","water","Talk to waiter"],"calling waiter what do you want") 
+             return True
          except:
             return False    
 def sendQuestion(id):
