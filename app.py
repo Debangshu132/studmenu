@@ -205,10 +205,8 @@ def checkCalculator(id,text):
 def checkQuickReply(text,id): 
          try: 
            msges,listofitems=decision(text)
-           if len(msges)>1:
-            for msg in range(0,len(msges)-1):
-              send_message(id,'a','a', msges[msg])
-           quickreply(id,listofitems,msges[len(msges)-1]) 
+           
+           quickreply(id,listofitems,msges) 
            return True
          except:
             return False    
