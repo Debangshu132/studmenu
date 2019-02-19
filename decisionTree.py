@@ -1,18 +1,18 @@
 from pymongo import MongoClient
 import random
 def fetchData():
-    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds239055.mlab.com:39055/studmenu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
-    db = client.get_database("brilu")
+    db = client.get_database("studmenu")
     col = db["questionAnswers"]
     cursor = col.find()
     # p.pprint(cursor[0])
     userInfo = cursor[0]
     return(userInfo)
 def updateUsersInformation(ID, **kwargs):
-    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds239055.mlab.com:39055/studmenu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
-    db = client.get_database("brilu")
+    db = client.get_database("studmenu")
     for key in kwargs:
         db.userInfo.update({"_id" : "5c4e064ffb6fc05326ad8c57"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
