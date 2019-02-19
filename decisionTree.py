@@ -24,13 +24,10 @@ def listOfExams(supertopic):
     if supertopic=='class10':
            return ['physics','biology','chemistry','math']    
 def decision(input):
-     if input=='generalknowledge':
-         msg=['Okay so general knowledge it is! I will continue giving you some random questions from general knowledge',' Untill you decide its enough','generalknowledge']
-         listitems=['Okay Sure','Go Back']
-         return msg,listitems
-     if input=='verbalability':
-         msg=['Okay so verbal ability it is! I will continue giving you some random questions from verbal ability',' Untill you decide its enough','verbalability']
-         listitems=['Okay Sure','Go Back']
+    
+     if input=='Call Waiter':
+         msg=['Calling waiter! what do you want?','verbalability']
+         listitems=['Napkin','Spoons',"Water","Talk to waiter"]
          return msg,listitems
      if input=='biology':
          msg=['Okay so biology it is! I will continue giving you some random questions from biology ',' Untill you decide its enough','biology']
