@@ -26,7 +26,7 @@ def listOfExams(supertopic):
 def decision(input):
     
      if input=='Call Waiter':
-         msg=['Calling waiter! what do you want?','verbalability']
+         msg=['Calling waiter!'+'\n'+' what do you want?']
          listitems=['Napkin','Spoons',"Water","Talk to waiter"]
          return msg,listitems
      if input=='biology':
