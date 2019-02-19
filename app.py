@@ -145,7 +145,7 @@ def pay(payload):
   result = response.json()
   return result
 def checkPostback(output):
-      #if output['entry'][0]['messaging'][0].get('postback'):
+     if output['entry'][0]['messaging'][0].get('postback'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
       data=a.json()
