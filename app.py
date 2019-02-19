@@ -145,13 +145,13 @@ def pay(payload):
   result = response.json()
   return result
 def checkPostback(output):
-     if output['entry'][0]['messaging'][0].get('postback'):
+     if output['entry'][0]['messaging'][0].get('referral'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
       data=a.json()
       name=data['first_name']
       #if output['entry'][0]['messaging'][0]['postback']['payload']=='debangshutable1':
-      #welcome='Welcome!'+str(output)+' I am AI-powered bot studmenu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
+      welcome='Welcome!'+str(output['entry'][0]['messaging'][0]['referral']['ref'])+' I am AI-powered bot studmenu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
       #send_message(id,'a','a', welcome)
 
     
