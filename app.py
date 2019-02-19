@@ -156,7 +156,9 @@ def checkReferral(output):
       restaurant=fulladdress[0]
       tableno=fulladdress[1]    
       welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today"
+      instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
       send_message(id,'a','a', welcome)
+      quickreply(id,['Open Menu','Call Waiter'],instruction)
 def checkPostback(output):
      if output['entry'][0]['messaging'][0].get('postback'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
@@ -173,7 +175,8 @@ def checkPostback(output):
        else:
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
        send_message(id,'a','a', welcome)
-    
+       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
+       quickreply(id,['Open Menu','Call Waiter'],instruction)
         
       
 def checkCalculator(id,text):
@@ -343,14 +346,6 @@ def sendLastOptionsQuickReply(id,text):
          pay(payload)
     return 'succeeded'        
     
-    
-    
-    
-    
-    
-    
-    
-    
 def shareme(message):
     shareit={
      "type": "element_share",
@@ -426,16 +421,7 @@ def sendSuperTopic(id):
              ]}}}}
     r=pay(response)
     return r
-def sendVideo(id,url):
- response={"recipient":{"id":id},
- "message":{
-    "attachment":{
-      "type":"video", 
-      "payload":{
-        "url":"https://www.youtube.com/watch?v=2KKkj-DJWzY", 
-        "is_reusable":True}}}}
- pay(response)    
- return True    
+
 def sendResult(id, gif,message):
     url = search_gif(gif)
     share=shareme(message)
@@ -488,33 +474,7 @@ def sendResult(id, gif,message):
     return r
 @app.route("/result/<id>", methods=['GET', 'POST'])
 def result(id):
-        global RID
-        R=int(getUserInformation(id,'totalquestionright'))
-        T=int(getUserInformation(id,'totalquestionasked'))
-        AR=int(getUserInformation(id,'aptituderight'))
-        AT=int(getUserInformation(id,'aptitudetotal'))
-        VR=int(getUserInformation(id,'verbalabilityright'))
-        VT=int(getUserInformation(id,'verbalabilitytotal'))
-        GR=int(getUserInformation(id,'generalknowledgeright'))
-        GT=int(getUserInformation(id,'generalknowledgetotal'))
-        PR=int(getUserInformation(id,'physicsright'))
-        PT=int(getUserInformation(id,'physicstotal'))
-        CR=int(getUserInformation(id,'chemistryright'))
-        CT=int(getUserInformation(id,'chemistrytotal'))
-        BR=int(getUserInformation(id,'biologyright'))
-        BT=int(getUserInformation(id,'biologytotal'))
-        MR=int(getUserInformation(id,'mathright'))
-        MT=int(getUserInformation(id,'mathtotal'))
-        W=T-R 
-        AW=AT-AR 
-        VW=VT-VR
-        GW=GT-GR 
-        PW=PT-PR
-        BW=BT-BR 
-        CW=CT-CR 
-        MW=MT-MR 
-        
-        return render_template('chart.html',R=R, W=W,PR=PR, PW=PW,CR=CR, CW=CW,MR=MR, MW=MW,BR=BR, BW=BW,AR=AR,AW=AW,GW=GW,GR=GR,VW=VW,VR=VR)
+        return render_template('chart.html')
     
 def initializeUser(id):
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
