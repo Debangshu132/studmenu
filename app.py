@@ -208,16 +208,16 @@ def checkQuickReply(text,id):
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
-            if text=="Open Menu": 
+           if text=="Open Menu": 
                  response=[
                              {
-                "type":"web_url",
-                "url":"http://www.google.com",
-                "title":"Open Menu!",
-                "webview_height_ratio": "tall"  
-              } ]
+                          "type":"web_url",
+                           "url":"http://www.google.com",
+                            "title":"Open Menu!",
+                           "webview_height_ratio": "tall"  
+                       } ]
                  bot.send_button_message(id,'To open menu press Open Menu ',response)
-                return True
+                 return True
          except:
             return False    
 
