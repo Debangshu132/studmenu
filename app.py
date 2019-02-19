@@ -161,9 +161,11 @@ def checkPostback(output):
       data=a.json()
       name=data['first_name']
       if output['entry'][0]['messaging'][0]['postback']['payload']=='StartMan':
-       welcome='Welcome!'+str(output)+' I am AI-powered bot studmenu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
-       send_message(id,'a','a', welcome)    
-
+       if output['entry'][0]['messaging'][0]['postback'].get('referral'):
+         welcome='Welcome!'+str(output['entry'][0]['messaging'][0]['referral']['ref'])+' I am AI-powered bot studmenu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
+       else:
+        welcome="Welcome! please open the camera and long press to scan the qr code!"
+       send_message(id,'a','a', welcome)
     
         
       
