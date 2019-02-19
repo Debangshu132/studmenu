@@ -209,13 +209,12 @@ def checkQuickReply(text,id):
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
            if text=="Open Menu": 
-                 response=[
-                             {
-                          "type":"web_url",
-                           "url":"http://www.google.com",
-                            "title":"Open Menu!",
-                           "webview_height_ratio": "tall"  
-                       } ]
+                 response= [
+              {
+                "type": "web_url",
+                "url": "https://www.google.com/", 
+                "title": "Open Menu"
+              }]
                  bot.send_button_message(id,'To open menu press Open Menu ',response)
                  return True
          except:
