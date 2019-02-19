@@ -163,7 +163,7 @@ def checkPostback(output):
       if output['entry'][0]['messaging'][0]['postback']['payload']=='StartMan':
        if output['entry'][0]['messaging'][0]['postback'].get('referral'):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
-         fulladdress=fulladdress.split("|")
+         fulladdress=fulladdress.split("_")
          restaurant=fulladdress[0]
          tableno=fulladdress[1]   
          welcome='Welcome!'+name+"you are sitting in restaurant"+restaurant+" in table number "+ tableno+" I am your host today"
