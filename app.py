@@ -30,7 +30,7 @@ def receive_message():
       # get whatever message a user sent the bot
       output = request.get_json()
       #for first time only check if this is the get started click or no
-      checkPostback(output)
+      checkReferral(output)
       for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
@@ -144,7 +144,7 @@ def pay(payload):
             json=payload )
   result = response.json()
   return result
-def checkPostback(output):
+def checkReferral(output):
      if output['entry'][0]['messaging'][0].get('referral'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
