@@ -151,8 +151,11 @@ def checkReferral(output):
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
       data=a.json()
       name=data['first_name']
-      
-      welcome='Welcome!'+str(output['entry'][0]['messaging'][0]['referral']['ref'])+' I am AI-powered bot studmenu,I will help you practice problems while having fun! Get ready for some interactive learning! :D'
+      fulladdress=str(output['entry'][0]['messaging'][0]['referral']['ref'])
+      fulladdress=fulladdress.split("_")
+      restaurant=fulladdress[0]
+      tableno=fulladdress[1]    
+      welcome='Welcome!'+name+"you are sitting in restaurant"+restaurant+" in table number "+ tableno+" I am your host today"
       send_message(id,'a','a', welcome)
 def checkPostback(output):
      if output['entry'][0]['messaging'][0].get('postback'):
