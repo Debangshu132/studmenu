@@ -206,41 +206,22 @@ def checkQuickReply(text,id):
          try: 
            msges,listofitems=decision(text)
            if text=="Call Waiter":
-             quickreply(id,["napkins","spoon","water","Talk to waiter"],"calling waiter what do you want") 
+             quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
+            if text=="Open Menu": 
+                 response=[
+                             {
+                "type":"web_url",
+                "url":"http://www.google.com",
+                "title":"Open Menu!",
+                "webview_height_ratio": "tall"  
+              } ]
+                 bot.send_button_message(id,'To open menu press Open Menu ',response)
+                return True
          except:
             return False    
-def sendQuestion(id):
-    question,options,right,hint,solution,exceeded=askQuestion(getUserInformation(id,'currenttopic'))
-    #options.append("hint")
-    updateUsersInformation(id,insidequestion=True,lastQuestion=question,lastRightAnswer=right,lasthint=hint,lastsolution=solution,lastOptions=options,lastExceeded=exceeded)
-    
-    if exceeded==False:
-      payload = {"recipient": {"id": id}, "message": {"text":question,"quick_replies": [] }}
-      for item in options:
-        if item==right:
-           payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":'right'})
-           
-        else:
-           payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":'wrong'})
-      if hint!='noHint':  
-         payload['message']['quick_replies'].append({"content_type":"text","title":"Give me a hint!","payload":'hint'})   
-      pay(payload)
-      return 'success'
-    if exceeded==True:
-         shortOptions=['A','B','C','D']
-         questionAns=question+'\n'+"A)"+options[0]+"\n"+"B)"+options[1]+"\n"+"C)"+options[2]+"\n"+"D)"+options[3]+"\n"
-         payload = {"recipient": {"id": id}, "message": {"text":questionAns,"quick_replies": []}}
-         for itemindex in range(0,4):
-            if options[itemindex]==right:
-              payload['message']['quick_replies'].append({"content_type":"text","title":shortOptions[itemindex],"payload":'right'})
-              
-            else:
-              payload['message']['quick_replies'].append({"content_type":"text","title":shortOptions[itemindex],"payload":'wrong'})
-         if hint!='noHint':    
-             payload['message']['quick_replies'].append({"content_type":"text","title":"Give me a hint!","payload":'hint'})    
-         pay(payload)
-         return 'success'  
+
+       
         
 #uses PyMessenger to send response to user
 def send_message(recipient_id, topic,mood,response):
