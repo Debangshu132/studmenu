@@ -191,8 +191,12 @@ def handleUser(id,fulladdress,name,restaurant,tableno):
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
         return True
     if userCondition=="consumer":
-        executeConsumerCode(id,fulladdress,name,restaurant,tableno)
-        return True
+        if tableno=="":
+            createUser(id,fulladdress)
+            return True
+        else:    
+         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
+         return True
     else:
         return False
 def checkUserCondition(id):
