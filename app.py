@@ -185,12 +185,7 @@ def checkPostback(output):
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
        send_message(id,'a','a', welcome)
        handleUser(id,fulladdress)
-       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
-       initializeUser(id,category) 
-       #quickreply(id,['Open Menu','Call Waiter'],instruction)
-       button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
-               {"type":"postback","title":"WAITER","payload":"waiter"}] 
-       bot.send_button_message(id,'To open menu press Open Menu ',button) 
+       
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
         
@@ -198,7 +193,7 @@ def handleUser(id,fulladdress):
     userCondition=checkUserCondition(id)
     send_message(id,'a','a', userCondition)
     return True
-    """if userCondition=="none":
+    if userCondition=="none":
         createUser(id,fulladdress)
         return True
     if userCondition=="waiter":    
@@ -208,7 +203,7 @@ def handleUser(id,fulladdress):
         executeConsumerCode(id,fulladdress)
         return True
     else:
-        return False"""
+        return False
 def checkUserCondition(id):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
@@ -223,7 +218,21 @@ def checkUserCondition(id):
         return "consumer"
     else:
         return "none"
-    
+def createUser(id,fulladdress):
+    a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
+    data=a.json()
+    name=data['first_name']
+    if len(fulladdress)==1:
+        updateWaitersInformation(id,name=name,name1="")
+    else:
+        updateConsumersInformation(id,name=name,name1="")    
+def executeConsumerCode(id,fulladdress):
+       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
+       button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
+               {"type":"postback","title":"WAITER","payload":"waiter"}] 
+       bot.send_button_message(id,'To open menu press Open Menu ',button) 
+def executeWaiterCode(id,fulladdress):
+    send_message(id,"a","a","welcome you are a waiter")
 
     
     
