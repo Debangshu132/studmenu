@@ -227,7 +227,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
-    send_message(id,"a","a","welcome"+name+" you are a waiter in "+restaurant+ "restaurant")
+    send_message(id,"a","a","welcome "+name+" you are a waiter in "+restaurant+ " restaurant")
 
     
     
