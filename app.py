@@ -222,8 +222,10 @@ def createUser(id,fulladdress):
     name=data['first_name']
     if len(fulladdress)==1:
         updateWaitersInformation(id,name=name,name1="")
+        executeWaiterCode(id,fulladdress)
     else:
-        updateConsumersInformation(id,name=name,name1="")    
+        updateConsumersInformation(id,name=name,name1="")   
+        executeConsumerCode(id,fulladdress)
 def executeConsumerCode(id,fulladdress):
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
