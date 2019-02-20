@@ -104,10 +104,7 @@ def receive_message():
                     response = ['(y)',':)',":D"]
                     
                     quickreply(recipient_id,['Lets test', 'I am Bored!'],random.choice(response))
-                """try:
-                    dummy=getUserInformation(recipient_id,'name')
-                except:
-                    initializeUser(recipient_id)"""
+               
     return "Message Processed"
 
 
@@ -155,14 +152,11 @@ def checkReferral(output):
       fulladdress=fulladdress.split("_")
        
       restaurant=fulladdress[0]
-      tableno=fulladdress[1]    
-      welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
-      instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
-      send_message(id,'a','a', welcome)
-      #quickreply(id,['Open Menu','Call Waiter'],instruction)
-      button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
-              {"type":"postback","title":"WAITER","payload":"waiter"}] 
-      bot.send_button_message(id,'To open menu press Open Menu ',button)  
+      try:   
+           tableno=fulladdress[1]
+      except:
+            tableno="none"    
+      handleUser(id,fulladdress,name,restaurant,tableno)
     
 def checkPostback(output):
  if output['entry'][0]['messaging'][0].get('postback'):
