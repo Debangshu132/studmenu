@@ -237,7 +237,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant)
     else:    
       send_message(id,"a","a","Done! waiting for the previous waiter's approval")    
-      updateWaitersInformation(id,currentTable=tableno)
+      #updateWaitersInformation(id,currentTable=tableno)
     
     
 def checkQuickReply(text,id): 
