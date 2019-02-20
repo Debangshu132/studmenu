@@ -192,7 +192,7 @@ def handleUser(id,fulladdress,name,restaurant,tableno):
         return True
     if userCondition=="consumer":
         if tableno=="none":
-            createUser(id,fulladdress,name,restaurant,tableno)
+            createUser(id,fulladdress)
             return True
         else:    
          executeConsumerCode(id,fulladdress,name,restaurant,tableno)
@@ -215,12 +215,13 @@ def checkUserCondition(id):
         return "none"
 def createUser(id,fulladdress,name,restaurant,tableno):
     if len(fulladdress)==1:
-        updateWaitersInformation(id,name=name)
+       
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
-
+        updateWaitersInformation(id,name=name)
     else:
-        updateConsumersInformation(id,name=name)   
+           
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
+        updateConsumersInformation(id,name=name)
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
@@ -228,7 +229,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
-       #updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
+       updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
