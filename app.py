@@ -191,8 +191,6 @@ def checkPostback(output):
         
 def handleUser(id,fulladdress):
     userCondition=checkUserCondition(id)
-    send_message(id,'a','a', userCondition)
-    return True
     if userCondition=="none":
         createUser(id,fulladdress)
         return True
