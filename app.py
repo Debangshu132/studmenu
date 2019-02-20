@@ -180,7 +180,7 @@ def checkPostback(output):
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
        send_message(id,'a','a', welcome)
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
-       #initializeUser(id) 
+       initializeUser(id) 
        #quickreply(id,['Open Menu','Call Waiter'],instruction)
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
