@@ -219,10 +219,10 @@ def checkUserCondition(id):
     cunsumerFind=cursor[1]
     if waiterFind.get(id):
         return "waiter"
-    if consumerFind.get(id):
-        return "consumer"
+    #if consumerFind.get(id):
+    #    return "consumer"
     else:
-        return "none"
+        return str(cursor.count())
     
 
     
