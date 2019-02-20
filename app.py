@@ -158,7 +158,9 @@ def checkReferral(output):
       welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
       send_message(id,'a','a', welcome)
-      quickreply(id,['Open Menu','Call Waiter'],instruction)
+      #quickreply(id,['Open Menu','Call Waiter'],instruction)
+      button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" }] 
+      bot.send_button_message(id,'To open menu press Open Menu ',button)   
 def checkPostback(output):
      if output['entry'][0]['messaging'][0].get('postback'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
