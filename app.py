@@ -236,11 +236,11 @@ def send_message(recipient_id, topic,mood,response):
     return "success"
 
 def updateUsersInformation(ID, **kwargs):
-    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds121461.mlab.com:21461/flunkey"
+   MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
-    db = client.get_database("flunkey")
+    db = client.get_database("brilu")
     for key in kwargs:
-        db.usersInfo.update({"_id": "5c6d5871fb6fc01c4ce86b24"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True)
+        db.users.update({"_id" : "5c6d5a8efb6fc01c4ce86ee6"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds121461.mlab.com:21461/flunkey"
