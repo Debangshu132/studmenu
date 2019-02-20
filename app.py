@@ -177,7 +177,7 @@ def checkPostback(output):
          restaurant=fulladdress[0]
          try:   
            tableno=fulladdress[1]
-         else:
+         except:
             tableno="none"    
          
          handleUser(id,fulladdress,name,restaurant,tableno)
