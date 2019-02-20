@@ -236,11 +236,11 @@ def send_message(recipient_id, topic,mood,response):
     return "success"
 
 def updateUsersInformation(ID, **kwargs):
-    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds239055.mlab.com:39055/studmenu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
-    db = client.get_database("brilu")
+    db = client.get_database("studmenu")
     for key in kwargs:
-        db.userInfo.update({"_id" : "5c4e064ffb6fc05326ad8c57"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
+        db.userInfo.update({"_id" : "5c685393e7179a27eb61c59a"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds239055.mlab.com:39055/studmenu"
@@ -427,7 +427,7 @@ def initializeUser(id):
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
     data=a.json()
     name=data['first_name']
-    updateUsersInformation(id,name=name)
+    updateUsersInformation(id,name=name,name1="")
     
 
 if __name__ == "__main__":
