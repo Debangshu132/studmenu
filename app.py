@@ -236,7 +236,7 @@ def send_message(recipient_id, topic,mood,response):
     return "success"
 
 def updateUsersInformation(ID, **kwargs):
-    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds239055.mlab.com:39055/flunkey"
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds121461.mlab.com:21461/flunkey"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("flunkey")
     for key in kwargs:
