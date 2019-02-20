@@ -162,8 +162,7 @@ def checkReferral(output):
       button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" },
               {"type":"postback","title":"CALL WAITER","payload":"waiter"}] 
       bot.send_button_message(id,'To open menu press Open Menu ',button)  
-     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
-        quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")   
+    
 def checkPostback(output):
      if output['entry'][0]['messaging'][0].get('postback'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
