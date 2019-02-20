@@ -173,7 +173,7 @@ def checkPostback(output):
        if output['entry'][0]['messaging'][0]['postback'].get('referral'):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
          fulladdress=fulladdress.split("_")
-         if len(fulladdress==1):
+         if len(fulladdress)==1:
                 category="waiter"
                
          restaurant=fulladdress[0]
