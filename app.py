@@ -191,7 +191,7 @@ def handleUser(id,fulladdress,name,restaurant,tableno):
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
         return True
     if userCondition=="consumer":
-        if tableno=="":
+        if tableno=="none":
             createUser(id,fulladdress)
             return True
         else:    
