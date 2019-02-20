@@ -185,7 +185,7 @@ def checkPostback(output):
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
     if userCondition=="none":
-        createUser(id,fulladdress)
+        createUser(id,fulladdress,name,restaurant,tableno)
         return True
     if userCondition=="waiter":    
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
@@ -213,10 +213,7 @@ def checkUserCondition(id):
         return "consumer"
     else:
         return "none"
-def createUser(id,fulladdress):
-    a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
-    data=a.json()
-    name=data['first_name']
+def createUser(id,fulladdress,name,restaurant,tableno):
     if len(fulladdress)==1:
         updateWaitersInformation(id,name=name)
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
