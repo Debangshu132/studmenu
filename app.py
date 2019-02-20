@@ -194,7 +194,7 @@ def handleUser(id,fulladdress,name,restaurant,tableno):
         createUser(id,fulladdress)
         return True
     if userCondition=="waiter":    
-        executeWaiterCode(id,fulladdress,name,restaurant)
+        executeWaiterCode(id,fulladdress,name,restaurant,tableno)
         return True
     if userCondition=="consumer":
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
@@ -221,10 +221,10 @@ def createUser(id,fulladdress):
     name=data['first_name']
     if len(fulladdress)==1:
         updateWaitersInformation(id,name=name,name1="")
-        executeWaiterCode(id,fulladdress)
+        executeWaiterCode(id,fulladdress,name,restaurant,tableno)
     else:
         updateConsumersInformation(id,name=name,name1="")   
-        executeConsumerCode(id,fulladdress)
+        executeConsumerCode(id,fulladdress,name,restaurant,tableno)
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
