@@ -219,7 +219,7 @@ def checkUserCondition(id):
     if waiterFind.get(id):
         return "waiter"
     else:
-        return "none"
+        return str(waiterFind)
     #cursor = col.find({"_id": "waiter"}, {"id":id}).limit(1)
     return "yoo"    
 
