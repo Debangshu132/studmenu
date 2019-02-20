@@ -216,13 +216,13 @@ def checkUserCondition(id):
     col = db["users"]
     cursor = col.find()
     waiterFind = cursor[0]
-    cunsumerFind=cursor[1]
+    consumerFind=cursor[1]
     if waiterFind.get(id):
         return "waiter"
-    #if consumerFind.get(id):
-    #    return "consumer"
+    if consumerFind.get(id):
+        return "consumer"
     else:
-        return str(cursor.count())
+        return "none"
     
 
     
