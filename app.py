@@ -174,31 +174,30 @@ def checkPostback(output):
        if output['entry'][0]['messaging'][0]['postback'].get('referral'):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
          fulladdress=fulladdress.split("_")
-         if len(fulladdress)==1:
-                category="waiter"
-         else:     
-            category="consumer"
          restaurant=fulladdress[0]
-         tableno=fulladdress[1]   
-         welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
+         try:   
+           tableno=fulladdress[1]
+         else:
+            tableno="none"    
+         
+         handleUser(id,fulladdress,name,restaurant,tableno)
        else:
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
-       send_message(id,'a','a', welcome)
-       handleUser(id,fulladdress)
+       
        
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
         
-def handleUser(id,fulladdress):
+def handleUser(id,fulladdress,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
     if userCondition=="none":
         createUser(id,fulladdress)
         return True
     if userCondition=="waiter":    
-        executeWaiterCode(id,fulladdress)
+        executeWaiterCode(id,fulladdress,name,restaurant)
         return True
     if userCondition=="consumer":
-        executeConsumerCode(id,fulladdress)
+        executeConsumerCode(id,fulladdress,name,restaurant,tableno)
         return True
     else:
         return False
@@ -226,13 +225,15 @@ def createUser(id,fulladdress):
     else:
         updateConsumersInformation(id,name=name,name1="")   
         executeConsumerCode(id,fulladdress)
-def executeConsumerCode(id,fulladdress):
+def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
+       welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
+       send_message(id,'a','a', welcome)
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
-def executeWaiterCode(id,fulladdress):
-    send_message(id,"a","a","welcome you are a waiter")
+def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
+    send_message(id,"a","a","welcome"+name+" you are a waiter in "+restaurant+ "restaurant")
 
     
     
