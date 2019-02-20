@@ -159,8 +159,8 @@ def checkReferral(output):
       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
       send_message(id,'a','a', welcome)
       #quickreply(id,['Open Menu','Call Waiter'],instruction)
-      button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" },
-              {"type":"postback","title":"CALL WAITER","payload":"waiter"}] 
+      button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
+              {"type":"postback","title":"WAITER","payload":"waiter"}] 
       bot.send_button_message(id,'To open menu press Open Menu ',button)  
     
 def checkPostback(output):
@@ -182,8 +182,8 @@ def checkPostback(output):
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
        #initializeUser(id) 
        #quickreply(id,['Open Menu','Call Waiter'],instruction)
-       button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" },
-               {"type":"postback","title":"CALL WAITER","payload":"waiter"}] 
+       button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
+               {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
       if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
