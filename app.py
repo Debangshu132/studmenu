@@ -214,8 +214,14 @@ def checkUserCondition(id):
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
     col = db["users"]
-    cursor = col.find({"_id": "waiter"}, {"id":id}).limit(1)
-    return cursor    
+    cursor = col.find()
+    waiterFind = cursor[0]
+    if waiterFind.get(id):
+        return "waiter"
+    else:
+        return "none"
+    #cursor = col.find({"_id": "waiter"}, {"id":id}).limit(1)
+    return "yoo"    
 
     
     
