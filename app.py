@@ -228,7 +228,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
-       updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
+       #updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
