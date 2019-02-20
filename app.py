@@ -240,7 +240,7 @@ def updateUsersInformation(ID, **kwargs):
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("studmenu")
     for key in kwargs:
-        db.userInfo.update({"_id" : "5c4e064ffb6fc05326ad8c57"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
+        db.userInfo.update({"_id" : "5c685393e7179a27eb61c59a"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds239055.mlab.com:39055/studmenu"
