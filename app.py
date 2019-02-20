@@ -218,10 +218,10 @@ def createUser(id,fulladdress):
     data=a.json()
     name=data['first_name']
     if len(fulladdress)==1:
-        updateWaitersInformation(id,name=name,name1="")
+        updateWaitersInformation(id,name=name)
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
     else:
-        updateConsumersInformation(id,name=name,name1="")   
+        updateConsumersInformation(id,name=name)   
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
@@ -230,11 +230,14 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
+       updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
-    send_message(id,"a","a","welcome "+name+" you are a waiter in "+restaurant+ " restaurant")
-
-    
-    
+    if tableno=="none":
+      send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
+      updateWaitersInformation(id,name=name,currentRestaurant=restaurant)
+    else:    
+      send_message(id,"a","a","Done! waiting for the previous waiter's approval")    
+      updateWaitersInformation(id,currentTable=tableno)
     
     
 def checkQuickReply(text,id): 
