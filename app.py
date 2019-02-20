@@ -164,15 +164,18 @@ def checkReferral(output):
       bot.send_button_message(id,'To open menu press Open Menu ',button)  
     
 def checkPostback(output):
-     if output['entry'][0]['messaging'][0].get('postback'):
-      id=  output['entry'][0]['messaging'][0]['sender']['id']  
-      a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
-      data=a.json()
-      name=data['first_name']
-      if output['entry'][0]['messaging'][0]['postback']['payload']=='StartMan':
+ if output['entry'][0]['messaging'][0].get('postback'):
+    id=  output['entry'][0]['messaging'][0]['sender']['id']  
+    a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
+    data=a.json()
+    name=data['first_name']
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='StartMan':
        if output['entry'][0]['messaging'][0]['postback'].get('referral'):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
          fulladdress=fulladdress.split("_")
+         if len(fulladdress==1):
+                category="waiter"
+               
          restaurant=fulladdress[0]
          tableno=fulladdress[1]   
          welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
@@ -185,7 +188,7 @@ def checkPostback(output):
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
-      if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
         
       
@@ -252,19 +255,7 @@ def getUserInformation(id,property):
     return(userInfo[id][property])
 
 
-def search_gif(text):
-    #get a GIF that is similar to text sent
-    payload = {'s': text, 'api_key': '8uWKU7YtJ4bIzYcAnjRVov8poEHCCj8l'}
-    r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
-    r = r.json()
-    url = r['data']['images']['original']['url']
-    return url
-def send_gif_message(recipient_id, message):
-    gif_url = search_gif(message)
-    data = json.dumps({"recipient": {"id": recipient_id},"message": {"attachment": {"type": "image","payload": {"url": gif_url}}}})
-    params = {"access_token": ACCESS_TOKEN }
-    headers = {"Content-Type": "application/json"}
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
 def sendLastOptionsQuickReply(id,text):
     options=getUserInformation(id,'lastOptions')
     right=getUserInformation(id,'lastRightAnswer')
