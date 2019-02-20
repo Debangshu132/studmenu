@@ -177,7 +177,9 @@ def checkPostback(output):
        send_message(id,'a','a', welcome)
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
        #initializeUser(id) 
-       quickreply(id,['Open Menu','Call Waiter'],instruction)
+       #quickreply(id,['Open Menu','Call Waiter'],instruction)
+       button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" }] 
+       bot.send_button_message(id,'To open menu press Open Menu ',button) 
         
       
 def checkCalculator(id,text):
