@@ -153,6 +153,7 @@ def checkReferral(output):
       name=data['first_name']
       fulladdress=str(output['entry'][0]['messaging'][0]['referral']['ref'])
       fulladdress=fulladdress.split("_")
+       
       restaurant=fulladdress[0]
       tableno=fulladdress[1]    
       welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
@@ -175,15 +176,17 @@ def checkPostback(output):
          fulladdress=fulladdress.split("_")
          if len(fulladdress)==1:
                 category="waiter"
-               
+         else:     
+            category="consumer"
          restaurant=fulladdress[0]
          tableno=fulladdress[1]   
          welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        else:
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
        send_message(id,'a','a', welcome)
+       handleUser(id,fulladdress)
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
-       initializeUser(id) 
+       initializeUser(id,category) 
        #quickreply(id,['Open Menu','Call Waiter'],instruction)
        button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Menu" },
                {"type":"postback","title":"WAITER","payload":"waiter"}] 
@@ -191,28 +194,32 @@ def checkPostback(output):
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
         
-      
-def checkCalculator(id,text):
-   try:
-     text=text.lower()
-     text=text.replace('+','%2B')
-     text=text.replace("what is","")
-     text=text.replace("calculate","")
-     text=text.replace("evaluate","")   
-     resultOfCalculation=requests.get("http://api.mathjs.org/v4/?expr="+str(text)) 
-     if str(resultOfCalculation)=="<Response [200]>":   
-      if getUserInformation(id,'insidequestion')==True: 
-         p=sendLastOptionsQuickReply(id,resultOfCalculation.text)
-         return True
-      else:
-         quickreply(id,['Lets test', 'I am Bored!'],resultOfCalculation.text)   
-         return True
-     else:
-        return False
+def handleUser(id,fulladdress):
+    userCondition=checkUserCondition(id)
+    send_message(id,'a','a', userCondition)
+    return True
+    """if userCondition=="none":
+        createUser(id,fulladdress)
+        return True
+    if userCondition=="waiter":    
+        executeWaiterCode(id,fulladdress)
+        return True
+    if userCondition=="consumer":
+        executeConsumerCode(id,fulladdress)
+        return True
+    else:
+        return False"""
+def checkUserCondition(id):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    col = db["users"]
+    cursor = col.find({_id: "waiter"}, {_id:id}).limit(1)
+    return cursor    
+
     
-   
-   except:
-    return False
+    
+    
     
 def checkQuickReply(text,id): 
          try: 
@@ -238,12 +245,19 @@ def send_message(recipient_id, topic,mood,response):
     bot.send_text_message(recipient_id, response)
     return "success"
 
-def updateUsersInformation(ID, **kwargs):
+def updateWaitersInformation(ID, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
     for key in kwargs:
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
+    return(0)
+def updateConsumersInformation(ID, **kwargs):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    for key in kwargs:
+        db.users.update({"_id" : "consumer"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
@@ -256,170 +270,23 @@ def getUserInformation(id,property):
 
 
 
-def sendLastOptionsQuickReply(id,text):
-    options=getUserInformation(id,'lastOptions')
-    right=getUserInformation(id,'lastRightAnswer')
-    exceeded=getUserInformation(id,'lastExceeded')
-    solution=""
-    if exceeded==False:
-      payload = {"recipient": {"id": id}, "message": {"text":text,"quick_replies": [] }}
-      for item in options:
-        if item==right:
-           payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":'right'})
-           
-        else:
-           payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":'wrong'})
-      #payload['message']['quick_replies'].append({"content_type":"text","title":"Give me a hint!","payload":hint})   
-      pay(payload)
-      return 'success'
-    if exceeded==True:
-         shortOptions=['A','B','C','D']
-         payload = {"recipient": {"id": id}, "message": {"text":text,"quick_replies": []}}
-         for itemindex in range(0,4):
-            if options[itemindex]==right:
-              payload['message']['quick_replies'].append({"content_type":"text","title":shortOptions[itemindex],"payload":'right'})
-              
-            else:
-              payload['message']['quick_replies'].append({"content_type":"text","title":shortOptions[itemindex],"payload":'wrong'})
-         #payload['message']['quick_replies'].append({"content_type":"text","title":"Give me a hint!","payload":hint})    
-         pay(payload)
-    return 'succeeded'        
+     
     
-def shareme(message):
-    shareit={
-     "type": "element_share",
-     "share_contents": { 
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [
-          {
-            "title": "I was just answering Brilu's questions!!",
-            "subtitle": "He says: " + message,
-            #"image_url": "<IMAGE_URL_TO_DISPLAY>",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://www.messenger.com/t/teacherchatbot"
-            },
-            "buttons": [
-              {
-                "type": "web_url",
-                "url": "https://www.messenger.com/t/teacherchatbot", 
-                "title": "Chat now"
-              }]}]}}}}
-    return shareit
-def sendSuperTopic(id):
-    response=   {
-     "recipient":{"id":id},
-     "message":{
-      "quick_replies": [
-      {
-        "content_type":"text",
-        "title":"I am Bored!",
-        "payload":'I am Bored!'
-      }],   
-      "attachment":{
-        "type":"template",
-          "payload":{
-           "template_type":"generic",
-             "elements":[
-                 
-                 {
-                 "title":"Job Preparation",
-                   "image_url":"http://www.dvc.edu/enrollment/career-employment/images/Jobs.jpg",
-                      "subtitle":"practice problems that makes you ready for interview I have aptitude,verbal ability and logical reasoning",
-                       
-                           "buttons":[
-                             {"type":"postback",
-  "title":"Start now",
-  "payload":"jobPrep"},shareme('he helps practice interview questions,you should try it')] },
-                 
-                 
-                 
-                  {
-                 "title":"class10",
-                   "image_url":"http://2.bp.blogspot.com/_Q_ZJiaCqn38/TFIu3dkYfxI/AAAAAAAAACo/63Vuzi-IG4A/s1600/SCIENCE.png",
-                     "subtitle":"practice science problems from class 10 and improve your concepts",
-                        
-                           "buttons":[
-                             {"type":"postback",
-  "title":"Start now",
-  "payload":"class10"},shareme('he helps practice class 10 questions,you should try it')] }
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             ]}}}}
-    r=pay(response)
-    return r
 
-def sendResult(id, gif,message):
-    url = search_gif(gif)
-    share=shareme(message)
-    response=   {
-     "recipient":{
-           "id":id
-                      },
-     "message":{
-      "quick_replies": [
-      {
-        "content_type":"text",
-        "title":"Go Back",
-        
-        "payload":"Go Back"
-      },
-      {
-        "content_type":"text",
-        "title":"Continue",
-        "payload":"Continue"
-      },
-        {
-        "content_type":"text",
-        "title":"I am Bored!",
-        "payload":'I am Bored!'
-      }
-    ],   
-      "attachment":{
-        "type":"template",
-          "payload":{
-           "template_type":"generic",
-             "elements":[
-                 {
-                 "title":"Here is your result!",
-                   #"image_url":https://images.pexels.com/photos/1642883/pexels-photo-1642883.jpeg?cs=srgb&dl=adults-affection-couple-1642883.jpg&fm=jpg,
-                     "subtitle":message,
-                        "default_action": {
-                            "type":"web_url",
-                            "url":"http://brilu.herokuapp.com/result/"+str(id),
-                            "webview_height_ratio": "tall"  
-                              },
-                           "buttons":[
-                             {
-                "type":"web_url",
-                "url":"http://brilu.herokuapp.com/result/"+str(id),
-                "title":"See Details!",
-                "webview_height_ratio": "tall"  
-              },share ] }]}}}}
-    
-    r=pay(response)
-    return r
+
+
 @app.route("/result/<id>", methods=['GET', 'POST'])
 def result(id):
         return render_template('chart.html')
     
-def initializeUser(id):
+def initializeUser(id,category):
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
     data=a.json()
     name=data['first_name']
-    updateUsersInformation(id,name=name,name1="")
+    if category=="waiter":
+        updateWaitersInformation(id,name=name,name1="")
+    if category=="consumer":
+        updateConsumersInformation(id,name=name,name1="")    
     
 
 if __name__ == "__main__":
