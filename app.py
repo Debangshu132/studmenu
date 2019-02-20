@@ -188,7 +188,7 @@ def checkPostback(output):
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
         
-def handleUser(id,fulladdress,fulladdress,name,restaurant,tableno):
+def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
     if userCondition=="none":
         createUser(id,fulladdress)
