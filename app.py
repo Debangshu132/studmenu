@@ -215,13 +215,12 @@ def checkUserCondition(id):
         return "none"
 def createUser(id,fulladdress,name,restaurant,tableno):
     if len(fulladdress)==1:
-       
+        updateWaitersInformation(id,name=name)
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
-        #updateWaitersInformation(id,name=name)
+
     else:
-           
+        updateConsumersInformation(id,name=name)   
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
-        #updateConsumersInformation(id,name=name)
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
