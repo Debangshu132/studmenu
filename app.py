@@ -234,6 +234,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant)
+      updateRestaurantsInformation(restaurant, waiters.id=name)  
     else:    
       send_message(id,"a","a","Done! waiting for the previous waiter's approval")    
       #updateWaitersInformation(id,currentTable=tableno)
@@ -276,6 +277,13 @@ def updateConsumersInformation(ID, **kwargs):
     db = client.get_database("brilu")
     for key in kwargs:
         db.users.update({"_id" : "consumer"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
+    return(0)
+def updateRestaurantsInformation(nameOfRestaurant, **kwargs):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    for key in kwargs:
+        db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
