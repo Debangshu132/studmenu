@@ -234,7 +234,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant)
-      updateRestaurantsInformation(restaurant, waiters.id=name)  
+      updateRestaurantsInformation(restaurant, name=id)  
     else:    
       send_message(id,"a","a","Done! waiting for the previous waiter's approval")    
       #updateWaitersInformation(id,currentTable=tableno)
@@ -278,13 +278,24 @@ def updateConsumersInformation(ID, **kwargs):
     for key in kwargs:
         db.users.update({"_id" : "consumer"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     return(0)
-def updateRestaurantsInformation(nameOfRestaurant, **kwargs):
+def updateRestaurantsWaitersInformation(nameOfRestaurant, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
+    waiters=getRestaurantsInformation(nameOfRestaurant,"waiters")
     for key in kwargs:
-        db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+"."+str(key): kwargs[key]}},upsert=True);
+        waiters[kwargs[key]]=str(key)
+    print(waiters)
+    db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".waiters": waiters}},upsert=True);
     return(0)
+def getRestaurantsInformation(nameOfRestaurant,property):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    col = db["restaurants"]
+    cursor = col.find()
+    restaurant = cursor[0]
+    return(restaurant[nameOfRestaurant][property])
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
