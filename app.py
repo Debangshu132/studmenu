@@ -330,7 +330,7 @@ def getUserInformation(id,property):
 
 @app.route("/menu/<restaurant>", methods=['GET', 'POST'])
 def menu(restaurant):
-         menu=getRestaurantsInformation(restaurant,menu)
+         menu=getRestaurantsInformation(restaurant,"menu")
          return str(menu)
          #return render_template('chart.html')
     
