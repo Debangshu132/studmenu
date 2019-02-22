@@ -204,8 +204,8 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     
     
 def checkQuickReply(text,id): 
-           restaurant=getUserInformation(id,"currentRestaurant")
-           tableno=getUserInformation(id,"currentTable")
+           restaurant=getConsumerInformation(id,"currentRestaurant")
+           tableno=getConsumerInformation(id,"currentTable")
            tables=getRestaurantsInformation(restaurant,"tables")
            table=tables[tableno]
            waiterid=table['waiter'] 
@@ -275,14 +275,14 @@ def getRestaurantsTableInformation(nameOfRestaurant,tableno):
     restaurant = cursor[0]
     return(restaurant[nameOfRestaurant]["tables"][str(tableno)])
 
-def getUserInformation(id,property):
+def getConsumerInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
     col = db["users"]
     cursor = col.find()
-    userInfo = cursor[0]
-    return(userInfo[id][property])
+    consumer = cursor[1]
+    return(consumer[id][property])
 
 
 
