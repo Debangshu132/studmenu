@@ -328,7 +328,7 @@ def getUserInformation(id,property):
 
 
 
-@app.route("/result/<id>", methods=['GET', 'POST'])
+@app.route("/result", methods=['GET', 'POST'])
 def result(id):
         return render_template('chart.html')
     
