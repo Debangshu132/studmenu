@@ -52,7 +52,7 @@ def receive_message():
                      
                     
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
-                    isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id,restaurant,tableno)
+                    isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id,name,restaurant,tableno)
                     
                     isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
