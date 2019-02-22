@@ -285,7 +285,7 @@ def updateRestaurantsWaitersInformation(nameOfRestaurant, **kwargs):
     db = client.get_database("brilu")
     waiters=getRestaurantsInformation(nameOfRestaurant,"waiters")
     for key in kwargs:
-        waiters[kwargs[key]]=str(key)
+        waiters[key]=str(kwargs[key])
     print(waiters)
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".waiters": waiters}},upsert=True);
     return(0)
