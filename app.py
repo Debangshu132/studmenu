@@ -192,7 +192,7 @@ def handleUser(id,fulladdress,name,restaurant,tableno):
         return True
     if userCondition=="consumer":
         if tableno=="none":
-            createUser(id,fulladdress)
+            createUser(id,fulladdress,name,restaurant,tableno)
             return True
         else:    
          executeConsumerCode(id,fulladdress,name,restaurant,tableno)
