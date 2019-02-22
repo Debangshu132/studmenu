@@ -33,11 +33,12 @@ def receive_message():
       # get whatever message a user sent the bot
       output = request.get_json()
       #for first time only check if this is the get started click or no
-      try:
-       name,restaurant,tableno=checkReferral(output)
-       name,restaurant,tableno=checkPostback(output)  
-      except:
-        pass
+    
+    
+      name,restaurant,tableno=checkReferral(output)
+      if name=="None":  
+         name,restaurant,tableno=checkPostback(output)  
+
       for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
@@ -116,6 +117,8 @@ def checkReferral(output):
             tableno="none"    
       handleUser(id,fulladdress,name,restaurant,tableno)
       return name,restaurant,tableno
+     else:
+      return "None","None","None"      
     
 def checkPostback(output):
  if output['entry'][0]['messaging'][0].get('postback'):
@@ -142,7 +145,7 @@ def checkPostback(output):
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
     return name,restaurant,tableno    
-        
+ return "None","None","None"       
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
     if userCondition=="none":
