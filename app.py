@@ -55,7 +55,7 @@ def receive_message():
                     
                     isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
-                        quickreply(recipient_id,['Dummy Menu', 'Dummy Waiter'],response)
+                        quickreply(recipient_id,['Dummy Menu', 'Dummy Waiter'],"I didnot get what you are saying")
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
