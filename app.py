@@ -236,7 +236,14 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant) 
       updateRestaurantsWaitersInformation(restaurant, **{id:name})  
     else:    
-      send_message(id,"a","a","Done! waiting for the previous waiter's approval")    
+      table=getRestaurantsTableInformation(restaurant,tableno) 
+      if table['waiter']=="":
+            send_message(id,"a","a","You will be serving this table from now on!")
+      else:
+        send_message(id,"a","a","waiting for the previous waiter's approval")
+        #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
+        prompt=name+" Wants to serve your table number "+ tableno
+        quickreply(table['waiter'],['Accept','Deny'],prompt)    
       #updateWaitersInformation(id,currentTable=tableno)
     
     
@@ -296,6 +303,15 @@ def getRestaurantsInformation(nameOfRestaurant,property):
     cursor = col.find()
     restaurant = cursor[0]
     return(restaurant[nameOfRestaurant][property])
+def getRestaurantsTableInformation(nameOfRestaurant,tableno):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    col = db["restaurants"]
+    cursor = col.find()
+    restaurant = cursor[0]
+    return(restaurant[nameOfRestaurant]["tables"][str(tableno)])
+
 def getUserInformation(id,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
