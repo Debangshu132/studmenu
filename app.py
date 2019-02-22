@@ -217,7 +217,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     
     
 def checkQuickReply(text,id,name,restaurant,tableno): 
-         try: 
+         
            msges,listofitems=decision(text)
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
@@ -233,7 +233,7 @@ def checkQuickReply(text,id,name,restaurant,tableno):
                  button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" }]
                  bot.send_button_message(id,'To open menu press Open Menu ',button)
                  return True
-         except:
+           else: 
             return False    
 
        
