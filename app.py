@@ -33,8 +33,11 @@ def receive_message():
       # get whatever message a user sent the bot
       output = request.get_json()
       #for first time only check if this is the get started click or no
-      name,restaurant,tableno=checkReferral(output)
-      name,restaurant,tableno=checkPostback(output)  
+      try:
+       name,restaurant,tableno=checkReferral(output)
+       name,restaurant,tableno=checkPostback(output)  
+      except:
+        pass
       for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
