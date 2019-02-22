@@ -330,7 +330,7 @@ def getUserInformation(id,property):
 
 @app.route("/menu", methods=['GET', 'POST'])
 def menu():
-         return <h1>hey man</h1>
+         return "hey man"
          #return render_template('chart.html')
     
 def initializeUser(id,category):
