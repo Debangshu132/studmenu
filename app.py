@@ -223,7 +223,7 @@ def checkQuickReply(text,id,name,restaurant,tableno):
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
            if text=="Napkins":
-               tables=getRestaurantsInformation(restaurant,tables)
+               tables=getRestaurantsInformation(restaurant,"tables")
                table=tables[tableno]
                waiterid=table['waiter']
                send_message(waiterid,"a","a",name+" who is sitting on table number"+ tableno+"is asking for napkins")
