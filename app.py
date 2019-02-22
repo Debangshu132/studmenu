@@ -214,28 +214,24 @@ def checkQuickReply(text,id):
              return True
            if text=="Napkins":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for napkins")
-               send_message(id,"a","a","Request sent! Your waiter will be arriving soon!")
                button= [{ "type": "web_url","url": "http://studmenu.herokuapp.com/menu/"+str(restaurant), "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Spoons":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for spoons")
-               send_message(id,"a","a","Request sent! Your waiter will be arriving soon!")
                button= [{ "type": "web_url","url": "http://studmenu.herokuapp.com/menu/"+str(restaurant), "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               send_message(id,"a","a","Request sent! Your waiter will be arriving soon!")
                button= [{ "type": "web_url","url": "http://studmenu.herokuapp.com/menu/"+str(restaurant), "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
            if text=="Talk to waiter":
                send_message(waiterid,"a","a"," table number"+ tableno+" wants to talk")
-               send_message(id,"a","a","Request sent! Your waiter will be arriving soon!")
                button= [{ "type": "web_url","url": "http://studmenu.herokuapp.com/menu/"+str(restaurant), "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
