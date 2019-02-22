@@ -233,9 +233,8 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
-      updateWaitersInformation(id,name=name,currentRestaurant=restaurant)
-      waiter={"name":name,"id":id}  
-      updateRestaurantsWaitersInformation(restaurant, **{id:waiter})  
+      updateWaitersInformation(id,name=name,currentRestaurant=restaurant) 
+      updateRestaurantsWaitersInformation(restaurant, **{id:name})  
     else:    
       send_message(id,"a","a","Done! waiting for the previous waiter's approval")    
       #updateWaitersInformation(id,currentTable=tableno)
