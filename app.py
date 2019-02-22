@@ -30,8 +30,8 @@ def receive_message():
       #for first time only check if this is the get started click or no
     
     
-      name,restaurant,tableno=checkReferral(output) 
-      name,restaurant,tableno=checkPostback(output)  
+      checkReferral(output) 
+      checkPostback(output)  
 
       for event in output['entry']:
           messaging = event['messaging']
@@ -96,9 +96,7 @@ def pay(payload):
   result = response.json()
   return result
 def checkReferral(output):
-     global restaurant
-     global name
-     global tableno
+    
      if output['entry'][0]['messaging'][0].get('referral'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
@@ -114,13 +112,10 @@ def checkReferral(output):
             tableno="none"    
       handleUser(id,fulladdress,name,restaurant,tableno)
       return name,restaurant,tableno
-     else:
-      return name,restaurant,tableno     
+        
     
 def checkPostback(output):
- global restaurant
- global name
- global tableno   
+ 
  if output['entry'][0]['messaging'][0].get('postback'):
     id=  output['entry'][0]['messaging'][0]['sender']['id']  
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
@@ -136,16 +131,13 @@ def checkPostback(output):
          except:
             tableno="none"    
          
-         handleUser(id,fulladdress,name,restaurant,tableno)
-         return name,restaurant,tableno   
+         handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
-        return name,restaurant,tableno
+   
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
-        return name,restaurant,tableno
-    return name,restaurant,tableno    
- return "None","None","None"       
+     
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
     if userCondition=="none":
