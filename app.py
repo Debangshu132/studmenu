@@ -238,7 +238,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     else:    
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
-            send_message(id,"a","a","You will be serving this table from now on!")
+            send_message(id,"a","a","You will be serving this table from now on!Table no. :"+tableno)
       else:
         send_message(id,"a","a","waiting for the previous waiter's approval")
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
