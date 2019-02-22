@@ -331,7 +331,7 @@ def getUserInformation(id,property):
 @app.route("/menu", methods=['GET', 'POST'])
 def menu():
          return <h1>hey man</h1>
-        #return render_template('chart.html')
+         #return render_template('chart.html')
     
 def initializeUser(id,category):
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
