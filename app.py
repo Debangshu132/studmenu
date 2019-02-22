@@ -328,8 +328,8 @@ def getUserInformation(id,property):
 
 
 
-@app.route("/result", methods=['GET', 'POST'])
-def result():
+@app.route("/menu", methods=['GET', 'POST'])
+def menu():
         return render_template('chart.html')
     
 def initializeUser(id,category):
