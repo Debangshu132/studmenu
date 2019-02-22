@@ -53,7 +53,7 @@ def receive_message():
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
                     isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id,name,restaurant,tableno)
                     
-                    isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
+                    #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
                         quickreply(recipient_id,['Dummy Menu', 'Dummy Waiter'],"I didnot get what you are saying")
                         return "Message Processed"
@@ -228,6 +228,7 @@ def checkQuickReply(text,id,name,restaurant,tableno):
                waiterid=table['waiter']
                send_message(waiterid,"a","a",name+" who is sitting on table number"+ tableno+"is asking for napkins")
                send_message(id,"a","a","Request sent! Your waiter will be arriving soon!")
+               return True 
            if text=="Open Menu": 
                  button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" }]
                  bot.send_button_message(id,'To open menu press Open Menu ',button)
