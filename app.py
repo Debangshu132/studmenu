@@ -14,15 +14,10 @@ app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
-restaurant=""
-tableno=""
-name=""
+
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    global restaurant
-    global name
-    global tableno
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
@@ -51,7 +46,7 @@ def receive_message():
                      
                     
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
-                    isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id,name,restaurant,tableno)
+                    isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id)
                     
                     #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
@@ -216,19 +211,17 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       #updateWaitersInformation(id,currentTable=tableno)
     
     
-def checkQuickReply(text,id,name,restaurant,tableno): 
-           global restaurant
-           global name
-           global tableno
-           #msges,listofitems=decision(text)
+def checkQuickReply(text,id): 
+           restaurant=getUserInformation(id,currentRestaurant)
+           tableno=getUserInformation(id,currentTable)
+           tables=getRestaurantsInformation(restaurant,"tables")
+           table=tables[tableno]
+           waiterid=table['waiter'] 
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
            if text=="Napkins":
-               tables=getRestaurantsInformation(restaurant,"tables")
-               table=tables[tableno]
-               waiterid=table['waiter']
-               send_message(waiterid,"a","a",name+" who is sitting on table number"+ tableno+"is asking for napkins")
+               send_message(waiterid,"a","a"," table number"+ tableno+"is asking for napkins")
                send_message(id,"a","a","Request sent! Your waiter will be arriving soon!")
                return True 
            if text=="Open Menu": 
