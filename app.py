@@ -218,7 +218,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     
 def checkQuickReply(text,id,name,restaurant,tableno): 
          
-           msges,listofitems=decision(text)
+           #msges,listofitems=decision(text)
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
