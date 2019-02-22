@@ -14,12 +14,15 @@ app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
-#ps=PorterStemmer()
-RID=''
+restaurant=""
+tableno=""
+name=""
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    global RID
+    global restaurant
+    global name
+    global tableno
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook."""
@@ -30,8 +33,8 @@ def receive_message():
       # get whatever message a user sent the bot
       output = request.get_json()
       #for first time only check if this is the get started click or no
-      checkReferral(output)
-      checkPostback(output)  
+      name,restaurant,tableno=checkReferral(output)
+      name,restaurant,tableno=checkPostback(output)  
       for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
@@ -41,63 +44,15 @@ def receive_message():
                 RID=recipient_id 
                 if message['message'].get('text'):
                     typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
-                    if  message['message'].get('quick_reply'):  
-                      secretcode= message['message']['quick_reply']['payload']
-                      if secretcode=='hint':
-                            hint=getUserInformation(recipient_id,'lasthint')
-                            sendLastOptionsQuickReply(recipient_id,hint)
-                            return "Message Processed"
-                      if secretcode=='right':
-                          
-                        currtopic=getUserInformation(recipient_id,"currenttopic")
-                        #currtotal=str(currtopic)+'total'
-                        #currright=str(currtopic)+'right'
-                        updateUsersInformation(recipient_id,insidequestion=False,totalquestionasked=int(getUserInformation(recipient_id,'totalquestionasked'))+1)
-                        updateUsersInformation(recipient_id,totalquestionright=int(getUserInformation(recipient_id,'totalquestionright'))+1)
-                        updateUsersInformation(recipient_id,**{str(currtopic)+'total':int(getUserInformation(recipient_id,str(str(currtopic)+'total')))+1})
-                        updateUsersInformation(recipient_id,**{str(currtopic)+'right':int(getUserInformation(recipient_id,str(str(currtopic)+'right')))+1})
-                        noofconsecutiveright=getUserInformation(recipient_id,'noofconsecutiveright')
-                        updateUsersInformation(recipient_id,noofconsecutivewrong=0)
-                        updateUsersInformation(recipient_id,noofconsecutiveright=noofconsecutiveright+1)
-                        reply=decisionRightWrong('right', noofconsecutiveright)
-                        #send_message(recipient_id, "dummy","dummy",reply)
-                        if getUserInformation(recipient_id,'currenttopic')=='aptitude':
-                            quickreply(recipient_id,['Another One','Go Back','Results','I am Bored!'], reply)
-                        else:
-                            quickreply(recipient_id,['Another One','Go Back','Results','I am Bored!'], reply+'\n'+getUserInformation(recipient_id,'lastsolution'))
-                        
-                        return "Message Processed"
-                      if secretcode=='wrong':
-                        
-                        updateUsersInformation(recipient_id,insidequestion=False,totalquestionasked=int(getUserInformation(recipient_id,'totalquestionasked'))+1)
-                        rightAns=getUserInformation(recipient_id,'lastRightAnswer')
-                        
-                        noofconsecutivewrong=getUserInformation(recipient_id,'noofconsecutivewrong')
-                        updateUsersInformation(recipient_id,noofconsecutiveright=0)
-                        updateUsersInformation(recipient_id,noofconsecutivewrong=noofconsecutivewrong+1)
-                        
-                        
-                        
-                        currtopic=getUserInformation(recipient_id,"currenttopic")
-                        #currtotal=str(currtopic)+'total'
-                        updateUsersInformation(recipient_id,**{str(currtopic)+'total':int(getUserInformation(recipient_id,str(str(currtopic)+'total')))+1})
-                        
-                        
-                        reply=decisionRightWrong('wrong', noofconsecutivewrong)
-                        #send_message(recipient_id, "dummy","dummy",reply+ ' ,the right answer is: '+'\n'+rightAns)
-                        quickreply(recipient_id,['Try Another','Go Back','Results','I am Bored!'],reply+ ' ,the right answer is: '+'\n'+rightAns+'\n'+getUserInformation(recipient_id,'lastsolution'))
-                        
-                        return "Message Processed"
+                  
+                     
                     
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
-                    #checkPostback(output)
-                    isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id)
+                    isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id,restaurant,tableno)
                     
-                    isQuickReplyHint=checkQuickReply(response,recipient_id)
-                    isCalculator=checkCalculator(recipient_id,message['message'].get('text'))
-                    if isQuickReply==False and isQuickReplyHint==False and isCalculator==False :
+                    isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
+                    if isQuickReply==False  :
                         quickreply(recipient_id,['Lets test', 'I am Bored!'],response)
-                        #sendLastOptionsQuickReply(recipient_id,'kya be')
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
@@ -157,6 +112,7 @@ def checkReferral(output):
       except:
             tableno="none"    
       handleUser(id,fulladdress,name,restaurant,tableno)
+      return name,restaurant,tableno
     
 def checkPostback(output):
  if output['entry'][0]['messaging'][0].get('postback'):
@@ -177,10 +133,12 @@ def checkPostback(output):
          handleUser(id,fulladdress,name,restaurant,tableno)
        else:
         welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
+        
        
        
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
+    return name,restaurant,tableno    
         
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -247,12 +205,17 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       #updateWaitersInformation(id,currentTable=tableno)
     
     
-def checkQuickReply(text,id): 
+def checkQuickReply(text,id,name,restaurant,tableno): 
          try: 
            msges,listofitems=decision(text)
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
+           if text=="Napkins":
+               tables=getRestaurantsInformation(restaurant,tables)
+               table=tables[tableno]
+               waiterid=table['waiter']
+               send_message(waiterid,"a","a",name+" who is sitting on table number"+ tableno+"is asking for napkins")
            if text=="Open Menu": 
                  button= [{ "type": "web_url","url": "https://www.google.com/", "title": "Open Menu" }]
                  bot.send_button_message(id,'To open menu press Open Menu ',button)
