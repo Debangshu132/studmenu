@@ -204,8 +204,8 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     
     
 def checkQuickReply(text,id): 
-           restaurant=getUserInformation(id,currentRestaurant)
-           tableno=getUserInformation(id,currentTable)
+           restaurant=getUserInformation(id,"currentRestaurant")
+           tableno=getUserInformation(id,"currentTable")
            tables=getRestaurantsInformation(restaurant,"tables")
            table=tables[tableno]
            waiterid=table['waiter'] 
