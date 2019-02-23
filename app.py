@@ -339,7 +339,8 @@ def getConsumerInformation(id,property):
 @app.route("/menu/<restaurant>", methods=['GET', 'POST'])
 def menu(restaurant):
          menu=getRestaurantsInformation(restaurant,"menu")  
-         return render_template('chart.html',menu=menu)
+         return "hello"
+         #return render_template('chart.html',menu=menu)
     
 def initializeUser(id,category):
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
