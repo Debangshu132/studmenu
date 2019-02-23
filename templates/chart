@@ -6,6 +6,6 @@
   </head>
 
   <body>
- <h1>hey man</h1>
+ <h1>{{menu}}</h1>
   </body>
 </html>
