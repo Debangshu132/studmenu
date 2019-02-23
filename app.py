@@ -44,12 +44,15 @@ def receive_message():
                     typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
                     if  message['message'].get('quick_reply'):  
                       secretcode= message['message']['quick_reply']['payload']
-                      if secretcode=='hint':
-                            hint=getUserInformation(recipient_id,'lasthint')
-                            sendLastOptionsQuickReply(recipient_id,hint)
+                      if secretcode.find('TableChangeAccept') != -1:
+                            secretcode=secretcode.split('|')
+                            updateRestaurantsTablesInformation(secretcode[2],secretcode[3], waiter=secretcode[1])
+                            send_message(id,"a","a","Your table number has been changed successfully!")
+                            send_message(secretcode[1],"a","a","Congracts your request has been accepted! :)")
                             return "Message Processed"
-                     
-                    
+                      if secretcode.find('TableChangeDeny') != -1:
+                            secretcode=secretcode.split('|')
+                            send_message(secretcode[1],"a","a","Sorry the waiter has not accepted your tabe number :(")
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
                     isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id)
                     
@@ -213,7 +216,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
         prompt=name+" Wants to serve your table number "+ tableno
         #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
-        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
+        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
       #updateWaitersInformation(id,currentTable=tableno)
     
     
