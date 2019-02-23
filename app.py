@@ -16,9 +16,9 @@ VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
 @app.route("/menu/<restaurant>", methods=['GET', 'POST'])
 def menu(restaurant):
-         #menu=getRestaurantsInformation(restaurant,"menu")  
-         return "hello"
-         #return render_template('chart.html',menu=menu)
+         menu=getRestaurantsInformation(restaurant,"menu")  
+         #return "hello"
+         return render_template('chart.html',menu=menu)
 
 #We will receive messages that Facebook sends our bot at this endpoint
 @app.route("/", methods=['GET', 'POST'])
