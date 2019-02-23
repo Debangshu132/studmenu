@@ -200,13 +200,15 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     else:    
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
+            updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
             send_message(id,"a","a","You will be serving this table from now on!Table no. :"+tableno)
+            
       else:
         send_message(id,"a","a","waiting for the previous waiter's approval")
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
         prompt=name+" Wants to serve your table number "+ tableno
-        quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
-        #quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['Table Change Accept','Table Change Deny'],prompt)
+        #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
+        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['Table Change Accept','Table Change Deny'],prompt)
       #updateWaitersInformation(id,currentTable=tableno)
     
     
@@ -281,6 +283,16 @@ def updateRestaurantsWaitersInformation(nameOfRestaurant, **kwargs):
         waiters[key]=str(kwargs[key])
     print(waiters)
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".waiters": waiters}},upsert=True);
+    return(0)
+def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    tables=getRestaurantsInformation(nameOfRestaurant,"tables")
+    table=tables[tableno]
+    for key in kwargs:
+        table[key]=str(kwargs[key])
+    db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno): table}},upsert=True);
     return(0)
 def getRestaurantsInformation(nameOfRestaurant,property):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
