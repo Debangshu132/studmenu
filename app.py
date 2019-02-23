@@ -86,6 +86,12 @@ def quickreply(id,listofitems,text):
         payload['message']['quick_replies'].append({"content_type":"text","title":str(item),"payload":str(item)})   
     pay(payload)
     return 'success'
+def quickreplyDifferentPayload(id,listofitems,listofpayloads,text):
+    payload = {"recipient": {"id": id}, "message": {"text":text,"quick_replies": []}}
+    for i in range(0,len(listofitems)):
+        payload['message']['quick_replies'].append({"content_type":"text","title":str(listofitems[i]),"payload":str(listofpayloads[i])})   
+    pay(payload)
+    return 'success'
   
 def pay(payload):
   request_endpoint = "https://graph.facebook.com/v2.6/me/messages?access_token="+os.environ['ACCESS_TOKEN']
@@ -199,7 +205,8 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
         send_message(id,"a","a","waiting for the previous waiter's approval")
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
         prompt=name+" Wants to serve your table number "+ tableno
-        quickreply(table['waiter'],['Accept','Deny'],prompt)    
+        #quickreply(table['waiter'],['Accept','Deny'],prompt)  
+        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['Table Change Accept','Table Change Deny'],prompt)
       #updateWaitersInformation(id,currentTable=tableno)
     
     
