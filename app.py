@@ -52,7 +52,8 @@ def receive_message():
                             return "Message Processed"
                       if secretcode.find('TableChangeDeny') != -1:
                             secretcode=secretcode.split('|')
-                            send_message(secretcode[1],"a","a","Sorry the waiter has not accepted your tabe number :(")
+                            send_message(secretcode[1],"a","a","Sorry the waiter has not accepted your table number :(")
+                            return "Message Processed"
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
                     isQuickReply=checkQuickReply(message['message'].get('text'),recipient_id)
                     
