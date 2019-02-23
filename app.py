@@ -47,7 +47,7 @@ def receive_message():
                       if secretcode.find('TableChangeAccept') != -1:
                             secretcode=secretcode.split('|')
                             updateRestaurantsTablesInformation(secretcode[2],secretcode[3], waiter=secretcode[1])
-                            send_message(id,"a","a","Your table number has been changed successfully!")
+                            send_message(recipient_id,"a","a","Your table number has been changed successfully!")
                             send_message(secretcode[1],"a","a","Congracts your request has been accepted! :)")
                             return "Message Processed"
                       if secretcode.find('TableChangeDeny') != -1:
