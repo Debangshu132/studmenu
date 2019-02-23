@@ -338,8 +338,9 @@ def getConsumerInformation(id,property):
 
 @app.route("/menu/<restaurant>", methods=['GET', 'POST'])
 def menu(restaurant):
-         menu=getRestaurantsInformation(restaurant,"menu")
+         #menu=getRestaurantsInformation(restaurant,"menu")
          #return str(menu)
+         menu="menu"   
          return render_template('chart.html',menu=str(menu))
     
 def initializeUser(id,category):
