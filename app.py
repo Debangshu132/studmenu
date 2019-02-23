@@ -42,7 +42,12 @@ def receive_message():
                 RID=recipient_id 
                 if message['message'].get('text'):
                     typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
-                  
+                    if  message['message'].get('quick_reply'):  
+                      secretcode= message['message']['quick_reply']['payload']
+                      if secretcode=='hint':
+                            hint=getUserInformation(recipient_id,'lasthint')
+                            sendLastOptionsQuickReply(recipient_id,hint)
+                            return "Message Processed"
                      
                     
                     topic,mood,response = get_message(recipient_id,message['message'].get('text'))
@@ -208,7 +213,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
         prompt=name+" Wants to serve your table number "+ tableno
         #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
-        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['Table Change Accept','Table Change Deny'],prompt)
+        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
       #updateWaitersInformation(id,currentTable=tableno)
     
     
