@@ -202,7 +202,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
-       button= [{ "type": "web_url","url": "http://debangshu132.pythonanywhere.com/",
+       button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
@@ -238,7 +238,7 @@ def checkQuickReply(text,id):
              return True
            if text=="Napkins":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for napkins")
-               button= [{ "type": "web_url","url": "http://studmenu.herokuapp.com/menu/"+str(restaurant), "title": "Menu" },
+               button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/"+str(restaurant), "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
