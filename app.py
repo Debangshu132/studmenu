@@ -206,6 +206,18 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu","messenger_extensions":True },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
+         
+       response={"recipient":{"id":id},
+       "message":{"attachment":{"type":"template",
+       "payload":{"template_type":"button",
+        "text":"What do you want to do next?",
+        "buttons":[{
+            "type":"web_url",
+            "url":"https://www.messenger.com",
+            "title":"Visit Messenger"}]}}}}
+       pay(response)
+         
+         
        send_message(id,'a','a', "yoooo")  
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
        send_message(id,'a','a', "yoooo1")   
