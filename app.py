@@ -203,7 +203,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
        instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
-       button= [{ "type": "web_url","messenger_extension":True,"url": "https://studmenuweb.herokuapp.com/",
+       button= [{ "type": "web_url","messenger_extensions": "true","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
        send_message(id,'a','a', "yoooo")  
