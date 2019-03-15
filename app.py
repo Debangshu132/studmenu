@@ -15,6 +15,8 @@ app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
+consumer_id=""
+waiter_id=""
 @app.route("/menu/<restaurant>", methods=['GET', 'POST'])
 def menu(restaurant):
          menu=getRestaurantsInformation(restaurant,"menu")  
@@ -120,6 +122,7 @@ def checkReferral(output):
     
      if output['entry'][0]['messaging'][0].get('referral'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
+      consumer_id=id
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
       data=a.json()
       name=data['first_name']
@@ -139,6 +142,7 @@ def checkPostback(output):
  
  if output['entry'][0]['messaging'][0].get('postback'):
     id=  output['entry'][0]['messaging'][0]['sender']['id']  
+    consumer_id=id
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
     data=a.json()
     name=data['first_name']
@@ -366,9 +370,11 @@ def initializeUser(id,category):
         updateConsumersInformation(id,name=name,name1="")  
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 def cart(cartdata):
+    global consumer_id     
     datacart=urllib.parse.unquote(cartdata)     
     print(datacart)
     print("it works!")     
+    send_message(consumer_id,"a","a","your order is placed!")     
 
 
     return datacart
