@@ -250,25 +250,25 @@ def checkQuickReply(text,id):
              return True
            if text=="Napkins":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for napkins")
-               button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/","messenger_extensions": True, "title": "Menu" },
+               button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/","messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Spoons":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for spoons")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/","messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/","messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/","messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/","messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
            if text=="Talk to waiter":
                send_message(waiterid,"a","a"," table number"+ tableno+" wants to talk")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/","messenger_extensions": True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/","messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
