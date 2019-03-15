@@ -368,6 +368,7 @@ def initializeUser(id,category):
 def cart(cartdata):
     datacart=urllib.parse.unquote(cartdata)     
     print(datacart)
+    print("it works!")     
 
 
     return datacart
