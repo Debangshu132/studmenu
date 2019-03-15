@@ -370,12 +370,15 @@ def initializeUser(id,category):
         updateConsumersInformation(id,name=name,name1="")  
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 def cart(cartdata):
-    global consumer_id     
+    global consumer_id
+    print("yea")
+    print(consumer_id)
     datacart=urllib.parse.unquote(cartdata)     
     print(datacart)
-    print("it works!")     
+    print("it works!")   
+         
     send_message(consumer_id,"a","a","your order is placed!")     
-
+   
 
     return datacart
 
