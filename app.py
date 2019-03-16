@@ -120,8 +120,9 @@ def pay(payload):
   result = response.json()
   return result
 def checkReferral(output):
-     global consumer_id
+    
      if output['entry'][0]['messaging'][0].get('referral'):
+      global consumer_id            
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       consumer_id=id
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
@@ -140,8 +141,9 @@ def checkReferral(output):
         
     
 def checkPostback(output):
- global consumer_id
+
  if output['entry'][0]['messaging'][0].get('postback'):
+    global consumer_id     
     id=  output['entry'][0]['messaging'][0]['sender']['id']  
     consumer_id="yo man lalalala"
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
