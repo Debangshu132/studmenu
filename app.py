@@ -143,7 +143,7 @@ def checkPostback(output):
  global consumer_id
  if output['entry'][0]['messaging'][0].get('postback'):
     id=  output['entry'][0]['messaging'][0]['sender']['id']  
-    consumer_id=id
+    consumer_id="yo man lalalala"
     a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
     data=a.json()
     name=data['first_name']
