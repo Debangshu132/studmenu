@@ -210,20 +210,13 @@ def createUser(id,fulladdress,name,restaurant,tableno):
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
-       
-        
-       yourwaiter="seemant"  
-         
-         
-       instruction=yourwaiter+" will be serving you,To open menu press Open Menu, To call the waiter press Call Waiter"
+       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
        
-       updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno) 
-       #updateRestaurantsTablesInformation(restaurant,tableno, **kwargs)
-       
+       updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
@@ -277,7 +270,18 @@ def checkQuickReply(text,id):
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
-           
+           if text=="Accept Order":
+               #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/","messenger_extensions":True, "title": "Menu" },
+               {"type":"postback","title":"Waiter","payload":"waiter"}] 
+               bot.send_button_message(id,'Hurray! your ordered has been accepted ',button) 
+               return True 
+           if text=="Deny Order":
+               #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/","messenger_extensions":True, "title": "Menu" },
+               {"type":"postback","title":"Waiter","payload":"waiter"}] 
+               bot.send_button_message(id,'Sorry Your order has been denied',button) 
+               return True 
           
            else: 
             return False    
@@ -390,9 +394,14 @@ def cart(cartdata):
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is:")      
-         
+    #send_message(waiterid, "","",cartdata)     
     quickreply(waiterid,['Accept Order','Deny Order'],cartdata)
-   
+    """print(consumer_id)
+    datacart=urllib.parse.unquote(cartdata)     
+    print(datacart)
+    print("it works!")   
+         
+    send_message(consumer_id,"a","a","your order is placed!")     """
    
 
     return "yes!!!"
