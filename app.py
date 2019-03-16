@@ -12,6 +12,7 @@ from decisionTree import decision,listOfExams,askQuestion,handleResults,decision
 from intelligence import BRAIN
 import time
 app = Flask(__name__)
+CORS(app)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
