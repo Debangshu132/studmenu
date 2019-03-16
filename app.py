@@ -381,6 +381,7 @@ def cart(cartdata):
     global consumer_id
     print("yea")
     print(cartdata)
+    print(consumer_id)
     send_message(consumer_id, "","","you have done it")
    
     """print(consumer_id)
