@@ -210,7 +210,17 @@ def createUser(id,fulladdress,name,restaurant,tableno):
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
-       instruction="To open menu press Open Menu, To call the waiter press Call Waiter"
+         
+       restaurant=getConsumerInformation(id,"currentRestaurant")
+       tableno=getConsumerInformation(id,"currentTable")
+       tables=getRestaurantsInformation(restaurant,"tables")
+       table=tables[tableno]
+       waiterid=table['waiter']
+       waiter=getRestaurantsInformation(restaurant,"waiters")  
+       yourwaiter=waiter[waiterid]  
+         
+         
+       instruction=yourwaiter+" will be serving you,To open menu press Open Menu, To call the waiter press Call Waiter"
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
