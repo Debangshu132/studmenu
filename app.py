@@ -228,7 +228,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno) 
-       updateRestaurantsTablesInformation(restaurant,tableno, **kwargs)
+       #updateRestaurantsTablesInformation(restaurant,tableno, **kwargs)
        
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
