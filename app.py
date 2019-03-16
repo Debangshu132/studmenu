@@ -224,7 +224,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
-       bot.send_button_message(id,'To open menu press Open Menu ',button) 
+       bot.send_button_message(id,instruction,button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
