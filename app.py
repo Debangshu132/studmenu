@@ -122,7 +122,8 @@ def pay(payload):
 def checkReferral(output):
     
      if output['entry'][0]['messaging'][0].get('referral'):
-      global consumer_id            
+      global consumer_id   
+    
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       consumer_id=id
       a=requests.get("https://graph.facebook.com/"+id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
@@ -374,7 +375,13 @@ def cart(cartdata):
     print("yea")
     print(cartdata)
     print(consumer_id)
+    restaurant=getConsumerInformation(id,"currentRestaurant")
+    tableno=getConsumerInformation(id,"currentTable")
+    tables=getRestaurantsInformation(restaurant,"tables")
+    table=tables[tableno]
+    waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
+    send_message(waiterid, "","",cartdata)     
    
     """print(consumer_id)
     datacart=urllib.parse.unquote(cartdata)     
