@@ -370,7 +370,7 @@ def initializeUser(id,category):
     if category=="consumer":
         updateConsumersInformation(id,name=name,name1="")  
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
-@cross_origin()
+
 def cart(cartdata):
   if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
