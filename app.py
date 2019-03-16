@@ -211,14 +211,8 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
        
-       restaurant=getConsumerInformation(id,"currentRestaurant")
-       tableno=getConsumerInformation(id,"currentTable")
-       tables=getRestaurantsInformation(restaurant,"tables")
-       table=tables[tableno]
-       waiterid=table['waiter']
-       waiter=getRestaurantsInformation(restaurant,"waiters")  
-       yourwaiter=waiter[waiterid]  
-         
+        
+       yourwaiter="seemant"  
          
          
        instruction=yourwaiter+" will be serving you,To open menu press Open Menu, To call the waiter press Call Waiter"
