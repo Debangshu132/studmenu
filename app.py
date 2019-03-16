@@ -375,8 +375,8 @@ def cart(cartdata):
     print("yea")
     print(cartdata)
     print(consumer_id)
-    restaurant=getConsumerInformation(id,"currentRestaurant")
-    tableno=getConsumerInformation(id,"currentTable")
+    restaurant=getConsumerInformation(consumer_id,"currentRestaurant")
+    tableno=getConsumerInformation(consumer_id,"currentTable")
     tables=getRestaurantsInformation(restaurant,"tables")
     table=tables[tableno]
     waiterid=table['waiter']
