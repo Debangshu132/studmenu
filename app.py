@@ -16,7 +16,7 @@ CORS(app)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
-consumer_id=""
+consumer_id="initial"
 waiter_id=""
 @app.route("/menu/<restaurant>", methods=['GET', 'POST'])
 def menu(restaurant):
