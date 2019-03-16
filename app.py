@@ -370,6 +370,12 @@ def initializeUser(id,category):
         updateConsumersInformation(id,name=name,name1="")  
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 def cart(cartdata):
+  if request.method == 'GET':
+        """Before allowing people to message your bot, Facebook has implemented a verify token
+        that confirms all requests that your bot receives came from Facebook."""
+        token_sent = request.args.get("hub.verify_token")
+        return verify_fb_token(token_sent)
+  else:
     global consumer_id
     print("yea")
     print(cartrdata)
