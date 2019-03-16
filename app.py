@@ -120,7 +120,7 @@ def pay(payload):
   result = response.json()
   return result
 def checkReferral(output):
-    
+     global consumer_id
      if output['entry'][0]['messaging'][0].get('referral'):
       id=  output['entry'][0]['messaging'][0]['sender']['id']  
       consumer_id=id
@@ -140,7 +140,7 @@ def checkReferral(output):
         
     
 def checkPostback(output):
- 
+ global consumer_id
  if output['entry'][0]['messaging'][0].get('postback'):
     id=  output['entry'][0]['messaging'][0]['sender']['id']  
     consumer_id=id
