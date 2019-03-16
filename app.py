@@ -368,10 +368,13 @@ def initializeUser(id,category):
         updateWaitersInformation(id,name=name,name1="")
     if category=="consumer":
         updateConsumersInformation(id,name=name,name1="")  
-@app.route("/cart/", methods=['GET', 'POST'])
-def cart():
+@app.route("/cart/<cartdata>", methods=['GET', 'POST'])
+def cart(cartdata):
     global consumer_id
     print("yea")
+    print(cartrdata)
+    send_message(consumer_id, "","","you have done it")
+   
     """print(consumer_id)
     datacart=urllib.parse.unquote(cartdata)     
     print(datacart)
