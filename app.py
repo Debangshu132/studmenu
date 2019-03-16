@@ -211,18 +211,8 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
-         
-       response={"recipient":{"id":id},
-       "message":{"attachment":{"type":"template",
-       "payload":{"template_type":"button",
-        "text":"What do you want to do next?",
-        "buttons":button}}}}
-       pay(response)
-         
-         
-       send_message(id,'a','a', "yoooo")  
        bot.send_button_message(id,'To open menu press Open Menu ',button) 
-       send_message(id,'a','a', "yoooo1")   
+       
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
@@ -382,7 +372,7 @@ def cart(cartdata):
     print("yea")
     print(cartdata)
     print(consumer_id)
-    send_message(consumer_id, "","","you have done it")
+    send_message(consumer_id, "","","your order is placed!")
    
     """print(consumer_id)
     datacart=urllib.parse.unquote(cartdata)     
