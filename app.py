@@ -420,7 +420,7 @@ def cart(cartdata):
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsTablesInformation(restaurant,tableno,**{consumer_id:mycart})   
-    updateRestaurantsCartInformation(restaurant,tableno, **kwargs):
+    
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
