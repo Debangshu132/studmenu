@@ -427,11 +427,11 @@ def cart(cartdata):
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[{"title":"Your Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
-                      "subtitle":"See your order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/individualcart/"+individualcartjson,
+                      "subtitle":"See your order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/individualcart/"+str(individualcartjson),
                  "title": "Menu","messenger_extensions": True}] },
                  {"title":"Group Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
-                     "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+groupcartjson,
+                     "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+str(groupcartjson),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
     r=pay(response)     
     return "yes!!!"
