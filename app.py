@@ -204,7 +204,7 @@ def createUser(id,fulladdress,name,restaurant,tableno):
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
         updateWaitersInformation(id,name=name)
     else:
-        updateConsumersInformation(id,name=name)   
+        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)   
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
        
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
