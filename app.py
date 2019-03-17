@@ -408,7 +408,7 @@ def cart(cartdata):
    
       
          
-    send_message(consumer_id,"a","a","your order is placed!")     
+   
    
 
     return "yes!!!"
