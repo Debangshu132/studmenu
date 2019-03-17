@@ -397,7 +397,7 @@ def cart(cartdata):
     print("yea")
     print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
-    cart=json.loads(cartdata)["cart"]
+    mycart=json.loads(cartdata)["cart"]
          
     print(consumer_id)
     restaurant=getConsumerInformation(consumer_id,"currentRestaurant")
@@ -406,8 +406,8 @@ def cart(cartdata):
     table=tables[tableno]
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
-    send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(cart))  
-    updateRestaurantsTablesInformation(restaurant,tableno,**{cart.consumer_id:cart})     
+    send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
+    updateRestaurantsTablesInformation(restaurant,tableno,**{cart.consumer_id:mycart})     
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
