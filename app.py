@@ -406,7 +406,7 @@ def cart(cartdata):
     table=tables[tableno]
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
-    send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+cart)      
+    send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(cart))      
    
    
       
