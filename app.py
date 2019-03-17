@@ -410,6 +410,11 @@ def cart(cartdata):
     print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
     mycart=json.loads(cartdata)["cart"]
+
+    a=requests.get("https://graph.facebook.com/"+consumer_id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
+    data=a.json()
+    profilepic=data['profile_pic']
+
          
     print(consumer_id)
     restaurant=getConsumerInformation(consumer_id,"currentRestaurant")
@@ -420,7 +425,7 @@ def cart(cartdata):
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:mycart})   
-    cartjson={"restaurant":restaurant,"tableno":tableno,"consumer_id":consumer_id}
+    cartjson={"restaurant":restaurant,"tableno":tableno,"consumer_id":consumer_id,"profilepic":profilepic}
     
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
