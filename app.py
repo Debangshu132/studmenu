@@ -393,7 +393,7 @@ def cart(cartdata):
         token_sent = request.args.get("hub.verify_token")
         return verify_fb_token(token_sent)
   else:
-    global consumer_id
+    
     print("yea")
     print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
