@@ -200,9 +200,9 @@ def checkUserCondition(id):
         return "none"
 def createUser(id,fulladdress,name,restaurant,tableno):
     if len(fulladdress)==1:
-       
+        updateWaitersInformation(id,name=name,currentRestaurant=restaurant)
         executeWaiterCode(id,fulladdress,name,restaurant,tableno)
-        updateWaitersInformation(id,name=name)
+        
     else:
         updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)   
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
