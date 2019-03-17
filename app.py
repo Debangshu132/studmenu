@@ -420,18 +420,15 @@ def cart(cartdata):
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:mycart})   
-    individualcartjson={"restaurant":restaurant,"tableno":tableno,"consumer_id":consumer_id}
-    groupcartjson={"restaurant":restaurant,"tableno":tableno}     
+    cartjson={"restaurant":restaurant,"tableno":tableno,"consumer_id":consumer_id}
+    
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
-          "payload":{"template_type":"generic","elements":[{"title":"Your Order",
-                   "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
-                      "subtitle":"See your order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/individualcart/"+str(individualcartjson),
-                 "title": "Menu","messenger_extensions": True}] },
+          "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
-                     "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+str(groupcartjson),
+                     "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+str(cartjson),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
     r=pay(response)     
     return "yes!!!"
