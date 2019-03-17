@@ -331,6 +331,18 @@ def updateRestaurantsWaitersInformation(nameOfRestaurant, **kwargs):
     print(waiters)
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".waiters": waiters}},upsert=True);
     return(0)
+def updateRestaurantsCartInformation(nameOfRestaurant,tableno, **kwargs):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    tables=getRestaurantsInformation(nameOfRestaurant,"tables")
+    table=tables[tableno]
+    cart=table["cart"]
+    for key in kwargs:
+        cart[key]=str(kwargs[key])
+    db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart": cart}},upsert=True);
+    return(0)
+
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
@@ -407,7 +419,8 @@ def cart(cartdata):
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
-    updateRestaurantsTablesInformation(restaurant,tableno,**{cart.consumer_id:mycart})     
+    updateRestaurantsTablesInformation(restaurant,tableno,**{consumer_id:mycart})   
+    updateRestaurantsCartInformation(restaurant,tableno, **kwargs):
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
