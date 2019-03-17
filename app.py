@@ -396,6 +396,8 @@ def cart(cartdata):
     global consumer_id
     print("yea")
     print(cartdata)
+    consumer_id=json.loads(cartdata)["id"]
+         
     print(consumer_id)
     restaurant=getConsumerInformation(consumer_id,"currentRestaurant")
     tableno=getConsumerInformation(consumer_id,"currentTable")
