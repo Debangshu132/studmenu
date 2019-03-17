@@ -419,7 +419,7 @@ def cart(cartdata):
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
-    updateRestaurantsTablesInformation(restaurant,tableno,**{consumer_id:mycart})   
+    updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:mycart})   
     
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
