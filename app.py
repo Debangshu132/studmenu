@@ -406,21 +406,17 @@ def cart(cartdata):
     table=tables[tableno]
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
-    send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(cart))      
+    send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(cart))  
+    updateRestaurantsTablesInformation(restaurant,tableno,**{cart.consumer_id:cart})     
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
-      {"content_type":"text",
-        "title":"Waiter",
-        "payload":'Waiter'}],   
+      {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
-          "payload":{"template_type":"generic",
-             "elements":[{
-                 "title":"Your Order",
+          "payload":{"template_type":"generic","elements":[{"title":"Your Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
                       "subtitle":"See your order here","buttons":[{"type":"postback","title":"My Cart","payload":"mCart"}] },
                  {"title":"Group Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
-                     "subtitle":"See the group order here",
-                        "buttons":[{"type":"postback","title":"Group Cart","payload":"gCart"}] }]}}}}
+                     "subtitle":"See the group order here","buttons":[{"type":"postback","title":"Group Cart","payload":"gCart"}] }]}}}}
     r=pay(response)     
     return "yes!!!"
 
