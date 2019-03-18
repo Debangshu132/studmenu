@@ -424,10 +424,10 @@ def cart(cartdata):
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
+    mycart={"cart":mycart,"profilepic":str(profilepic)}     
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:mycart})   
-    cartjson={"restaurant":restaurant,"tableno":tableno,"consumer_id":consumer_id,"profilepic":str(profilepic)}
-    print("the json is "+json.dumps(cartjson))
-    print("the string is "+str(cartjson))
+    cartjson={"restaurant":restaurant,"tableno":tableno,"consumer_id":consumer_id}
+    
     response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
