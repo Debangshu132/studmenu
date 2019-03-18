@@ -414,7 +414,7 @@ def cart(cartdata):
     a=requests.get("https://graph.facebook.com/"+consumer_id+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
     data=a.json()
     profilepic=data['profile_pic']
-    print(str(profilepic))
+    print("the profile pic is: "+str(profilepic))
          
     print(consumer_id)
     restaurant=getConsumerInformation(consumer_id,"currentRestaurant")
