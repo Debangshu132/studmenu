@@ -339,8 +339,8 @@ def updateRestaurantsCartInformation(nameOfRestaurant,tableno, **kwargs):
     table=tables[tableno]
     cart=table["cart"]
     for key in kwargs:
-      #cart[key]=kwargs[key]
-      db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(key)+".mycart": kwargs[key]+".mycart"}},upsert=True);
+      cartdata=kwargs[key]["mycart"]
+      db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(key)+".mycart": cartdata}},upsert=True);
     return(0)
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
