@@ -343,6 +343,12 @@ def updateRestaurantsCartInformation(nameOfRestaurant,tableno, **kwargs):
       for individualorder in cartdata:
          db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(key)+".mycart": individualorder}},upsert=True);
     return(0)
+def updateRestaurantsStatusInformation(nameOfRestaurant,tableno,id, acceptdeny):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".status": acceptdeny}},upsert=True);
+    return(0)
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
@@ -426,7 +432,7 @@ def cart(cartdata):
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     
-    updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"mycart":mycart}})   
+    updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
     cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
@@ -456,6 +462,7 @@ def acceptdeny(data):
      restaurant=json.loads(data)["restaurant"]
      tableno=json.loads(data)["tableno"]  
      acceptdeny=json.loads(data)["acceptdeny"]
+     updateRestaurantsStatusInformation(nameOfRestaurant,tableno,consumer_id, acceptdeny)   
      print(data)
      return "yes!!!"
     
