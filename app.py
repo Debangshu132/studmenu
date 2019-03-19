@@ -430,15 +430,24 @@ def cart(cartdata):
     cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
-    response=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
+    responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
-                 "title": "Menu","messenger_extensions": True}] }]}}}}
-    r=pay(response)     
+                 "title": "View Order","messenger_extensions": True}] }]}}}}
+    responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
+      {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
+      "attachment":{"type":"template",
+          "payload":{"template_type":"generic","elements":[
+                 {"title":"Table number "+tableno,
+                   "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
+                     "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
+                 "title": "Order","messenger_extensions": True}] }]}}}}     
+    r=pay(responseconsumer) 
+    r=pay(responsewaiter)      
     return "yes!!!"
 
     
