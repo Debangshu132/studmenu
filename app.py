@@ -341,7 +341,7 @@ def updateRestaurantsCartInformation(nameOfRestaurant,tableno, **kwargs):
     for key in kwargs:
       cartdata=kwargs[key]["mycart"]
       for individualorder in cartdata:
-         db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(key)+".mycart": individualorder}},upsert=True);
+         db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(key)+".mycart.-1": individualorder}},upsert=True);
     return(0)
 def updateRestaurantsStatusInformation(nameOfRestaurant,tableno,id, acceptdeny):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
