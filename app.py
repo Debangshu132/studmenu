@@ -462,7 +462,7 @@ def acceptdeny(data):
      restaurant=json.loads(data)["restaurant"]
      tableno=json.loads(data)["tableno"]  
      acceptdeny=json.loads(data)["acceptdeny"]
-     updateRestaurantsStatusInformation(nameOfRestaurant,tableno,consumer_id, acceptdeny)   
+     updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, acceptdeny)   
      print(data)
      return "yes!!!"
     
