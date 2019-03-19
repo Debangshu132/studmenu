@@ -449,7 +449,12 @@ def cart(cartdata):
     r=pay(responseconsumer) 
     r=pay(responsewaiter)      
     return "yes!!!"
+@app.route("/acceptdeny/<data>", methods=['GET', 'POST'])
 
+def cart(data):
+     consumer_id=json.loads(data)["id"]    
+     restaurant=json.loads(data)["restaurant"]
+     tableno=json.loads(data)["tableno"]    
     
 
 if __name__ == "__main__":
