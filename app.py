@@ -431,7 +431,6 @@ def cart(cartdata):
     waiterid=table['waiter']
     send_message(consumer_id, "","","your order is placed!")
     send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
-    
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
     cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
