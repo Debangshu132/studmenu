@@ -451,12 +451,13 @@ def cart(cartdata):
     return "yes!!!"
 @app.route("/acceptdeny/<data>", methods=['GET', 'POST'])
 
-def cart(data):
+def acceptdeny(data):
      consumer_id=json.loads(data)["id"]    
      restaurant=json.loads(data)["restaurant"]
      tableno=json.loads(data)["tableno"]  
      acceptdeny=json.loads(data)["acceptdeny"]
      print(data)
+     return "yes!!!"
     
 
 if __name__ == "__main__":
