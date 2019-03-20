@@ -28,7 +28,7 @@ def menu():
 
 #We will receive messages that Facebook sends our bot at this endpoint
 @socketio.on('canirefresh')
-@app.route("/menu", methods=['GET', 'POST'])
+@app.route("/test", methods=['GET', 'POST'])
 def handle_my_custom_event(msg):
     print("yo refresh the page")     
     emit('okrefreshpage', msg, broadcast=True)
