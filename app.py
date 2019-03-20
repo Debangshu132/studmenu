@@ -414,6 +414,10 @@ def initializeUser(id,category):
         updateWaitersInformation(id,name=name,name1="")
     if category=="consumer":
         updateConsumersInformation(id,name=name,name1="")  
+@socketio.on('acceptdenyupdate', namespace='/refresh')  # Decorator to catch an event called "my event":
+def refresh(acceptdeny):                        # test_message() is the event callback function.
+    emit('okrefreshpage', {'data': 'got it!'})      # Trigger a new event called "my response" 
+
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
 def cart(cartdata):
