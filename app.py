@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from flask import Flask, request,render_template
 from pymessenger.bot import Bot
 import os
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO,send,emit
 import requests
 import urllib
 from flask_cors import CORS
@@ -414,6 +414,9 @@ def initializeUser(id,category):
         updateWaitersInformation(id,name=name,name1="")
     if category=="consumer":
         updateConsumersInformation(id,name=name,name1="")  
+@socketio.on('connected')
+def handle_my_custom_event(msg):
+    emit('okrefreshpage', msg)
 
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
