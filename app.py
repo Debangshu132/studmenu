@@ -353,7 +353,7 @@ def updateRestaurantsStatusInformation(nameOfRestaurant,tableno,id, acceptdeny):
     cartdata=cart[id]
     mycart=cartdata["mycart"]     
     for atomicorderindex in range(0,len(mycart)):
-        db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".mycart."+str(atomicorderindex): acceptdeny}},upsert=True);
+        db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".mycart."+str(atomicorderindex)+".status": acceptdeny}},upsert=True);
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".status": acceptdeny}},upsert=True);
     
     return(0)
