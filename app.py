@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from flask import Flask, request,render_template
 from pymessenger.bot import Bot
 import os
+from flask_socketio import SocketIO
 import requests
 import urllib
 from flask_cors import CORS
@@ -13,6 +14,7 @@ from intelligence import BRAIN
 import time
 app = Flask(__name__)
 CORS(app)
+socketio = SocketIO(app)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
@@ -478,4 +480,5 @@ def acceptdeny(data):
     
 
 if __name__ == "__main__":
-    app.run(use_reloader=True, threaded=True)
+     socketio.run(app)     
+   
