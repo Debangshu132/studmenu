@@ -414,11 +414,7 @@ def initializeUser(id,category):
         updateWaitersInformation(id,name=name,name1="")
     if category=="consumer":
         updateConsumersInformation(id,name=name,name1="")  
-@socketio.on('acceptdenyupdate', namespace='/refresh')  # Decorator to catch an event called "my event":
-def refresh(acceptdeny):  
-    print("the socket worked!!")     # test_message() is the event callback function.
-    emit('okrefreshpage', {'data': 'got it!'})      # Trigger a new event called "my response" 
-    return True
+
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
 def cart(cartdata):
@@ -479,7 +475,9 @@ def acceptdeny(data):
      tableno=json.loads(data)["tableno"]  
      acceptdeny=json.loads(data)["acceptdeny"]
      updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, acceptdeny,"changeall")
+     socketio.emit('my response', data, broadcast=True)
      send_message(consumer_id, "","","your order is "+ acceptdeny)
+         
      print(data)
      return "yes!!!"
     
