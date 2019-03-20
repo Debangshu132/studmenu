@@ -475,7 +475,8 @@ def acceptdeny(data):
      tableno=json.loads(data)["tableno"]  
      acceptdeny=json.loads(data)["acceptdeny"]
      updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, acceptdeny,"changeall")
-     socketio.emit('my response', data, broadcast=True)
+     datasocket="the socket worked!"
+     socketio.emit('my response', datasocket, broadcast=True)
      send_message(consumer_id, "","","your order is "+ acceptdeny)
          
      print(data)
