@@ -416,6 +416,7 @@ def initializeUser(id,category):
         updateConsumersInformation(id,name=name,name1="")  
 @socketio.on('connected')
 def handle_my_custom_event(msg):
+    print(msg)     
     emit('okrefreshpage', msg)
 
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
