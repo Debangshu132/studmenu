@@ -418,7 +418,9 @@ def initializeUser(id,category):
 def handle_my_custom_event(msg):
     print(msg)     
     emit('okrefreshpage', msg)
-
+@socketio.on('connect')
+def handleConnect():
+    print('yeay connected')
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
 def cart(cartdata):
