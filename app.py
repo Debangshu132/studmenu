@@ -347,7 +347,15 @@ def updateRestaurantsStatusInformation(nameOfRestaurant,tableno,id, acceptdeny):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
+    tables=getRestaurantsInformation(nameOfRestaurant,"tables")
+    table=tables[tableno]
+    cart=table["cart"]
+    cartdata=cart[id]
+    mycart=cartdata["mycart"]     
+    for atomicorderindex in range(0,len(mycart)):
+        db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".mycart."+atomicorderindex: acceptdeny}},upsert=True);
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".status": acceptdeny}},upsert=True);
+    
     return(0)
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
