@@ -216,7 +216,7 @@ def createUser(id,fulladdress,name,restaurant,tableno):
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
        send_message(id,'a','a', welcome)
-         
+       updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
        restaurant=getConsumerInformation(id,"currentRestaurant")
        tableno=getConsumerInformation(id,"currentTable")
        tables=getRestaurantsInformation(restaurant,"tables")
