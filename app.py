@@ -20,11 +20,11 @@ VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
 consumer_id="initial"
 waiter_id=""
-@app.route("/menu/<restaurant>", methods=['GET', 'POST'])
-def menu(restaurant):
-         menu=getRestaurantsInformation(restaurant,"menu")  
+@app.route("/menu", methods=['GET', 'POST'])
+def menu():
+         #menu=getRestaurantsInformation(restaurant,"menu")  
          #return "hello"
-         return render_template('chart.html',menu=menu)
+         return 'yeay it worked dumbo'
 
 #We will receive messages that Facebook sends our bot at this endpoint
 @socketio.on('canirefresh')
@@ -227,7 +227,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
          
          
        instruction=yourwaiter+" will be serving you,To open menu press Open Menu, To call "+yourwaiter+" press Call Waiter"
-       button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/",
+       button= [{ "type": "web_url","url": "/menu",
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
        bot.send_button_message(id,instruction,button) 
