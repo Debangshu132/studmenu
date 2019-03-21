@@ -465,6 +465,7 @@ def cart(cartdata):
     tables=getRestaurantsInformation(restaurant,"tables")
     table=tables[tableno]
     waiterid=table['waiter']
+    updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
     send_message(consumer_id, "","","your order is pending!")
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
