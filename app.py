@@ -373,7 +373,8 @@ def helpRestaurantCheckout(nameOfRestaurant,tableno):
     table=tables[tableno]
     cart=table["cart"]
     for consumerid in cart.keys():
-         updateConsumersInformation(ID, **kwargs)
+         updateConsumersInformation(consumerid,currentRestaurant='none',currentTable='none')
+    updateRestaurantsTablesInformation(restaurant,tableno, cart={})     
     return(0)     
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
@@ -497,8 +498,8 @@ def checkout(data):
      print('yo done bro haha')
          
          
-         
-     updateRestaurantsTablesInformation(restaurant,tableno, cart={})
+     helpRestaurantCheckout(restaurant,tableno)    
+     
      print(data)
      return "yes!!!"
 @app.route("/acceptdeny/<data>", methods=['GET', 'POST'])
