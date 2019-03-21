@@ -477,6 +477,20 @@ def cart(cartdata):
     r=pay(responseconsumer) 
     r=pay(responsewaiter)      
     return "yes!!!"
+@app.route("/checkout/<data>", methods=['GET', 'POST'])
+
+def checkout(data):
+     consumer_id=json.loads(data)["tableno"]    
+     restaurant=json.loads(data)["restaurant"]
+     tableno=json.loads(data)["tableno"] 
+     print('yo done bro haha')
+     updateRestaurantsTablesInformation(restaurant,tableno, cart={})
+     
+    
+     send_message(consumer_id, "","","your order is "+ acceptdeny)
+         
+     print(data)
+     return "yes!!!"
 @app.route("/acceptdeny/<data>", methods=['GET', 'POST'])
 
 def acceptdeny(data):
