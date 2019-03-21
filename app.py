@@ -374,7 +374,7 @@ def helpRestaurantCheckout(nameOfRestaurant,tableno):
     cart=table["cart"]
     for consumerid in cart.keys():
          updateConsumersInformation(consumerid,currentRestaurant='none',currentTable='none')
-    updateRestaurantsTablesInformation(restaurant,tableno, cart={})     
+    updateRestaurantsTablesInformation(nameOfRestaurant,tableno, cart={})     
     return(0)     
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
