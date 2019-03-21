@@ -364,6 +364,17 @@ def updateRestaurantsStatusInformation(nameOfRestaurant,tableno,id, acceptdeny,a
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno)+".cart."+str(id)+".status": acceptdeny}},upsert=True);
     
     return(0)
+         
+def helpRestaurantCheckout(nameOfRestaurant,tableno):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    tables=getRestaurantsInformation(nameOfRestaurant,"tables")
+    table=tables[tableno]
+    cart=table["cart"]
+    for consumerid in cart.keys():
+         updateConsumersInformation(ID, **kwargs)
+    return(0)     
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
@@ -484,6 +495,9 @@ def checkout(data):
      restaurant=json.loads(data)["restaurant"]
      tableno=json.loads(data)["tableno"] 
      print('yo done bro haha')
+         
+         
+         
      updateRestaurantsTablesInformation(restaurant,tableno, cart={})
      print(data)
      return "yes!!!"
