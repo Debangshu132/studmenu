@@ -372,7 +372,7 @@ def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
     tables=getRestaurantsInformation(nameOfRestaurant,"tables")
     table=tables[tableno]
     for key in kwargs:
-        table[key]=str(kwargs[key])
+        table[key]=(kwargs[key])
     db.restaurants.update({"_id" : "restaurant"}, {"$set":{str(nameOfRestaurant)+".tables."+str(tableno): table}},upsert=True);
     return(0)
 def getRestaurantsInformation(nameOfRestaurant,property):
