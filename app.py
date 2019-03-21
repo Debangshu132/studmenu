@@ -485,10 +485,6 @@ def checkout(data):
      tableno=json.loads(data)["tableno"] 
      print('yo done bro haha')
      updateRestaurantsTablesInformation(restaurant,tableno, cart={})
-     
-    
-     send_message(consumer_id, "","","your order is "+ acceptdeny)
-         
      print(data)
      return "yes!!!"
 @app.route("/acceptdeny/<data>", methods=['GET', 'POST'])
