@@ -379,6 +379,7 @@ def helpRestaurantCheckout(nameOfRestaurant,tableno):
     for consumerid in cart.keys():
          updateConsumersInformation(consumerid,currentRestaurant='none',currentTable='none')
     updateRestaurantsTablesInformation(nameOfRestaurant,tableno, cart={})     
+    updateRestaurantsTablesInformation(nameOfRestaurant,tableno, consumer=[])
     return(0)    
 def updateRestaurantsTablesConsumerInformation(nameOfRestaurant,tableno, consumer_id):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
