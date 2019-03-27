@@ -262,37 +262,37 @@ def checkQuickReply(text,id):
              return True
            if text=="Napkins":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for napkins")
-               button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/","messenger_extensions": True, "title": "Menu" },
+               button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Spoons":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for spoons")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/","messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/","messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
            if text=="Talk to waiter":
                send_message(waiterid,"a","a"," table number"+ tableno+" wants to talk")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/","messenger_extensions": True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
            if text=="Accept Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/","messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Hurray! your ordered has been accepted ',button) 
                return True 
            if text=="Deny Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/","messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
                bot.send_button_message(id,'Sorry Your order has been denied',button) 
                return True 
