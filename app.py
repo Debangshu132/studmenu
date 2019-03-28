@@ -235,7 +235,8 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant) 
-      updateRestaurantsWaitersInformation(restaurant, **{id:name})  
+      info={"name":name,"picurl":"","active":True,"activetables":[]}   
+      updateRestaurantsWaitersInformation(restaurant, **{id:info})  
     else:    
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
