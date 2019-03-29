@@ -168,8 +168,8 @@ def checkPostback(output):
          
          handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
-        welcome="Welcome! "+name+" please open the camera and long press to scan the QR code!"
-   
+        welcome="Welcome! please open the camera and long press to scan the QR code!"
+        send_message(id, "","",welcome)
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
      
