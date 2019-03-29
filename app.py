@@ -234,7 +234,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
       send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
-      updateWaitersInformation(id,name=name,currentRestaurant=restaurant) 
+      updateWaitersInformation(id,name=name,currentRestaurant=restaurant,tableno=tableno) 
       info={"name":name,"picurl":"","active":True,"activetables":[]}   
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
     else:    
@@ -316,8 +316,14 @@ def updateWaitersInformation(ID, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
+    col = db["restaurants"]
+    cursor = col.find()
+    restaurant = cursor[0]
+    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(currentRestaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
+         
     for key in kwargs:
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
+    
     return(0)
 def updateConsumersInformation(ID, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
