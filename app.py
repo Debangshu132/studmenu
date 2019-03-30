@@ -270,10 +270,10 @@ def checkQuickReply(text,id):
            if text=="T1":
                      handleUser(id,"Taj_1","Meallionaire",'Taj',"1")   
                      return True 
-           if text=="T1":
+           if text=="T2":
                      handleUser(id,"Taj_2","Meallionaire",'Taj',"2")   
                      return True 
-           if text=="T1":
+           if text=="T3":
                      handleUser(id,"Taj_3","Meallionaire",'Taj',"3")   
                      return True                      
            if text=="Call Waiter":
