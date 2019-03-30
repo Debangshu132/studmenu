@@ -168,8 +168,8 @@ def checkPostback(output):
          
          handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
-         welcome="Welcome! please choose one from below!"
-         quickreply(id,['Branch1','Branch2','Branch3'],welcome)
+         welcome="please choose one from below!"
+         quickreply(id,['Gurgaon','Noida','Delhi'],welcome)
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
      
@@ -211,8 +211,8 @@ def createUser(id,fulladdress,name,restaurant,tableno):
         executeConsumerCode(id,fulladdress,name,restaurant,tableno)
        
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
-       welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
-       send_message(id,'a','a', welcome)
+       #welcome='Welcome!'+name+" you are sitting in restaurant "+restaurant+" in table number "+ tableno+" I am your host today :)"
+       #send_message(id,'a','a', welcome)
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
        updateRestaurantsTablesConsumerInformation(restaurant,tableno, name)
        restaurant=getConsumerInformation(id,"currentRestaurant")
@@ -224,7 +224,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        yourwaiter=waiter[waiterid]["name"]  
          
          
-       instruction=yourwaiter+" will be serving you,To open menu press Open Menu, To call "+yourwaiter+" press Call Waiter"
+       instruction="Our waiter "yourwaiter+" will be serving you,To open menu press Open Menu, To call "+yourwaiter+" press Call Waiter"
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
@@ -258,13 +258,13 @@ def checkQuickReply(text,id):
            tables=getRestaurantsInformation(restaurant,"tables")
            table=tables[tableno]
            waiterid=table['waiter'] 
-           if text=="Branch1":
+           if text=="Gurgaon":
              quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
              return True   
-           if text=="Branch2":
+           if text=="Noida":
              quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
              return True 
-           if text=="Branch3":
+           if text=="Delhi":
              quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
              return True 
            if text=="T1":
