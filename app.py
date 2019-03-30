@@ -221,7 +221,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        table=tables[tableno]
        waiterid=table['waiter']
        waiter=getRestaurantsInformation(restaurant,"waiters")  
-       yourwaiter=waiter[waiterid]  
+       yourwaiter=waiter[waiterid]["name"]  
          
          
        instruction=yourwaiter+" will be serving you,To open menu press Open Menu, To call "+yourwaiter+" press Call Waiter"
