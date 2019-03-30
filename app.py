@@ -268,13 +268,13 @@ def checkQuickReply(text,id):
              quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
              return True 
            if text=="T1":
-                     handleUser(id,"Taj_1","Meallionaire,'Taj',"1")   
+                     handleUser(id,"Taj_1","Meallionaire",'Taj',"1")   
                      return True 
            if text=="T1":
-                     handleUser(id,"Taj_2","Meallionaire,'Taj',"2")   
+                     handleUser(id,"Taj_2","Meallionaire",'Taj',"2")   
                      return True 
            if text=="T1":
-                     handleUser(id,"Taj_3","Meallionaire,'Taj',"3")   
+                     handleUser(id,"Taj_3","Meallionaire",'Taj',"3")   
                      return True                      
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
