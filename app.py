@@ -80,7 +80,7 @@ def receive_message():
                 if message['message'].get('attachments'):
                     response = ['(y)',':)',":D"]
                     
-                    quickreply(recipient_id,['Lets test', 'I am Bored!'],random.choice(response))
+                    quickreply(recipient_id,['I am Bored!'],random.choice(response))
                
     return "Message Processed"
 
@@ -168,8 +168,8 @@ def checkPostback(output):
          
          handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
-        welcome="Welcome! please open the camera and long press to scan the QR code!"
-        send_message(id, "","",welcome)
+         welcome="Welcome! please choose one from below!"
+         quickreply(id,['Branch1','Branch2','Branch3'],welcome)
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
      
@@ -258,6 +258,24 @@ def checkQuickReply(text,id):
            tables=getRestaurantsInformation(restaurant,"tables")
            table=tables[tableno]
            waiterid=table['waiter'] 
+           if text=="Branch1":
+             quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
+             return True   
+           if text=="Branch2":
+             quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
+             return True 
+           if text=="Branch3":
+             quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
+             return True 
+           if text=="T1":
+                     handleUser(id,"Taj_1","Meallionaire,'Taj',"1")   
+                     return True 
+           if text=="T1":
+                     handleUser(id,"Taj_2","Meallionaire,'Taj',"2")   
+                     return True 
+           if text=="T1":
+                     handleUser(id,"Taj_3","Meallionaire,'Taj',"3")   
+                     return True                      
            if text=="Call Waiter":
              quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
