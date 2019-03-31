@@ -253,10 +253,12 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     
     
 def checkQuickReply(text,id): 
-           restaurant=getConsumerInformation(id,"currentRestaurant")
-           tableno=getConsumerInformation(id,"currentTable")
-           tables=getRestaurantsInformation(restaurant,"tables")
-           table=tables[tableno]
+           #restaurant=getConsumerInformation(id,"currentRestaurant")
+           restaurant="Taj"       
+           #tableno=getConsumerInformation(id,"currentTable")
+           #tables=getRestaurantsInformation(restaurant,"tables")
+           tableno="1"
+           table=tables["1"]
            waiterid=table['waiter'] 
            if text=="Gurgaon":
              quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
@@ -268,6 +270,7 @@ def checkQuickReply(text,id):
              quickreply(id,["T1","T2","T3"],"One more step! enter the table number where you are sitting") 
              return True 
            if text=="T1":
+                       
                      handleUser(id,"Taj_1","Meallionaire",'Taj',"1")   
                      return True 
            if text=="T2":
