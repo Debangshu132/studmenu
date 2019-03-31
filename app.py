@@ -256,7 +256,7 @@ def checkQuickReply(text,id):
            #restaurant=getConsumerInformation(id,"currentRestaurant")
            restaurant="Taj"       
            #tableno=getConsumerInformation(id,"currentTable")
-           #tables=getRestaurantsInformation(restaurant,"tables")
+           tables=getRestaurantsInformation(restaurant,"tables")
            tableno="1"
            table=tables["1"]
            waiterid=table['waiter'] 
