@@ -322,8 +322,10 @@ def updateWaitersInformation(ID, **kwargs):
     col = db["restaurants"]
     cursor = col.find()
     restaurant = cursor[0]
-    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(restaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
-         
+    try:     
+      db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(restaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
+    except:
+      pass            
     for key in kwargs:
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     
