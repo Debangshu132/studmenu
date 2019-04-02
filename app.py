@@ -64,6 +64,8 @@ def receive_message():
                             updateRestaurantsTablesInformation(secretcode[2],secretcode[3], waiter=secretcode[1])
                             send_message(recipient_id,"a","a","Your table number has been changed successfully!")
                             send_message(secretcode[1],"a","a","Congracts your request has been accepted! :)")
+                             
+                            pushRestaurantsWaitersInformation(restaurant, **{id:secretcode[3]})        
                             return "Message Processed"
                       if secretcode.find('TableChangeDeny') != -1:
                             secretcode=secretcode.split('|')
@@ -328,6 +330,16 @@ def updateWaitersInformation(ID, **kwargs):
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     
     return(0)
+def pushRestaurantsWaitersInformation(restaurant, id,tableno):
+    MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
+    client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
+    db = client.get_database("brilu")
+    col = db["restaurants"]
+    cursor = col.find()
+    restaurant = cursor[0]
+    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(restaurant)+".waiters."+str(id)+".activetables": tableno}},upsert=True);
+           
+         
 def updateConsumersInformation(ID, **kwargs):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
