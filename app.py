@@ -65,7 +65,7 @@ def receive_message():
                             send_message(recipient_id,"a","a","Your table number has been changed successfully!")
                             send_message(secretcode[1],"a","a","Congracts your request has been accepted! :)")
                              
-                            pushRestaurantsWaitersInformation(restaurant,id,secretcode[3])        
+                            #pushRestaurantsWaitersInformation(restaurant,id,secretcode[3])        
                             return "Message Processed"
                       if secretcode.find('TableChangeDeny') != -1:
                             secretcode=secretcode.split('|')
@@ -324,7 +324,7 @@ def updateWaitersInformation(ID, **kwargs):
     col = db["restaurants"]
     cursor = col.find()
     restaurant = cursor[0]
-    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(restaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
+    #db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(restaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
                 
     for key in kwargs:
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
