@@ -223,10 +223,10 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        waiterid=table['waiter']
        waiter=getRestaurantsInformation(restaurant,"waiters")  
        yourwaiter=waiter[waiterid]["name"]  
-       welcome='Hi! '+name+",\n"+" Welcome to "+restaurant+":) \n"+"Our steward "+ yourwaiter+" will be serving your table number "+tableno
+       welcome='Hi! '+name+",\n"+"\n"+"Welcome to "+restaurant+" :) \n"+"Our steward "+ yourwaiter+" will be serving your Table No. "+tableno
        send_message(id,'a','a', welcome)  
          
-       instruction="Instructions:"+ "\n"+ "To open menu tap Menu, To call "+yourwaiter+" tap Waiter"
+       instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Waiter"
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
