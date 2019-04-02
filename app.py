@@ -168,7 +168,7 @@ def checkPostback(output):
          
          handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
-         welcome="please choose one from below!"
+         welcome="please cscan the QR code"
          quickreply(id,['Gurgaon','Noida','Delhi'],welcome)
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
@@ -322,7 +322,7 @@ def updateWaitersInformation(ID, **kwargs):
     col = db["restaurants"]
     cursor = col.find()
     restaurant = cursor[0]
-    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(currentRestaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
+    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(restaurant)+".waiters."+str(ID)+".activetables": tableno}},upsert=True);
          
     for key in kwargs:
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
