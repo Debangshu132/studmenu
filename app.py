@@ -65,7 +65,7 @@ def receive_message():
                             send_message(recipient_id,"a","a","Your table number has been changed successfully!")
                             send_message(secretcode[1],"a","a","Congracts your request has been accepted! :)")
                              
-                            pushRestaurantsWaitersInformation(restaurant, **{id:secretcode[3]})        
+                            pushRestaurantsWaitersInformation(restaurant,id,secretcode[3])        
                             return "Message Processed"
                       if secretcode.find('TableChangeDeny') != -1:
                             secretcode=secretcode.split('|')
