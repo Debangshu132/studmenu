@@ -525,7 +525,7 @@ def cart(cartdata):
     table=tables[tableno]
     waiterid=table['waiter']
     updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
-    send_message(consumer_id, "","","your order is pending!")
+    send_message(consumer_id, "","","Your order is pending!")
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
     updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
@@ -579,7 +579,7 @@ def acceptdeny(data):
      updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, acceptdeny,"changeall")
      datasocket="the socket worked!"
      socketio.emit("okrefreshpage", datasocket, broadcast=True)
-     send_message(consumer_id, "","","your order is "+ acceptdeny)
+     send_message(consumer_id, "","","Your order is "+ acceptdeny+" :)")
          
      print(data)
      return "yes!!!"
