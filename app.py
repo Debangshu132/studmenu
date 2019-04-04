@@ -311,7 +311,7 @@ def checkQuickReply(text,id):
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
                return True 
-           if text=="Talk to steward":
+           if text=="Talk to Steward":
                send_message(waiterid,"a","a","Table "+tableno+": wants to talk")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
