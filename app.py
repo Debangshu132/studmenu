@@ -527,7 +527,7 @@ def cart(cartdata):
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
-      {"content_type":"text","title":"Call Steward","payload":'Call Steward'}],   
+      {"content_type":"text","title":"Talk to Steward","payload":'Talk to Steward'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
@@ -536,7 +536,7 @@ def cart(cartdata):
                  "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
     responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
-      {"content_type":"text","title":"Steward","payload":'Call Steward'}],   
+      {"content_type":"text","title":"Steward","payload":'Talk to Steward'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Table number "+tableno,
