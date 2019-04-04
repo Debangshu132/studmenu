@@ -259,7 +259,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
-      send_message(id,"a","a","Hi "+name+"!"+"\n"+"Welcome onboard to "+restaurant)
+      send_message(id,"a","a","Hi "+name+"!"+"\n"+"Welcome on-board to "+restaurant)
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant,tableno=tableno) 
       info={"name":name,"picurl":"","active":True,"activetables":[]}   
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
@@ -267,12 +267,12 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
             updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
-            send_message(id,"a","a","Onboarded Table No. :"+tableno)
+            send_message(id,"a","a","On-boarded Table No. :"+tableno)
             
       else:
         send_message(id,"a","a","Waiting for previous Steward's approval")
         
-        prompt=name+" Wants to onboard your Table No. "+ tableno
+        prompt=name+" Wants to on-board your Table No. "+ tableno
          
         quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
         #updateWaitersInformation(id,currentTable=tableno)
@@ -287,28 +287,28 @@ def checkQuickReply(text,id):
            waiterid=table['waiter'] 
                          
            if text=="Talk to Steward":
-             quickreply(id,["Napkins","Spoons","Water","Talk to Steward","Open Menu"],"calling steward what do you want") 
+             quickreply(id,["Water","Cutlery","Napkins","Talk to Steward","Open Menu"],"calling steward what do you want") 
              return True
            if text=="Napkins":
-               send_message(waiterid,"a","a"," table number"+ tableno+"is asking for Napkins")
+               send_message(waiterid,"a","a"," Table No."+ tableno+" :  Napkins")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
                return True
-           if text=="Spoons":
-               send_message(waiterid,"a","a"," table number"+ tableno+"is asking for spoons")
+           if text=="Cutlery":
+               send_message(waiterid,"a","a"," Table No."+ tableno+" : Cutlery")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
                return True
            if text=="Water":
-               send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
+               send_message(waiterid,"a","a"," Table No."+ tableno+" : water")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
                return True 
            if text=="Talk to steward":
-               send_message(waiterid,"a","a"," table number"+ tableno+" wants to talk")
+               send_message(waiterid,"a","a"," Table No."+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
