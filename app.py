@@ -259,7 +259,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
-      send_message(id,"a","a","welcome "+name+" from now you are a Steward in "+restaurant+ " restaurant")
+      send_message(id,"a","a","Hi "+name+"! Welcome onboard to "+restaurant+" :)")
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant,tableno=tableno) 
       info={"name":name,"picurl":"","active":True,"activetables":[]}   
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
@@ -267,7 +267,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
             updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
-            send_message(id,"a","a","You will be serving this table from now on!Table no. :"+tableno)
+            send_message(id,"a","a","Table no. :"+tableno+"alloted :) ")
             
       else:
         send_message(id,"a","a","waiting for the previous Steward's approval")
