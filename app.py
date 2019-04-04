@@ -293,43 +293,43 @@ def checkQuickReply(text,id):
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Napkins")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! '+firstname+' is on the way with napkins. ',button) 
+               bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with napkins. ',button) 
                return True
            if text=="Bill":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Bill")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! '+firstname+' is on the way with bill.',button) 
+               bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with bill.',button) 
                return True
            if text=="Cutlery":
                send_message(waiterid,"a","a"," Table "+ tableno+" : Cutlery")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! '+firstname+' is on the way with cutlery. ',button) 
+               bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with cutlery. ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," Table "+ tableno+" : Water")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! '+firstname+' is on the way with water. ',button) 
+               bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with water. ',button) 
                return True 
            if text=="Call Steward":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! '+firstname+' is on the way. ',button) 
+               bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way. ',button) 
                return True 
            if text=="Accept Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Hurray! your ordered has been accepted ',button) 
+               bot.send_button_message(id,'Your ordered is accepted :D ',button) 
                return True 
            if text=="Deny Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Sorry Your order has been denied',button) 
+               bot.send_button_message(id,'Sorry, your order has been denied :( ',button) 
                return True 
           
            else: 
