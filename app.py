@@ -177,8 +177,8 @@ def checkPostback(output):
          
          handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
-         welcome="please cscan the QR code"
-         quickreply(id,['Gurgaon','Noida','Delhi'],welcome)
+         welcome="please scan the QR code infront of you!"
+         send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
      
@@ -516,7 +516,8 @@ def cart(cartdata):
                  {"title":"Group Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
-                 "title": "View Order","messenger_extensions": True}] }]}}}}
+                 "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
+                 "title": "Menu","messenger_extensions": True}] }]}}}}
     responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
       {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
