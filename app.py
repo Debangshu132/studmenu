@@ -548,8 +548,10 @@ def cart(cartdata):
                  {"title":"Table number "+tableno,
                    "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cart.png",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
-                 "title": "Order","messenger_extensions": True}] }]}}}}  
-    bot.send_button_message(waiterid,'Request sent! Your steward will be arriving soon! ',button)      
+                 "title": "Order","messenger_extensions": True}] }]}}}} 
+    button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
+                 "title": "Order","messenger_extensions": True}]    
+    bot.send_button_message(waiterid,'Table '+tableno+" : Ordered!",button)      
     r=pay(responseconsumer) 
     r=pay(responsewaiter)      
     return "yes!!!"
