@@ -77,7 +77,7 @@ def receive_message():
                     if isQuickReply==False  :
                         instruction="Sorry I didnot get what you are saying"
                         button= [{"type":"postback","title":"Call Steward","payload":"Call Steward"}] 
-                        bot.send_button_message(id,instruction,button) 
+                        bot.send_button_message(recipient_id,instruction,button) 
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
