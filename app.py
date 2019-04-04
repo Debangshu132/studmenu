@@ -34,7 +34,8 @@ def handle_my_custom_event(msg):
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
     if request.method == 'GET':
-       
+        """Before allowing people to message your bot, Facebook has implemented a verify token
+        that confirms all requests that your bot receives came from Facebook."""
         token_sent = request.args.get("hub.verify_token")
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
@@ -75,11 +76,7 @@ def receive_message():
                     
                     #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
-                        instruction="Sorry I didnot get what you are saying"
-                        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(recipient_id,"currentRestaurant"),
-                               "title": "Menu","messenger_extensions": True},
-                        {"type":"postback","title":"Call Steward","payload":"Call Steward"}] 
-                        bot.send_button_message(id,instruction,button) 
+                        quickreply(recipient_id,['Dummy Menu', 'Dummy Waiter'],"I didnot get what you are saying")
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
@@ -91,7 +88,8 @@ def receive_message():
 
 
 def verify_fb_token(token_sent):
-  
+    #take token sent by facebook and verify it matches the verify token you sent
+    #if they match, allow the request, else return an error
     if token_sent == VERIFY_TOKEN:
         return request.args.get("hub.challenge")
     return 'Invalid verification token'
@@ -141,10 +139,7 @@ def checkReferral(output):
       name=data['first_name']
       fulladdress=str(output['entry'][0]['messaging'][0]['referral']['ref'])
       fulladdress=fulladdress.split("_")
-      if(fulladdress[0] == "visitingCard"):
-            welcomeVisitor="welcome "+ name+ "!!"      
-            send_message(id,'a','a', welcomeVisitor)  
-            return "success"      
+       
       restaurant=fulladdress[0]
       try:   
            tableno=fulladdress[1]
@@ -167,10 +162,6 @@ def checkPostback(output):
        if output['entry'][0]['messaging'][0]['postback'].get('referral'):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
          fulladdress=fulladdress.split("_")
-         if(fulladdress[0]=="visitingCard"):
-            welcomeVisitor="welcome "+ name+ "!!"      
-            send_message(id,'a','a', welcomeVisitor) 
-            return "success"      
          restaurant=fulladdress[0]
          try:   
            tableno=fulladdress[1]
@@ -179,8 +170,8 @@ def checkPostback(output):
          
          handleUser(id,fulladdress,name,restaurant,tableno)  
        else:
-         welcome="please scan the QR code infront of you!"
-         send_message(id,'a','a', welcome)  
+         welcome="please cscan the QR code"
+         quickreply(id,['Gurgaon','Noida','Delhi'],welcome)
     if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
         quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
      
@@ -244,7 +235,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
-      send_message(id,"a","a","welcome "+name+" from now you are a Steward in "+restaurant+ " restaurant")
+      send_message(id,"a","a","welcome "+name+" from now you are a waiter in "+restaurant+ " restaurant")
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant,tableno=tableno) 
       info={"name":name,"picurl":"","active":True,"activetables":[]}   
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
@@ -255,7 +246,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
             send_message(id,"a","a","You will be serving this table from now on!Table no. :"+tableno)
             
       else:
-        send_message(id,"a","a","waiting for the previous Steward's approval")
+        send_message(id,"a","a","waiting for the previous waiter's approval")
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
         prompt=name+" Wants to serve your table number "+ tableno
         #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
@@ -271,32 +262,32 @@ def checkQuickReply(text,id):
            table=tables[tableno]
            waiterid=table['waiter'] 
                          
-           if text=="Call Steward":
-             quickreply(id,["napkins","spoon","water","Talk to Steward","Open Menu"],"calling steward what do you want") 
+           if text=="Call Waiter":
+             quickreply(id,["napkins","spoon","water","Talk to waiter","Open Menu"],"calling waiter what do you want") 
              return True
            if text=="Napkins":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for napkins")
                button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
-               bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
+               bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Spoons":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for spoons")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
-               bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
+               bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
-               bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
+               bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
            if text=="Talk to waiter":
                send_message(waiterid,"a","a"," table number"+ tableno+" wants to talk")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Waiter","payload":"waiter"}] 
-               bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
+               bot.send_button_message(id,'Request sent! Your waiter will be arriving soon! ',button) 
                return True 
            if text=="Accept Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
@@ -512,16 +503,15 @@ def cart(cartdata):
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
-      {"content_type":"text","title":"Call Steward","payload":'Call Steward'}],   
+      {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
                    "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
-                 "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
-                 "title": "Menu","messenger_extensions": True}] }]}}}}
+                 "title": "View Order","messenger_extensions": True}] }]}}}}
     responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
-      {"content_type":"text","title":"Steward","payload":'Call Steward'}],   
+      {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Table number "+tableno,
