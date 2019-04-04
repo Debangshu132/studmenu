@@ -287,7 +287,7 @@ def checkQuickReply(text,id):
            waiterid=table['waiter'] 
                          
            if text=="Talk to Steward":
-             quickreply(id,["napkins","spoon","water","Talk to Steward","Open Menu"],"calling steward what do you want") 
+             quickreply(id,["Napkins","Spoons","Water","Talk to Steward","Open Menu"],"calling steward what do you want") 
              return True
            if text=="Napkins":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for Napkins")
