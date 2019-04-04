@@ -76,9 +76,7 @@ def receive_message():
                     #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
                         instruction="Sorry I didnot get what you are saying"
-                        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(recipient_id,"currentRestaurant"),
-                               "title": "Menu","messenger_extensions": True},
-                        {"type":"postback","title":"Call Steward","payload":"Call Steward"}] 
+                        button= [{"type":"postback","title":"Call Steward","payload":"Call Steward"}] 
                         bot.send_button_message(id,instruction,button) 
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
@@ -288,7 +286,7 @@ def checkQuickReply(text,id):
            table=tables[tableno]
            waiterid=table['waiter'] 
                          
-           if text=="Call Steward":
+           if text=="Talk to Steward":
              quickreply(id,["napkins","spoon","water","Talk to Steward","Open Menu"],"calling steward what do you want") 
              return True
            if text=="Napkins":
