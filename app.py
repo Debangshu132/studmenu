@@ -291,27 +291,27 @@ def checkQuickReply(text,id):
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Napkins")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! Your steward is on the way with Napkins ',button) 
+               bot.send_button_message(id,'Got it! Your steward is on the way with napkins. ',button) 
                return True
            if text=="Bill":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Bill")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! Your steward is on the way with the Bill',button) 
+               bot.send_button_message(id,'Got it! Your steward is on the way with bill.',button) 
                return True
            if text=="Cutlery":
                send_message(waiterid,"a","a"," Table "+ tableno+" : Cutlery")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! Your steward is on the way with Cutlery ',button) 
+               bot.send_button_message(id,'Got it! Your steward is on the way with cutlery. ',button) 
                return True
            if text=="Water":
-               send_message(waiterid,"a","a"," Table "+ tableno+" : water")
+               send_message(waiterid,"a","a"," Table "+ tableno+" : Water")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! Your steward is on the way with water ',button) 
+               bot.send_button_message(id,'Got it! Your steward is on the way with water. ',button) 
                return True 
-           if text=="Talk to steward":
+           if text=="Talk to Steward":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
@@ -547,8 +547,12 @@ def cart(cartdata):
                    "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cart.png",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "Order","messenger_extensions": True}] }]}}}}     
+    button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
+                 "title": "View Order","messenger_extensions": True}
+               ] 
+    bot.send_button_message(consumer_id,'Table: '+tableno,button) 
     r=pay(responseconsumer) 
-    r=pay(responsewaiter)      
+    #r=pay(responsewaiter)      
     return "yes!!!"
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
 
