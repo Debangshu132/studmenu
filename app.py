@@ -139,7 +139,7 @@ def checkReferral(output):
       name=data['first_name']
       fulladdress=str(output['entry'][0]['messaging'][0]['referral']['ref'])
       fulladdress=fulladdress.split("_")
-      if(fulladdress[0]=="visitingCard"):
+      if(fulladdress[0] == "visitingCard"):
             welcomeVisitor="welcome "+ name+ "!!"      
             send_message(id,'a','a', welcomeVisitor)  
             return "success"      
@@ -165,7 +165,7 @@ def checkPostback(output):
        if output['entry'][0]['messaging'][0]['postback'].get('referral'):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
          fulladdress=fulladdress.split("_")
-          if(fulladdress[0]=="visitingCard"):
+         if(fulladdress[0]=="visitingCard"):
             welcomeVisitor="welcome "+ name+ "!!"      
             send_message(id,'a','a', welcomeVisitor) 
             return "success"      
