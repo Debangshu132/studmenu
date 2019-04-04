@@ -259,7 +259,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
-      send_message(id,"a","a","welcome "+name+" from now you are a Steward in "+restaurant+ " restaurant")
+      send_message(id,"a","a","Hi "+name+"!"+"\n"+"Welcome onboard to "+restaurant)
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant,tableno=tableno) 
       info={"name":name,"picurl":"","active":True,"activetables":[]}   
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
@@ -267,12 +267,12 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
             updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
-            send_message(id,"a","a","You will be serving this table from now on!Table no. :"+tableno)
+            send_message(id,"a","a","Onboarded Table No. :"+tableno)
             
       else:
-        send_message(id,"a","a","waiting for the previous Steward's approval")
+        send_message(id,"a","a","Waiting for previous Steward's approval")
         
-        prompt=name+" Wants to serve your table number "+ tableno
+        prompt=name+" Wants to onboard your Table No. "+ tableno
          
         quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
         #updateWaitersInformation(id,currentTable=tableno)
