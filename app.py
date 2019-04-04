@@ -514,7 +514,7 @@ def cart(cartdata):
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
-      {"content_type":"text","title":"Waiter","payload":'Waiter'}],   
+      {"content_type":"text","title":"Call Waiter","payload":'Call Waiter'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
