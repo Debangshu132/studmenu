@@ -275,7 +275,7 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
         prompt=name+" wants to onboard your table :"+ tableno
         #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
         quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
-      #updateWaitersInformation(id,currentTable=tableno)
+        #updateWaitersInformation(id,currentTable=tableno)
     
     
 def checkQuickReply(text,id): 
