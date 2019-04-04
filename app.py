@@ -142,8 +142,17 @@ def checkReferral(output):
       fulladdress=str(output['entry'][0]['messaging'][0]['referral']['ref'])
       fulladdress=fulladdress.split("_")
       if(fulladdress[0] == "visitingCard"):
-            welcomeVisitor="welcome "+ name+ "!!"      
+                  
+            welcomeVisitor="Hi "+ name+ "!!"+"\n"+"\n"      
             send_message(id,'a','a', welcomeVisitor)  
+            first_message="Eating out is something you love to do but figuring out what to eat when you go to a nice restaurant is often an issue. Right?"      
+            send_message(id,'a','a', first_message) 
+            second_message="Meallion makes you preview your meals visually, swiftly by just tapping on the menu right on this messenger."      
+            send_message(id,'a','a', second_message)   
+            third_message="EGG-cited to know more?"      
+            send_message(id,'a','a', third_message)  
+            fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
+            send_message(id,'a','a', fourth_message)        
             return "success"      
       restaurant=fulladdress[0]
       try:   
@@ -168,9 +177,17 @@ def checkPostback(output):
          fulladdress=str(output['entry'][0]['messaging'][0]['postback']['referral']['ref'])
          fulladdress=fulladdress.split("_")
          if(fulladdress[0]=="visitingCard"):
-            welcomeVisitor="welcome "+ name+ "!!"      
-            send_message(id,'a','a', welcomeVisitor) 
-            return "success"      
+            welcomeVisitor="Hi "+ name+ "!!"+"\n"+"\n"      
+            send_message(id,'a','a', welcomeVisitor)  
+            first_message="Eating out is something you love to do but figuring out what to eat when you go to a nice restaurant is often an issue. Right?"      
+            send_message(id,'a','a', first_message) 
+            second_message="Meallion makes you preview your meals visually, swiftly by just tapping on the menu right on this messenger."      
+            send_message(id,'a','a', second_message)   
+            third_message="EGG-cited to know more?"      
+            send_message(id,'a','a', third_message)  
+            fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
+            send_message(id,'a','a', fourth_message)        
+            return "success"         
          restaurant=fulladdress[0]
          try:   
            tableno=fulladdress[1]
@@ -181,8 +198,8 @@ def checkPostback(output):
        else:
          welcome="please scan the QR code infront of you!"
          send_message(id,'a','a', welcome)  
-    if output['entry'][0]['messaging'][0]['postback']['payload']=='waiter':
-        quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling waiter what do you want?")
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
+        quickreply(id,['Napkins','Spoons',"Water","Talk to waiter"],"Calling Steward what do you want?")
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -238,7 +255,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Waiter"
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
-               {"type":"postback","title":"Waiter","payload":"waiter"}] 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
        bot.send_button_message(id,instruction,button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
