@@ -550,7 +550,7 @@ def cart(cartdata):
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "View Order","messenger_extensions": True}
                ] 
-    bot.send_button_message(consumer_id,'Table: '+tableno,button) 
+    bot.send_button_message(waiterid,'Table: '+tableno,button) 
     r=pay(responseconsumer) 
     #r=pay(responsewaiter)      
     return "yes!!!"
