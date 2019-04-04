@@ -531,7 +531,7 @@ def cart(cartdata):
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
-                   "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
+                   "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cheers.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
                  "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
@@ -540,7 +540,7 @@ def cart(cartdata):
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Table number "+tableno,
-                   "image_url":"https://images.homedepot-static.com/productImages/1e1d64ec-a8b2-4328-9588-60d2b13a27e2/svn/yard-carts-cw5024-64_1000.jpg",
+                   "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cart.png",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "Order","messenger_extensions": True}] }]}}}}     
     r=pay(responseconsumer) 
