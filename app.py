@@ -270,9 +270,9 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
             send_message(id,"a","a","Table no. :"+tableno+"alloted :) ")
             
       else:
-        send_message(id,"a","a","waiting for the previous Steward's approval")
+        send_message(id,"a","a","Waiting for previous Steward's approval")
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
-        prompt=name+" Wants to serve your table number "+ tableno
+        prompt=name+" wants to onboard your table :"+ tableno
         #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
         quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
       #updateWaitersInformation(id,currentTable=tableno)
