@@ -548,7 +548,7 @@ def cart(cartdata):
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "Order","messenger_extensions": True}] }]}}}} 
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
-                 "title": "Order","messenger_extensions": True}]    
+                 "title": "View Order","messenger_extensions": True}]    
     bot.send_button_message(waiterid,'Table '+tableno+" : Ordered!",button)      
     r=pay(responseconsumer) 
     #r=pay(responsewaiter)      
