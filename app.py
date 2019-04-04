@@ -197,7 +197,7 @@ def checkPostback(output):
          welcome="please scan the QR code infront of you!"
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
-        quickreply(id,["Water","Cutlery","Napkins","Bill","Talk to Steward"],"Calling Steward what do you want?")
+        quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"Calling Steward what do you want?")
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -313,7 +313,7 @@ def checkQuickReply(text,id):
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! '+firstname+' is on the way with water. ',button) 
                return True 
-           if text=="Talk to Steward":
+           if text=="Call Steward":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
