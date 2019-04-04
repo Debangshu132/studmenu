@@ -259,7 +259,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
     if tableno=="none":
-      send_message(id,"a","a","Hi "+name+"! Welcome onboard to "+restaurant)
+      send_message(id,"a","a","welcome "+name+" from now you are a Steward in "+restaurant+ " restaurant")
       updateWaitersInformation(id,name=name,currentRestaurant=restaurant,tableno=tableno) 
       info={"name":name,"picurl":"","active":True,"activetables":[]}   
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
@@ -267,15 +267,15 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       table=getRestaurantsTableInformation(restaurant,tableno) 
       if table['waiter']=="":
             updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
-            send_message(id,"a","a","Table no. :"+tableno+"alloted :) ")
+            send_message(id,"a","a","You will be serving this table from now on!Table no. :"+tableno)
             
       else:
-        send_message(id,"a","a","Waiting for previous Steward's approval")
+        send_message(id,"a","a","waiting for the previous Steward's approval")
         #send_message(table['waiter'],"a","a",name+" Wants to serve your table number "+ tableno)
-        prompt=name+" wants to onboard your table :"+ tableno
+        prompt=name+" Wants to serve your table number "+ tableno
         #quickreply(table['waiter'],['Accept Change','Deny Change'],prompt)  
         quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
-        #updateWaitersInformation(id,currentTable=tableno)
+      #updateWaitersInformation(id,currentTable=tableno)
     
     
 def checkQuickReply(text,id): 
