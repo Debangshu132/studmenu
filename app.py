@@ -290,8 +290,10 @@ def checkQuickReply(text,id):
              quickreply(id,["napkins","spoon","water","Talk to Steward","Open Menu"],"calling steward what do you want") 
              return True
            if text=="Napkins":
-               send_message(id,"a","a"," table number is asking for napkins")            
-               
+               send_message(waiterid,"a","a"," table number"+ tableno+"is asking for Napkins")
+               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Request sent! Your steward will be arriving soon! ',button) 
                return True
            if text=="Spoons":
                send_message(waiterid,"a","a"," table number"+ tableno+"is asking for spoons")
