@@ -286,9 +286,7 @@ def checkQuickReply(text,id):
            table=tables[tableno]
            waiterid=table['waiter'] 
                          
-           if text=="Talk to Steward":
-             quickreply(id,["Water","Napkins","Spoons","Bill","Talk to Steward","Open Menu"],"calling steward what do you want") 
-             return True
+          
            if text=="Napkins":
                send_message(waiterid,"a","a","Table "+tableno+": Napkins")
                button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
@@ -542,7 +540,7 @@ def cart(cartdata):
                  "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
     responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
-      {"content_type":"text","title":"Steward","payload":'Talk to Steward'}],   
+      {"content_type":"text","title":"Steward","payload":'Call Steward'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Table number "+tableno,
@@ -553,7 +551,7 @@ def cart(cartdata):
                  "title": "Order","messenger_extensions": True}]    
     bot.send_button_message(waiterid,'Table '+tableno+" : Ordered!",button)      
     r=pay(responseconsumer) 
-    r=pay(responsewaiter)      
+    #r=pay(responsewaiter)      
     return "yes!!!"
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
 
