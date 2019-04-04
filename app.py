@@ -197,7 +197,7 @@ def checkPostback(output):
          welcome="please scan the QR code infront of you!"
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
-        quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"Calling Steward what do you want?")
+        quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -247,10 +247,10 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        waiterid=table['waiter']
        waiter=getRestaurantsInformation(restaurant,"waiters")  
        yourwaiter=waiter[waiterid]["name"]  
-       welcome='Hi! '+name+",\n"+"\n"+"Welcome to "+restaurant+" :) \n"+"Our steward "+ yourwaiter+" will be serving your Table No. "+tableno
+       welcome='Hi! '+name+",\n"+"\n"+"Welcome to "+restaurant+" :) \n  \n"+"Our steward "+ yourwaiter+" will be serving your Table "+tableno
        send_message(id,'a','a', welcome)  
          
-       instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Waiter"
+       instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Steward"
        button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Steward","payload":"Steward"}] 
