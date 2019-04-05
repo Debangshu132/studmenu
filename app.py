@@ -155,7 +155,7 @@ def checkReferral(output):
             "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
             {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant%20Jay.png",
             "subtitle":"CEO @ Meallion","buttons":[{"type":"phone_number","title":"Call Seemant","payload":"+918101443644"}]},
-            {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Debangshu.jpg",
+            {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/DebangshuPaul.jpg",
             "subtitle":"CTO @ Meallion","buttons":[{"type":"phone_number","title":"Call Debangshu","payload":"+917384342412"}]}         
             ]}}}}   
             r=pay(responseVisitor)       
@@ -197,7 +197,7 @@ def checkPostback(output):
             "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
             {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant%20Jay.png",
             "subtitle":"CEO @ Meallion","buttons":[{"type":"phone_number","title":"Call Seemant","payload":"+918101443644"}]},
-            {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Debangshu.jpg",
+            {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/DebangshuPaul.jpg",
             "subtitle":"CTO @ Meallion","buttons":[{"type":"phone_number","title":"Call Debangshu","payload":"+917384342412"}]}         
             ]}}}}   
             r=pay(responseVisitor) 
