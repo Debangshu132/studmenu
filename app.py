@@ -179,12 +179,17 @@ def checkPostback(output):
             send_message(id,'a','a', welcomeVisitor)  
             first_message="Eating out is something you love to do but figuring out what to eat when you go to a nice restaurant is often an issue. Right?"      
             send_message(id,'a','a', first_message) 
-            second_message="Meallion makes you preview your meals visually, swiftly by just tapping on the menu right on this messenger."      
+            second_message="Meallion makes you preview your meals visually , swiftly by just tapping on the menu right on this messenger. B) "      
             send_message(id,'a','a', second_message)   
-            third_message="EGG-cited to know more?"      
-            send_message(id,'a','a', third_message)  
-            fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
-            send_message(id,'a','a', fourth_message)        
+            #third_message="EGG-cited to know more? :D "      
+            #send_message(id,'a','a', third_message)  
+            #fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
+            #send_message(id,'a','a', fourth_message) 
+            responseVisitor=   {"recipient":{"id":id},"message":{   
+            "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
+            {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Debangshu.jpg",
+            "subtitle":"CTO @ Meallion","buttons":[{"type":"phone_number","title":"Call Debangshu","payload":"+917384342412"}]}]}}}}   
+            r=pay(responseVisitor) 
             return "success"         
          restaurant=fulladdress[0]
          try:   
