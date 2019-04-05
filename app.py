@@ -149,8 +149,16 @@ def checkReferral(output):
             send_message(id,'a','a', second_message)   
             third_message="EGG-cited to know more?"      
             send_message(id,'a','a', third_message)  
-            fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
-            send_message(id,'a','a', fourth_message)        
+            #fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
+            #send_message(id,'a','a', fourth_message) 
+            responseVisitor=   {"recipient":{"id":id},"message":{   
+            "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
+            {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant%20Jay.png",
+            "subtitle":"CEO @ Meallion","buttons":[{"type":"phone_number","title":"Call Seemant","payload":"+918101443644"}]},
+            {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Debangshu.jpg",
+            "subtitle":"CTO @ Meallion","buttons":[{"type":"phone_number","title":"Call Debangshu","payload":"+917384342412"}]}         
+            ]}}}}   
+            r=pay(responseVisitor)       
             return "success"      
       restaurant=fulladdress[0]
       try:   
