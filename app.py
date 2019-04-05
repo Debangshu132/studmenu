@@ -143,12 +143,20 @@ def checkReferral(output):
                   
             welcomeVisitor="Hi "+ name+ "!!"+"\n"+"\n"      
             send_message(id,'a','a', welcomeVisitor)  
+            typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
+            time.sleep(1)
             first_message="Eating out is something you love to do but figuring out what to eat when you go to a nice restaurant is often an issue. Right?"      
             send_message(id,'a','a', first_message) 
+            typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
+            time.sleep(2)     
             second_message="Meallion makes you preview your meals visually, swiftly by just tapping on the menu right on this messenger."      
-            send_message(id,'a','a', second_message)   
+            send_message(id,'a','a', second_message)
+            typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
+            time.sleep(2)      
             third_message="EGG-cited to know more?"      
             send_message(id,'a','a', third_message)  
+            typingon=pay({"recipient":{"id":recipient_id},"sender_action":"typing_on"})
+            time.sleep(1)      
             #fourth_message="Contact Seemant@8101443644/ or Debangshu@7384342412"      
             #send_message(id,'a','a', fourth_message) 
             responseVisitor=   {"recipient":{"id":id},"message":{   
