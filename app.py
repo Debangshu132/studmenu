@@ -153,7 +153,7 @@ def checkReferral(output):
             #send_message(id,'a','a', fourth_message) 
             responseVisitor=   {"recipient":{"id":id},"message":{   
             "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
-            {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant%20Jay.png",
+            {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant.png",
             "subtitle":"CEO @ Meallion","buttons":[{"type":"phone_number","title":"Call Seemant","payload":"+918101443644"}]},
             {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/DebangshuPaul.jpg",
             "subtitle":"CTO @ Meallion","buttons":[{"type":"phone_number","title":"Call Debangshu","payload":"+917384342412"}]}         
@@ -195,7 +195,7 @@ def checkPostback(output):
             #send_message(id,'a','a', fourth_message) 
             responseVisitor=   {"recipient":{"id":id},"message":{   
             "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
-            {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant%20Jay.png",
+            {"title":"Seemant Jay","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/Seemant.png",
             "subtitle":"CEO @ Meallion","buttons":[{"type":"phone_number","title":"Call Seemant","payload":"+918101443644"}]},
             {"title":"Debangshu Paul","image_url":"https://storage.googleapis.com/meallionpics/General/Visiting%20Card/DebangshuPaul.jpg",
             "subtitle":"CTO @ Meallion","buttons":[{"type":"phone_number","title":"Call Debangshu","payload":"+917384342412"}]}         
