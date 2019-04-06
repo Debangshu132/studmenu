@@ -284,7 +284,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        send_message(id,'a','a', welcome)  
          
        instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Steward"
-       button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
+       button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Steward","payload":"Steward"}] 
        bot.send_button_message(id,instruction,button) 
