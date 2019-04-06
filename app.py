@@ -83,7 +83,7 @@ def receive_message():
                 if message['message'].get('attachments'):
                     response = ['(y)',':)',":D"]
                     
-                    quickreply(recipient_id,['I am Bored!'],random.choice(response))
+                    quickreply(recipient_id,['Call Steward'],random.choice(response))
                
     return "Message Processed"
 
