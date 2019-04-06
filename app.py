@@ -324,43 +324,43 @@ def checkQuickReply(text,id):
            
            if text=="Napkins":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Napkins")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with napkins. ',button) 
                return True
            if text=="Bill":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Bill")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with bill.',button) 
                return True
            if text=="Cutlery":
                send_message(waiterid,"a","a"," Table "+ tableno+" : Cutlery")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with cutlery. ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," Table "+ tableno+" : Water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way with water. ',button) 
                return True 
            if text=="Call Steward":
                send_message(waiterid,"a","a"," Table "+ tableno+" :  Wants to talk")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n '+firstname+' is on the way. ',button) 
                return True 
            if text=="Accept Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Your ordered is accepted :D ',button) 
                return True 
            if text=="Deny Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Sorry, your order has been denied :( ',button) 
                return True 
@@ -572,7 +572,7 @@ def cart(cartdata):
                  {"title":"Group Order",
                    "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cheers.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
-                 "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
+                 "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
     responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
       {"content_type":"text","title":"Steward","payload":'Talk to Steward'}],   
