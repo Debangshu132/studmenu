@@ -78,11 +78,11 @@ def receive_message():
                         instruction="Looks like you typed something 🙄 \n"
                         send_message(recipient_id,"a","a",instruction)
                         time.sleep(1)
-                        instruction2="Please only use buttons or quick replies "   
+                        instruction2="Please use buttons or quick replies only. "   
                         send_message(recipient_id,"a","a",instruction2)
                         
-                        instruction3="Try this:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Steward"
-                        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
+                        instruction3="Try this:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call steward tap Steward"
+                        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(recipient_id,"currentRestaurant"),
                         "title": "Menu","messenger_extensions": True},
                         {"type":"postback","title":"Steward","payload":"Steward"}] 
                         bot.send_button_message(recipient_id,instruction3,button) 
