@@ -79,7 +79,7 @@ def receive_message():
                         send_message(recipient_id,"a","a",instruction)
                         time.sleep(1)
                         instruction2="Let me interest you with a PUNny reply B)  "   
-                        send_message(recipient_id,"a","a",instructio2)
+                        send_message(recipient_id,"a","a",instruction2)
                         time.sleep(1)
                         responseimage={"recipient":{"id":recipient_id},
                         "message":{"attachment":{"type":"image", "payload":{
