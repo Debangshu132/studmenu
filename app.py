@@ -81,9 +81,10 @@ def receive_message():
                         instruction2="Let me interest you with a PUNny reply B)  "   
                         send_message(recipient_id,"a","a",instruction2)
                         time.sleep(1)
+                        randompic=random.randint(1,50)   
                         responseimage={"recipient":{"id":recipient_id},
                         "message":{"attachment":{"type":"image", "payload":{
-                        "url":"https://storage.googleapis.com/meallionpics/General/Puns/30.jpg"}}}}
+                        "url":"https://storage.googleapis.com/meallionpics/General/Puns/"+str(randompic)+".jpg"}}}}
                         r=pay(responseimage)
                         button= [{"type":"postback","title":"Call Steward","payload":"Steward"}] 
                         bot.send_button_message(recipient_id,"Impressed? 😛",button) 
