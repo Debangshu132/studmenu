@@ -75,13 +75,18 @@ def receive_message():
                     
                     #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
-                        instruction="Ummm,🤔 I am not sure I am the best person to answer this"
+                        instruction="Ummm 🤔, I am not sure I am the best person to answer this"
                         send_message(recipient_id,"a","a",instruction)
                         time.sleep(1)
-                        instruction2="Let me interest you with a PUNny reply 😛 "   
-                        
+                        instruction2="Let me interest you with a PUNny reply B)  "   
+                        send_message(recipient_id,"a","a",instructio2)
+                        time.sleep(1)
+                        responseimage={"recipient":{"id":recipient_id},
+                        "message":{"attachment":{"type":"image", "payload":{
+                        "url":"https://storage.googleapis.com/meallionpics/General/Puns/30.jpg"}}}}
+                        r=pay(responseimage)
                         button= [{"type":"postback","title":"Call Steward","payload":"Steward"}] 
-                        bot.send_button_message(recipient_id,instruction2,button) 
+                        bot.send_button_message(recipient_id,"Impressed? 😛",button) 
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
