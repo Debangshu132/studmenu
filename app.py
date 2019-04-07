@@ -62,7 +62,7 @@ def receive_message():
                             secretcode=secretcode.split('|')
                             updateRestaurantsTablesInformation(secretcode[2],secretcode[3], waiter=secretcode[1])
                             send_message(recipient_id,"a","a","Your table number has been changed successfully!")
-                            send_message(secretcode[1],"a","a","Congracts your request has been accepted! :)")
+                            send_message(secretcode[1],"a","a","Congrats your request has been accepted! :)")
                              
                             #pushRestaurantsWaitersInformation(restaurant,id,secretcode[3])        
                             return "Message Processed"
@@ -81,8 +81,11 @@ def receive_message():
                         instruction2="Please only use buttons or quick replies "   
                         send_message(recipient_id,"a","a",instruction2)
                         
-                        button= [{"type":"postback","title":"Call Steward","payload":"Steward"}] 
-                        bot.send_button_message(recipient_id,"Impressed? 😛",button) 
+                        instruction3="Try this:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Steward"
+                        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
+                        "title": "Menu","messenger_extensions": True},
+                        {"type":"postback","title":"Steward","payload":"Steward"}] 
+                        bot.send_button_message(recipient_id,instruction3,button) 
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
@@ -363,6 +366,13 @@ def checkQuickReply(text,id):
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Your ordered is accepted :D ',button) 
+               time.sleep(1)
+               randompic=random.randint(1,50)  
+               send_message(id,'a','a', "Hey Meallionaire,you just got a free pun 😀 ") 
+               responseimage={"recipient":{"id":id},
+               "message":{"attachment":{"type":"image", "payload":{
+               "url":"https://storage.googleapis.com/meallionpics/General/Puns/"+str(randompic)+".jpg"}}}}
+               r=pay(responseimage)
                return True 
            if text=="Deny Order":
                #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
