@@ -75,9 +75,13 @@ def receive_message():
                     
                     #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
-                        instruction="Sorry I didnot get what you are saying"
+                        instruction="Ummm,🤔 I am not sure I am the best person to answer this"
+                        send_message(recipient_id,"a","a",instruction)
+                        time.sleep(1)
+                        instruction2="Let me interest you with a PUNny reply 😛 "   
+                        
                         button= [{"type":"postback","title":"Call Steward","payload":"Steward"}] 
-                        bot.send_button_message(recipient_id,instruction,button) 
+                        bot.send_button_message(recipient_id,instruction2,button) 
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
