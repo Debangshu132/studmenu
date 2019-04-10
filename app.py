@@ -553,7 +553,7 @@ def cart(cartdata):
  
     
     print("yea")
-    """print(cartdata)
+    print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
     mycart=json.loads(cartdata)["cart"]
 
@@ -573,7 +573,7 @@ def cart(cartdata):
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
     updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
-    cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
+    """cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
