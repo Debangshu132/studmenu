@@ -140,6 +140,7 @@ def pay(payload):
     request_endpoint, params=bot.auth_args,
             json=payload )
   result = response.json()
+  print(result)       
   return result
 def checkReferral(output):
     
