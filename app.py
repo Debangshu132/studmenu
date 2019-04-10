@@ -75,17 +75,26 @@ def receive_message():
                     
                     #isQuickReplyHint=checkQuickReply(response,recipient_id,name,restaurant,tableno)
                     if isQuickReply==False  :
-                        instruction="Looks like you typed something 🙄 \n"
-                        send_message(recipient_id,"a","a",instruction)
-                        time.sleep(1)
-                        instruction2="Please use buttons or quick replies only. "   
-                        send_message(recipient_id,"a","a",instruction2)
+                        restaurant=getConsumerInformation(recipient_id,"currentRestaurant")
+                        tableno=getConsumerInformation(recipient_id,"currentTable")
+                        tables=getRestaurantsInformation(restaurant,"tables")
+                        table=tables[tableno]
+                        waiterid=table['waiter'] 
+                        a=requests.get("https://graph.facebook.com/"+waiterid+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
+                        data=a.json()
+                        firstname=data['first_name']       
+                        send_message(waiterid,"a","a","Table No. "+tableno+": "+message['message'].get('text'))   
+                        #instruction="Looks like you typed something 🙄 \n"
+                        #send_message(recipient_id,"a","a",instruction)
+                        #time.sleep(1)
+                        #instruction2="Please use buttons or quick replies only. "   
+                        #send_message(recipient_id,"a","a",instruction2)
                         
-                        instruction3="Try this:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call steward tap Steward"
-                        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(recipient_id,"currentRestaurant"),
-                        "title": "Menu","messenger_extensions": True},
-                        {"type":"postback","title":"Steward","payload":"Steward"}] 
-                        bot.send_button_message(recipient_id,instruction3,button) 
+                        #instruction3="Try this:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call steward tap Steward"
+                        #button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(recipient_id,"currentRestaurant"),
+                        #"title": "Menu","messenger_extensions": True},
+                        #{"type":"postback","title":"Steward","payload":"Steward"}] 
+                        #bot.send_button_message(recipient_id,instruction3,button) 
                         return "Message Processed"
                 #if user sends us a GIF, photo,video, or any other non-text item
                 if message['message'].get('attachments'):
