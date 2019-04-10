@@ -571,7 +571,7 @@ def cart(cartdata):
     updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
     send_message(consumer_id, "a","a","Your order is pending!")
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
-    #updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
+    updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
     updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
     cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
