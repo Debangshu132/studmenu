@@ -553,7 +553,7 @@ def cart(cartdata):
  
     
     print("yea")
- """print(cartdata)
+    """print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
     mycart=json.loads(cartdata)["cart"]
 
