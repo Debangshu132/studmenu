@@ -244,7 +244,7 @@ def checkPostback(output):
          welcome="please scan the QR code infront of you!"
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
-        time.sleep(1) 
+ 
         quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
         #return 'success'
      
