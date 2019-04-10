@@ -569,11 +569,11 @@ def cart(cartdata):
     table=tables[tableno]
     waiterid=table['waiter']
     updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
-    send_message(consumer_id, "a","a","Your order is pending!")
+    #send_message(consumer_id, "a","a","Your order is pending!")
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
-    updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
-    updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
-    """cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
+    #updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
+    #updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
+    cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
@@ -589,7 +589,7 @@ def cart(cartdata):
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "View Order","messenger_extensions": True}] 
     bot.send_button_message(waiterid,'Table: '+tableno,button) 
-    r=pay(responseconsumer) """
+    r=pay(responseconsumer) 
      
     return "yes!!!"
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
