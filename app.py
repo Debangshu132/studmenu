@@ -245,7 +245,7 @@ def checkPostback(output):
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
         quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
-        return 'success'
+        #return 'success'
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -585,20 +585,12 @@ def cart(cartdata):
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
                  "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True}] }]}}}}
-    responsewaiter=   {"recipient":{"id":waiterid},"message":{"quick_replies": [
-      {"content_type":"text","title":"Steward","payload":'Talk to Steward'}],   
-      "attachment":{"type":"template",
-          "payload":{"template_type":"generic","elements":[
-                 {"title":"Table number "+tableno,
-                   "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cart.png",
-                     "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
-                 "title": "Order","messenger_extensions": True}] }]}}}}     
+      
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
-                 "title": "View Order","messenger_extensions": True}
-               ] 
+                 "title": "View Order","messenger_extensions": True}] 
     bot.send_button_message(waiterid,'Table: '+tableno,button) 
     r=pay(responseconsumer) 
-    #r=pay(responsewaiter)      
+     
     return "yes!!!"
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
 
