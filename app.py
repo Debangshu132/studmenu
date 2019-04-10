@@ -568,11 +568,11 @@ def cart(cartdata):
     tables=getRestaurantsInformation(restaurant,"tables")
     table=tables[tableno]
     waiterid=table['waiter']
-    updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
+    #updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
     send_message(consumer_id, "","","Your order is pending!")
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
-    updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
-    updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
+    #updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
+    #updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
     cartjsonconsumer={"restaurant":restaurant,"tableno":tableno,"identity":"consumer"}
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
@@ -591,7 +591,7 @@ def cart(cartdata):
     bot.send_button_message(waiterid,'Table: '+tableno,button) 
     r=pay(responseconsumer) 
      
-    return "yes!!!"
+    return "success!"
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
 
 def checkout(data):
