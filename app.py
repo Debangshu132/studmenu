@@ -245,7 +245,7 @@ def checkPostback(output):
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
         quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
-        return 'success'
+        #return 'success'
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -313,18 +313,18 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
     else:    
       table=getRestaurantsTableInformation(restaurant,tableno) 
-      #if table['waiter']=="":
-      updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
-      send_message(id,"a","a","On-boarded Table No. :"+tableno)
+      if table['waiter']=="":
+            updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
+            send_message(id,"a","a","On-boarded Table No. :"+tableno)
             
-      #else:
-      #  send_message(id,"a","a","Waiting for previous Steward's approval")
+      else:
+        send_message(id,"a","a","Waiting for previous Steward's approval")
         
-      #  prompt=name+" Wants to on-board your Table No. "+ tableno
+        prompt=name+" Wants to on-board your Table No. "+ tableno
          
-      #  quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
+        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
         #updateWaitersInformation(id,currentTable=tableno)
-      return True
+    
     
 def checkQuickReply(text,id): 
            restaurant=getConsumerInformation(id,"currentRestaurant")
@@ -550,8 +550,10 @@ def initializeUser(id,category):
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
 def cart(cartdata):
+ 
+    
     print("yea")
-    print(cartdata)
+    """print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
     mycart=json.loads(cartdata)["cart"]
 
@@ -567,7 +569,7 @@ def cart(cartdata):
     table=tables[tableno]
     waiterid=table['waiter']
     updateRestaurantsTablesInformation(restaurant,tableno, whoLastOrdered=consumer_id)     
-    send_message(consumer_id, "","","Your order is pending!")
+    send_message(consumer_id, "a","a","Your order is pending!")
     #send_message(waiterid, "","","Table number "+tableno+" has ordered!, the cart is: "+str(mycart))  
     updateRestaurantsCartInformation(restaurant,tableno,**{consumer_id:{"firstname":firstname,"status":"pending","mycart":mycart}})   
     updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, "pending","changeonlybucket")
@@ -587,9 +589,9 @@ def cart(cartdata):
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "View Order","messenger_extensions": True}] 
     bot.send_button_message(waiterid,'Table: '+tableno,button) 
-    r=pay(responseconsumer) 
-
-    return 'success'
+    r=pay(responseconsumer) """
+     
+    return "yes!!!"
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
 
 def checkout(data):
