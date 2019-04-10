@@ -550,8 +550,6 @@ def initializeUser(id,category):
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
 def cart(cartdata):
- 
-    
     print("yea")
     print(cartdata)
     consumer_id=json.loads(cartdata)["id"]
@@ -590,8 +588,8 @@ def cart(cartdata):
                  "title": "View Order","messenger_extensions": True}] 
     bot.send_button_message(waiterid,'Table: '+tableno,button) 
     r=pay(responseconsumer) 
-     
-    return "success!"
+
+    return 'success'
 @app.route("/checkout/<data>", methods=['GET', 'POST'])
 
 def checkout(data):
