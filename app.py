@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from flask import Flask, request,render_template
 from pymessenger.bot import Bot
 import os
-from flask_socketio import SocketIO,send,emit
+
 import requests
 import urllib
 from flask_cors import CORS
@@ -14,7 +14,7 @@ from intelligence import BRAIN
 import time
 app = Flask(__name__)
 CORS(app)
-socketio = SocketIO(app)
+
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot (ACCESS_TOKEN)
@@ -26,11 +26,7 @@ def menu():
          #return "hello"
          return 'yeay it worked dumbo'
 
-#We will receive messages that Facebook sends our bot at this endpoint
-@socketio.on('canirefresh',namespace="/test")
-def handle_my_custom_event(msg):
-    print("yo refresh the page")     
-    emit('okrefreshpage', msg, broadcast=True)
+
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
     if request.method == 'GET':
@@ -645,5 +641,5 @@ def acceptdeny(data):
     
 
 if __name__ == "__main__":
-     socketio.run(app)     
+     app.run()    
    
