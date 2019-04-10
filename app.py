@@ -546,13 +546,7 @@ def initializeUser(id,category):
         updateWaitersInformation(id,name=name,name1="")
     if category=="consumer":
         updateConsumersInformation(id,name=name,name1="")  
-@socketio.on('connected')
-def handle_my_custom_event(msg):
-    print(msg)     
-    emit('okrefreshpage', msg)
-@socketio.on('connect')
-def handleConnect():
-    print('yeay connected')
+
 @app.route("/cart/<cartdata>", methods=['GET', 'POST'])
 
 def cart(cartdata):
@@ -632,8 +626,7 @@ def acceptdeny(data):
      tableno=json.loads(data)["tableno"]  
      acceptdeny=json.loads(data)["acceptdeny"]
      updateRestaurantsStatusInformation(restaurant,tableno,consumer_id, acceptdeny,"changeall")
-     datasocket="the socket worked!"
-     socketio.emit("okrefreshpage", datasocket, broadcast=True)
+     
      send_message(consumer_id, "","","Your order is "+ acceptdeny+" :)")
          
      print(data)
