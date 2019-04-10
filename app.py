@@ -245,7 +245,7 @@ def checkPostback(output):
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
         quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
-        #return 'success'
+        return 'success'
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
