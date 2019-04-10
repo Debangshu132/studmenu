@@ -83,7 +83,8 @@ def receive_message():
                         a=requests.get("https://graph.facebook.com/"+waiterid+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
                         data=a.json()
                         firstname=data['first_name']       
-                        send_message(waiterid,"a","a","Table No. "+tableno+": "+message['message'].get('text'))   
+                        send_message(waiterid,"a","a","Table No. "+tableno+": "+message['message'].get('text'))  
+                        send_message(recipient_id,"a","a","(y)")
                         #instruction="Looks like you typed something 🙄 \n"
                         #send_message(recipient_id,"a","a",instruction)
                         #time.sleep(1)
