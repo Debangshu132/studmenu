@@ -279,7 +279,7 @@ def checkUserCondition(id):
     if consumerFind.get(id):
         if waiterFind.get("_id")=="consumer":            
          return "consumer"
-       else:
+        else:
          return "waiter"           
         
     else:
