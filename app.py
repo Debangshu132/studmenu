@@ -272,16 +272,9 @@ def checkUserCondition(id):
     waiterFind = cursor[0]
     consumerFind=cursor[1]
     if waiterFind.get(id):
-       if waiterFind.get("_id")=="waiter":            
-         return "waiter"
-       else:
-         return "consumer"         
+        return "waiter"
     if consumerFind.get(id):
-        if waiterFind.get("_id")=="consumer":            
-         return "consumer"
-        else:
-         return "waiter"           
-        
+        return "consumer"
     else:
         return "none"
 def createUser(id,fulladdress,name,restaurant,tableno):
@@ -327,12 +320,12 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       send_message(id,"a","a","On-boarded Table No. :"+tableno)
             
       #else:
-      #send_message(id,"a","a","Waiting for previous Steward's approval")
+      #  send_message(id,"a","a","Waiting for previous Steward's approval")
         
-      #prompt=name+" Wants to on-board your Table No. "+ tableno
+      #  prompt=name+" Wants to on-board your Table No. "+ tableno
          
-      #quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
-      #updateWaitersInformation(id,currentTable=tableno)
+      #  quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
+        #updateWaitersInformation(id,currentTable=tableno)
     
     
 def checkQuickReply(text,id): 
