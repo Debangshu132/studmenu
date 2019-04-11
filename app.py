@@ -272,9 +272,16 @@ def checkUserCondition(id):
     waiterFind = cursor[0]
     consumerFind=cursor[1]
     if waiterFind.get(id):
-        return "waiter"
+       if waiterFind.get("_id")=="waiter":            
+         return "waiter"
+       else:
+         return "consumer"         
     if consumerFind.get(id):
-        return "consumer"
+        if waiterFind.get("_id")=="consumer":            
+         return "consumer"
+       else:
+         return "waiter"           
+        
     else:
         return "none"
 def createUser(id,fulladdress,name,restaurant,tableno):
