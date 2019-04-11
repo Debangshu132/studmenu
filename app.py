@@ -315,17 +315,17 @@ def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
       updateRestaurantsWaitersInformation(restaurant, **{id:info})  
     else:    
       table=getRestaurantsTableInformation(restaurant,tableno) 
-      if table['waiter']=="":
-            updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
-            send_message(id,"a","a","On-boarded Table No. :"+tableno)
+      #if table['waiter']=="":
+      updateRestaurantsTablesInformation(restaurant,tableno, waiter=id)
+      send_message(id,"a","a","On-boarded Table No. :"+tableno)
             
-      else:
-        send_message(id,"a","a","Waiting for previous Steward's approval")
+      #else:
+      #send_message(id,"a","a","Waiting for previous Steward's approval")
         
-        prompt=name+" Wants to on-board your Table No. "+ tableno
+      #prompt=name+" Wants to on-board your Table No. "+ tableno
          
-        quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
-        #updateWaitersInformation(id,currentTable=tableno)
+      #quickreplyDifferentPayload(table['waiter'],['Accept','Deny'],['TableChangeAccept | '+str(id)+'|'+str(restaurant)+'|'+str(tableno),'TableChangeDeny |'+str(id)],prompt)
+      #updateWaitersInformation(id,currentTable=tableno)
     
     
 def checkQuickReply(text,id): 
