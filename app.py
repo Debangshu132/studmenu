@@ -346,55 +346,37 @@ def checkQuickReply(text,id):
            firstname=data['first_name']       
                          
            
-           if text=="Napkins":
-               send_message(waiterid,"a","a"," Table "+ tableno+" :  Napkins")
+           if text=="Towels":
+               send_message(waiterid,"a","a"," Room "+ tableno+" :  Towels")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with napkins. ',button) 
+               bot.send_button_message(id,'Got it! B) your towel is on the way ',button) 
                return True
-           if text=="Bill":
-               send_message(waiterid,"a","a"," Table "+ tableno+" :  Bill")
+           if text=="Checkout":
+               send_message(waiterid,"a","a"," Room "+ tableno+" :  Checkout")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with bill.',button) 
                return True
            if text=="Cutlery":
-               send_message(waiterid,"a","a"," Table "+ tableno+" : Cutlery")
+               send_message(waiterid,"a","a"," Room "+ tableno+" : Cutlery")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with cutlery. ',button) 
+               bot.send_button_message(id,'Got it! B) your cutlery is on the way ',button) 
                return True
            if text=="Water":
-               send_message(waiterid,"a","a"," Table "+ tableno+" : Water")
+               send_message(waiterid,"a","a"," Room "+ tableno+" : Water")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with water. ',button) 
                return True 
-           if text=="Call Steward":
-               send_message(waiterid,"a","a"," Table "+ tableno+" :  Wants to talk")
+           if text=="Call Room Service":
+               send_message(waiterid,"a","a"," Room "+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way. ',button) 
+               bot.send_button_message(id,'Got it! Room Service is on the way. ',button) 
                return True 
-           if text=="Accept Order":
-               #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Your ordered is accepted :D ',button) 
-               time.sleep(1)
-               randompic=random.randint(1,50)  
-               send_message(id,'a','a', "Hey Meallionaire,you just got a free pun 😀 ") 
-               responseimage={"recipient":{"id":id},
-               "message":{"attachment":{"type":"image", "payload":{
-               "url":"https://storage.googleapis.com/meallionpics/General/Puns/"+str(randompic)+".jpg"}}}}
-               r=pay(responseimage)
-               return True 
-           if text=="Deny Order":
-               #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
-               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Sorry, your order has been denied :( ',button) 
-               return True 
+           
           
            else: 
             return False    
