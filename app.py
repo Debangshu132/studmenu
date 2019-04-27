@@ -310,7 +310,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        instruction="Just tap menu to order anything you want to eat. \n \n Or tap Room Service for room service"
        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
-               {"type":"postback","title":"Room Service","payload":"Steward"}] 
+               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
        bot.send_button_message(id,instruction,button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
