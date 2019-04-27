@@ -79,7 +79,7 @@ def receive_message():
                         a=requests.get("https://graph.facebook.com/"+waiterid+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
                         data=a.json()
                         firstname=data['first_name']       
-                        send_message(waiterid,"a","a","Table No. "+tableno+": "+message['message'].get('text'))  
+                        send_message(waiterid,"a","a","Room No. "+tableno+": "+message['message'].get('text'))  
                         send_message(recipient_id,"a","a","(y)")
                         #instruction="Looks like you typed something 🙄 \n"
                         #send_message(recipient_id,"a","a",instruction)
@@ -568,7 +568,7 @@ def cart(cartdata):
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
-      {"content_type":"text","title":"Call Steward","payload":'Call Steward'}],   
+      {"content_type":"text","title":"Call Room Service","payload":'Call Room Service'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
                  {"title":"Group Order",
