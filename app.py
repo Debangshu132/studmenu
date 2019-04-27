@@ -246,7 +246,7 @@ def checkPostback(output):
          send_message(id,'a','a', welcome)  
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
  
-        quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
+        quickreply(id,["Water","Cutlery","Towels","Check Out","Call Room Service"],"How may he help you?")
         #return 'success'
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
@@ -352,11 +352,11 @@ def checkQuickReply(text,id):
                {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) your towel is on the way ',button) 
                return True
-           if text=="Checkout":
+           if text=="Check Out":
                send_message(waiterid,"a","a"," Room "+ tableno+" :  Checkout")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
                {"type":"postback","title":"Steward","payload":"Steward"}] 
-               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with bill.',button) 
+               bot.send_button_message(id,'Got it! your bill will be ready in the reception soon.',button) 
                return True
            if text=="Cutlery":
                send_message(waiterid,"a","a"," Room "+ tableno+" : Cutlery")
