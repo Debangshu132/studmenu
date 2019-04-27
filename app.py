@@ -303,9 +303,13 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        welcome3="Just tap menu to order anything you want to eat."
         
        send_message(id,'a','a', welcome)  
+       time.sleep(1)
+       send_message(id,'a','a', welcome1)  
+       time.sleep(2) 
        send_message(id,'a','a', welcome2)
+       time.sleep(1)  
        send_message(id,'a','a', welcome3)
-       
+       time.sleep(0.5) 
          
        instruction="Or tap Room Service for room service"
        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
@@ -349,31 +353,31 @@ def checkQuickReply(text,id):
            if text=="Towels":
                send_message(waiterid,"a","a"," Room "+ tableno+" :  Towels")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
                bot.send_button_message(id,'Got it! B) your towel is on the way ',button) 
                return True
            if text=="Check Out":
-               send_message(waiterid,"a","a"," Room "+ tableno+" :  Checkout")
+               send_message(waiterid,"a","a"," Room "+ tableno+" :  Check Out")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
                bot.send_button_message(id,'Got it! your bill will be ready in the reception soon.',button) 
                return True
            if text=="Cutlery":
                send_message(waiterid,"a","a"," Room "+ tableno+" : Cutlery")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
                bot.send_button_message(id,'Got it! B) your cutlery is on the way ',button) 
                return True
            if text=="Water":
                send_message(waiterid,"a","a"," Room "+ tableno+" : Water")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
                bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with water. ',button) 
                return True 
            if text=="Call Room Service":
                send_message(waiterid,"a","a"," Room "+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
                bot.send_button_message(id,'Got it! Room Service is on the way. ',button) 
                return True 
            
@@ -571,7 +575,7 @@ def cart(cartdata):
       {"content_type":"text","title":"Call Room Service","payload":'Call Room Service'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
-                 {"title":"Group Order",
+                 {"title":"Room Order",
                    "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cheers.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
                  "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
@@ -579,7 +583,7 @@ def cart(cartdata):
       
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "View Order","messenger_extensions": True}] 
-    bot.send_button_message(waiterid,'Table: '+tableno,button) 
+    bot.send_button_message(waiterid,'Room: '+tableno,button) 
     r=pay(responseconsumer) 
      
     return "yes!!!"
