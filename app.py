@@ -297,13 +297,20 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        waiterid=table['waiter']
        waiter=getRestaurantsInformation(restaurant,"waiters")  
        yourwaiter=waiter[waiterid]["name"]  
-       welcome='Hi! '+name+",\n"+"\n"+"Welcome to "+restaurant+" :) \n  \n"+"Our steward "+ yourwaiter+" will be serving your Table "+tableno
+       welcome='Hi! '+name+",\n"+"\n"+"Welcome to FAB hotel :) \n  \n"
+       welcome1="Just want to let you know that I am your personal assistant to make your stay easier, pleasant and exciting."
+       welcome2="Please take a look at our hotel services!"
+       welcome3="Just tap menu to order anything you want to eat."
+        
        send_message(id,'a','a', welcome)  
+       send_message(id,'a','a', welcome2)
+       send_message(id,'a','a', welcome3)
+       
          
-       instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Steward"
+       instruction="Or tap Room Service for room service"
        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
-               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               {"type":"postback","title":"Room Service","payload":"Steward"}] 
        bot.send_button_message(id,instruction,button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
