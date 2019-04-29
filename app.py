@@ -1,4 +1,4 @@
-#Python libraries that we need to import for our bot
+ #Python libraries that we need to import for our bot
 import random
 from pymongo import MongoClient
 from flask import Flask, request,render_template
@@ -79,7 +79,7 @@ def receive_message():
                         a=requests.get("https://graph.facebook.com/"+waiterid+"?fields=first_name,last_name,profile_pic&access_token="+ACCESS_TOKEN)
                         data=a.json()
                         firstname=data['first_name']       
-                        send_message(waiterid,"a","a","Room No. "+tableno+": "+message['message'].get('text'))  
+                        send_message(waiterid,"a","a","Table No. "+tableno+": "+message['message'].get('text'))  
                         send_message(recipient_id,"a","a","(y)")
                         #instruction="Looks like you typed something 🙄 \n"
                         #send_message(recipient_id,"a","a",instruction)
@@ -244,9 +244,9 @@ def checkPostback(output):
        else:
          welcome="please scan the QR code infront of you!"
          send_message(id,'a','a', welcome)  
-    if output['entry'][0]['messaging'][0]['postback']['payload']=='Call Room Service':
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='Steward':
  
-        quickreply(id,["Water","Cutlery","Towels","Check Out","Call Room Service"],"How may he help you?")
+        quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
         #return 'success'
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
@@ -297,20 +297,13 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        waiterid=table['waiter']
        waiter=getRestaurantsInformation(restaurant,"waiters")  
        yourwaiter=waiter[waiterid]["name"]  
-       welcome='Hi! '+name+",\n"+"\n"+"Welcome to FAB hotel :) \n  \n I am your personal assistant to make your stay easier, pleasant and exciting."
-       welcome2="Please take a look at our hotel services!"
-       
-        
+       welcome='Hi! '+name+",\n"+"\n"+"Welcome to "+restaurant+" :) \n  \n"+"Our steward "+ yourwaiter+" will be serving your Table "+tableno
        send_message(id,'a','a', welcome)  
-       time.sleep(2.5)
-       send_message(id,'a','a', welcome2)
-       time.sleep(1)  
-        
          
-       instruction="Just tap menu to order anything you want to eat. \n \n Or tap Room Service for room service"
+       instruction="Instructions:"+ "\n"+ "-To open menu tap Menu"+"\n"+"-To call "+yourwaiter+" tap Steward"
        button= [{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),
                  "title": "Menu","messenger_extensions": True},
-               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
        bot.send_button_message(id,instruction,button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
@@ -346,37 +339,55 @@ def checkQuickReply(text,id):
            firstname=data['first_name']       
                          
            
-           if text=="Towels":
-               send_message(waiterid,"a","a"," Room "+ tableno+" :  Towels")
+           if text=="Napkins":
+               send_message(waiterid,"a","a"," Table "+ tableno+" :  Napkins")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
-               bot.send_button_message(id,'Got it! B) your towel is on the way ',button) 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with napkins. ',button) 
                return True
-           if text=="Check Out":
-               send_message(waiterid,"a","a"," Room "+ tableno+" :  Check Out")
+           if text=="Bill":
+               send_message(waiterid,"a","a"," Table "+ tableno+" :  Bill")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
-               bot.send_button_message(id,'Got it! your bill will be ready in the reception soon.',button) 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with bill.',button) 
                return True
            if text=="Cutlery":
-               send_message(waiterid,"a","a"," Room "+ tableno+" : Cutlery")
+               send_message(waiterid,"a","a"," Table "+ tableno+" : Cutlery")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
-               bot.send_button_message(id,'Got it! B) your cutlery is on the way ',button) 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with cutlery. ',button) 
                return True
            if text=="Water":
-               send_message(waiterid,"a","a"," Room "+ tableno+" : Water")
+               send_message(waiterid,"a","a"," Table "+ tableno+" : Water")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
-               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
                bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way with water. ',button) 
                return True 
-           if text=="Call Room Service":
-               send_message(waiterid,"a","a"," Room "+ tableno+" :  Wants to talk")
+           if text=="Call Steward":
+               send_message(waiterid,"a","a"," Table "+ tableno+" :  Wants to talk")
                button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions": True, "title": "Menu" },
-               {"type":"postback","title":"Call Room Service","payload":"Call Room Service"}] 
-               bot.send_button_message(id,'Got it! Room Service is on the way. ',button) 
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Got it! B) \n'+firstname+' is on the way. ',button) 
                return True 
-           
+           if text=="Accept Order":
+               #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Your ordered is accepted :D ',button) 
+               time.sleep(1)
+               randompic=random.randint(1,50)  
+               send_message(id,'a','a', "Hey Meallionaire,you just got a free pun 😀 ") 
+               responseimage={"recipient":{"id":id},
+               "message":{"attachment":{"type":"image", "payload":{
+               "url":"https://storage.googleapis.com/meallionpics/General/Puns/"+str(randompic)+".jpg"}}}}
+               r=pay(responseimage)
+               return True 
+           if text=="Deny Order":
+               #send_message(waiterid,"a","a"," table number"+ tableno+"is asking for water")
+               button= [{ "type": "web_url","url":  "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(id,"currentRestaurant"),"messenger_extensions":True, "title": "Menu" },
+               {"type":"postback","title":"Steward","payload":"Steward"}] 
+               bot.send_button_message(id,'Sorry, your order has been denied :( ',button) 
+               return True 
           
            else: 
             return False    
@@ -568,10 +579,10 @@ def cart(cartdata):
     cartjsonwaiter={"restaurant":restaurant,"tableno":tableno,"identity":"waiter"}
     cartjsonmanager={"restaurant":restaurant,"tableno":tableno,"identity":"manager"}     
     responseconsumer=   {"recipient":{"id":consumer_id},"message":{"quick_replies": [
-      {"content_type":"text","title":"Call Room Service","payload":'Call Room Service'}],   
+      {"content_type":"text","title":"Call Steward","payload":'Call Steward'}],   
       "attachment":{"type":"template",
           "payload":{"template_type":"generic","elements":[
-                 {"title":"Room Order",
+                 {"title":"Group Order",
                    "image_url":"https://storage.googleapis.com/meallionpics/General/Icons/cheers.jpg",
                      "subtitle":"See the group order here","buttons":[{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonconsumer),
                  "title": "View Order","messenger_extensions": True},{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/"+getConsumerInformation(consumer_id,"currentRestaurant"),
@@ -579,7 +590,7 @@ def cart(cartdata):
       
     button= [{ "type": "web_url","url": "https://studmenuweb.herokuapp.com/groupcart/"+json.dumps(cartjsonwaiter),
                  "title": "View Order","messenger_extensions": True}] 
-    bot.send_button_message(waiterid,'Room: '+tableno,button) 
+    bot.send_button_message(waiterid,'Table: '+tableno,button) 
     r=pay(responseconsumer) 
      
     return "yes!!!"
