@@ -298,7 +298,7 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        waiter=getRestaurantsInformation(restaurant,"waiters")  
        yourwaiter=waiter[waiterid]["name"]  
        welcome='Hi! '+name+",\n"+"\n"+"Welcome to FAB hotel :) \n  \n I am your personal assistant to make your stay easier, pleasant and exciting."
-       welcome2="Please take a look at our hotel services!"
+       welcome2="We believe in staying connected, \n here is our WiFi Password-FAB@123"
        
         
        send_message(id,'a','a', welcome)  
