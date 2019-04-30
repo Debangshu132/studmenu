@@ -306,9 +306,13 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        responseVisitor=   {"recipient":{"id":id},"message":{   
        "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
       
-       {"title":"Room Service","image_url":"https://storage.googleapis.com/meallionpics/General/Room service.jpg",
+       {"title":"Room Service","image_url":"https://storage.googleapis.com/meallionpics/General/Roomservice.jpg",
        "buttons":[{"type":"postback","title":"Call Room Service","payload":"Call Room Service"}]},
         
+       {"title":"Menu","image_url":"https://storage.googleapis.com/meallionpics/General/Menu.jpg",
+       "buttons":[{"type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/CAD",
+       "title": "Menu","messenger_extensions": True} ]},
+       
       
         
        {"title":"Checkout","image_url":"https://storage.googleapis.com/meallionpics/General/Checkout.jpg",
