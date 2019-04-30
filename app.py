@@ -305,17 +305,12 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        time.sleep(1)  
        responseVisitor=   {"recipient":{"id":id},"message":{   
        "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
+      
        {"title":"Room Service","image_url":"https://storage.googleapis.com/meallionpics/General/Room service.jpg",
-       "buttons":[{"type":"postback","title":"Call Room Service","payload":"Call Room Service"}]},
-       {"title":"Menu","image_url":"https://storage.googleapis.com/meallionpics/General/Menu.jpg",
-       "buttons":[{ "type": "web_url","url": "https://reliable-plasma-234606.appspot.com/menu/CAD"),
-       "title": "Menu","messenger_extensions": True}]},
-       {"title":"Checkout","image_url":"https://storage.googleapis.com/meallionpics/General/Checkout.jpg",
-       "buttons":[{"type":"postback","title":"Checkout","payload":"Checkout"}]},
-       {"title":"Chat With Us","image_url":"https://storage.googleapis.com/meallionpics/General/Chat.jpg",
-       "buttons":[{"type":"postback","title":"Chat","payload":"Chat"}]}, 
-       {"title":"Onsite","image_url":"https://storage.googleapis.com/meallionpics/General/Onsite.jpg",
-       "buttons":[{"type":"postback","title":"Onsite","payload":"Onsite"}]}         
+       "buttons":[{"type":"postback","title":"Call Room Service","payload":"Call Room Service"}]}
+        
+        
+        
        ]}}}}   
        r=pay(responseVisitor) 
        instruction="Just tap menu to order anything you want to eat. \n \n Or tap Room Service for room service"
