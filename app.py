@@ -307,10 +307,18 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
        "attachment":{"type":"template","payload":{"template_type":"generic","elements":[
       
        {"title":"Room Service","image_url":"https://storage.googleapis.com/meallionpics/General/Room service.jpg",
-       "buttons":[{"type":"postback","title":"Call Room Service","payload":"Call Room Service"}]}
+       "buttons":[{"type":"postback","title":"Call Room Service","payload":"Call Room Service"}]},
         
+      
         
+       {"title":"Checkout","image_url":"https://storage.googleapis.com/meallionpics/General/Checkout.jpg",
+       "buttons":[{"type":"postback","title":"Checkout","payload":"Checkout"}]},
         
+       {"title":"Chat With Us","image_url":"https://storage.googleapis.com/meallionpics/General/Chat.jpg",
+       "buttons":[{"type":"postback","title":"Chat","payload":"Chat"}]}, 
+        
+       {"title":"Onsite","image_url":"https://storage.googleapis.com/meallionpics/General/Onsite.jpg",
+       "buttons":[{"type":"postback","title":"Onsite","payload":"Onsite"}]} 
        ]}}}}   
        r=pay(responseVisitor) 
        instruction="Just tap menu to order anything you want to eat. \n \n Or tap Room Service for room service"
