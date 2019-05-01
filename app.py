@@ -80,7 +80,7 @@ def receive_message():
                         data=a.json()
                         firstname=data['first_name']       
                         send_message(waiterid,"a","a","Room No. "+tableno+": "+message['message'].get('text'))  
-                        send_message(recipient_id,"a","a","(y)")
+                        #send_message(recipient_id,"a","a","(y)")
                         #instruction="Looks like you typed something 🙄 \n"
                         #send_message(recipient_id,"a","a",instruction)
                         #time.sleep(1)
