@@ -80,8 +80,8 @@ def receive_message():
                         data=a.json()
                         firstname=data['first_name']  
                         msg=message['message'].get('text')
-                        question=['Is there stag entry?','Are stags allowed?','Is there couple entry?','Opening time?','Closing time?','What kind of music is today?','Music?','Who is the DJ?','Do you have brewed beers?']
-                        answer=['Yes, why not','Sorry, we are taking only couple entry today','Yes, we are taking only couple entry today','We start pouring at 6 pm','We have bollywood night today.','We have bollywood night today.','We have Marshmello playing today.','Yes, we have lot of them. Please take a look at our menu.']
+                        question=['Is there stag entry?','Are stags allowed?','Is there couple entry?','Opening time?','Closing time?','What kind of music is today?','Music?','Who is the DJ?','Do you have brewed beers?','Book a table','Offers','Happy hours','Happy hours timing?']
+                        answer=['Yes, why not','Sorry, we are taking only couple entry today','Yes, we are taking only couple entry today','We start pouring at 6 pm','We have bollywood night today.','We have bollywood night today.','We have Marshmello playing today.','Yes, we have lot of them. Please take a look at our menu.','Sure, how many of you are coming to the party?','Here are some of the fantastic offers today','Our happy hours are 4pm to 7pm','Our happy hours are 4pm to 7pm']
                         for i in range(0,len(question)):
                             if msg==question[i]:
                               send_message(recipient_id,"a","a",answer[i])
