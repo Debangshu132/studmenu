@@ -611,6 +611,7 @@ def checkout(data):
      tableInfo=getRestaurantsTableInformation(restaurant,tableno)
      for consumer in tableinfo['consumer']:
         idToSend=consumer.keys()
+        print(idToSend)
         send_message(idToSend, "","","You have been checked out!")
      
      
