@@ -609,7 +609,7 @@ def checkout(data):
      tableno=json.loads(data)["tableno"] 
      helpRestaurantCheckout(restaurant,tableno) 
      tableInfo=getRestaurantsTableInformation(restaurant,tableno)
-     for consumer in tableinfo['consumer']:
+     for consumer in tableInfo['consumer']:
         idToSend=consumer.keys()
         print(idToSend)
         send_message(idToSend, "","","You have been checked out!")
