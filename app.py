@@ -160,6 +160,11 @@ def checkReferral(output):
       data=a.json()
       name=data['first_name']
       fulladdress=str(output['entry'][0]['messaging'][0]['referral']['ref'])
+      if fulladdress[0]=='R':
+         friendId=fulladdress[1:]
+         selfId=id
+         send_message(id,'a','a', "You got 20% discount")
+         send_message(friendId,'a','a', "You got 20% discount") 
       fulladdress=fulladdress.split("_")
       if(fulladdress[0] == "visitingCard"):
                   
