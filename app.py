@@ -255,6 +255,16 @@ def checkPostback(output):
  
         quickreply(id,["Water","Cutlery","Napkins","Bill","Call Steward"],"How may he help you?")
         #return 'success'
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='Good':
+        send_message(id,'a','a','I am glad :) \n Refer your friend and earn discount on your next visit to this restaurant') 
+        #return 'success'
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='Okayish':
+        send_message(id,'a','a','We would like to improve in future ') 
+        send_message(id,'a','a',' Meanwhile ou can share your friend and get amazing discount on your next visit :D') 
+        #return 'success'
+    if output['entry'][0]['messaging'][0]['postback']['payload']=='Bad':
+        send_message(id,'a','a','Sorry to hear that \n Please type in what we did wrong ') 
+        #return 'success'
      
 def handleUser(id,fulladdress,name,restaurant,tableno):
     userCondition=checkUserCondition(id)
@@ -615,9 +625,9 @@ def checkout(data):
         idToSend=list(consumer.keys())
         send_message(idToSend[0], "","","You have been checked out!")
         #quickreplyDifferentPayload(idToSend[0],['1','2','3','4','5'],['rating1','rating2','rating3','rating4','rating5'],'Please rate our service')
-        button= [{"type":"postback","title":"Good :D","payload":"Good"},
-                {"type":"postback","title":"Okayish :)","payload":"Okayish"},
-                {"type":"postback","title":"Bad :(","payload":"Bad"}] 
+        button= [{"type":"postback","title":"Good","payload":"Good"},
+                {"type":"postback","title":"Okayish","payload":"Okayish"},
+                {"type":"postback","title":"Bad","payload":"Bad"}] 
         bot.send_button_message(idToSend[0],'How was our service?',button) 
      helpRestaurantCheckout(restaurant,tableno)
      
