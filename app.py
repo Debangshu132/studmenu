@@ -618,7 +618,7 @@ def checkout(data):
         button= [{"type":"postback","title":"Good :D","payload":"Good"},
                 {"type":"postback","title":"Okayish :)","payload":"Okayish"},
                 {"type":"postback","title":"Bad :(","payload":"Bad"}] 
-        bot.send_button_message(id,'How was our service?',button) 
+        bot.send_button_message(idToSend[0],'How was our service?',button) 
      helpRestaurantCheckout(restaurant,tableno)
      
      print(data)
