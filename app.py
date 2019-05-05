@@ -611,7 +611,7 @@ def checkout(data):
      tableInfo=getRestaurantsTableInformation(restaurant,tableno)
      consumerData=tableInfo['consumer']
      print('consumer data is ',consumerData)
-     for consumer in tableInfo['consumer']:
+     for consumer in json.loads(list(consumerData)):
         print('the consumer is',consumer)
         idToSend=consumer.keys()
         print('the id is',idToSend)
