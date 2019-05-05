@@ -612,11 +612,9 @@ def checkout(data):
      consumerData=tableInfo['consumer']
      print('consumer data is ',consumerData)
      for consumer in consumerData:
-        print('the consumer is',consumer)
-        
         idToSend=list(consumer.keys())
-        print('the id is',idToSend[0])
         send_message(idToSend[0], "","","You have been checked out!")
+        quickreplyDifferentPayload(idToSend[0],['1','2','3','4','5'],['rating1','rating2','rating3','rating4','rating5'],'Please rate our service')
      helpRestaurantCheckout(restaurant,tableno)
      
      print(data)
