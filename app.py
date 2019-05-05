@@ -613,10 +613,10 @@ def checkout(data):
      print('consumer data is ',consumerData)
      for consumer in consumerData:
         print('the consumer is',consumer)
-        i=json.loads(consumer)
-        idToSend=i.keys()
-        print('the id is',idToSend)
-        send_message(idToSend, "","","You have been checked out!")
+        
+        idToSend=list(consumer.keys())
+        print('the id is',idToSend[0])
+        send_message(idToSend[0], "","","You have been checked out!")
      helpRestaurantCheckout(restaurant,tableno)
      
      print(data)
