@@ -257,13 +257,13 @@ def checkPostback(output):
         #return 'success'
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Good':
         send_message(id,'a','a','I am glad :) \n Refer your friend and earn discount on your next visit to this restaurant') 
-        bot.send_button_message(id,'Share',[shareme()])
+        bot.send_button_message(id,'Share',[shareme(id)])
         
         #return 'success'
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Okayish':
         send_message(id,'a','a','We would like to improve in future ') 
         send_message(id,'a','a',' Meanwhile ou can share your friend and get amazing discount on your next visit :D') 
-        bot.send_button_message(id,'Share',[shareme()])
+        bot.send_button_message(id,'Share',[shareme(id)])
         #return 'success'
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Bad':
         send_message(id,'a','a','Sorry to hear that \n Please type in what we did wrong ') 
@@ -436,17 +436,17 @@ def updateWaitersInformation(ID, **kwargs):
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     
     return(0)
-def shareme():
+def shareme(id):
     shareit={"type": "element_share","share_contents": { 
     "attachment": {"type": "template",
       "payload": {"template_type": "generic",
         "elements": [{
             "title": "Get amazing discount on your next visit to CAD!!",
-            "subtitle": " Use coupon code ABCD",
+            "subtitle": " Upto 20%",
             "image_url": "https://thumbs.dreamstime.com/t/sale-promotion-17779772.jpg",
             "default_action": {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot"},
             "buttons": [
-              {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot", "title": "Activate Offer!"
+              {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot?ref=R"+id, "title": "Activate Offer!"
               }]}]}}}}
     return shareit   
 def pushRestaurantsWaitersInformation(restaurant, id,tableno):
