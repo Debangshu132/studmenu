@@ -165,6 +165,7 @@ def checkReferral(output):
          selfId=id
          send_message(id,'a','a', "You got 20% discount")
          send_message(friendId,'a','a', "You got 20% discount") 
+         return "success" 
       fulladdress=fulladdress.split("_")
       if(fulladdress[0] == "visitingCard"):
                   
