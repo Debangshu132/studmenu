@@ -607,7 +607,7 @@ def checkout(data):
      consumer_id=json.loads(data)["tableno"]    
      restaurant=json.loads(data)["restaurant"]
      tableno=json.loads(data)["tableno"] 
-     helpRestaurantCheckout(restaurant,tableno) 
+      
      tableInfo=getRestaurantsTableInformation(restaurant,tableno)
      consumerData=tableInfo['consumer']
      print('consumer data is ',consumerData)
@@ -616,7 +616,7 @@ def checkout(data):
         idToSend=consumer.keys()
         print('the id is',idToSend)
         send_message(idToSend, "","","You have been checked out!")
-     
+     helpRestaurantCheckout(restaurant,tableno)
      
      print(data)
      return "yes!!!"
