@@ -443,7 +443,7 @@ def shareme():
         "elements": [{
             "title": "Get amazing discount on your next visit to CAD!!",
             "subtitle": " Use coupon code ABCD",
-            #"image_url": "<IMAGE_URL_TO_DISPLAY>",
+            "image_url": "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwig6puTvoTiAhWJ6Y8KHfFUDrwQjRx6BAgBEAU&url=https%3A%2F%2Fwww.dreamstime.com%2Fstock-photography-sale-promotion-image17779772&psig=AOvVaw0efWZFUOVDjfIJyeqNN9Za&ust=1557148974892313",
             "default_action": {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot"},
             "buttons": [
               {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot", "title": "Activate Offer!"
