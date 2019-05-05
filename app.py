@@ -296,7 +296,7 @@ def createUser(id,fulladdress,name,restaurant,tableno):
 def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
       
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
-       updateRestaurantsTablesConsumerInformation(restaurant,tableno, name)
+       updateRestaurantsTablesConsumerInformation(restaurant,tableno, name,id)
        restaurant=getConsumerInformation(id,"currentRestaurant")
        tableno=getConsumerInformation(id,"currentTable")
        tables=getRestaurantsInformation(restaurant,"tables")
@@ -493,13 +493,13 @@ def helpRestaurantCheckout(nameOfRestaurant,tableno):
     updateRestaurantsTablesInformation(nameOfRestaurant,tableno, cart={})     
     updateRestaurantsTablesInformation(nameOfRestaurant,tableno, consumer=[])
     return(0)    
-def updateRestaurantsTablesConsumerInformation(nameOfRestaurant,tableno, consumer_id):
+def updateRestaurantsTablesConsumerInformation(nameOfRestaurant,tableno, name,consumer_id):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
     db = client.get_database("brilu")
     tables=getRestaurantsInformation(nameOfRestaurant,"tables")
     table=tables[tableno]
-    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".consumer": consumer_id}},upsert=True);
+    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".consumer."+str(consumer_id):name}},upsert=True);
     return(0)
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
