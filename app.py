@@ -257,10 +257,13 @@ def checkPostback(output):
         #return 'success'
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Good':
         send_message(id,'a','a','I am glad :) \n Refer your friend and earn discount on your next visit to this restaurant') 
+        bot.send_button_message(id,'Share',[shareme()])
+        
         #return 'success'
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Okayish':
         send_message(id,'a','a','We would like to improve in future ') 
         send_message(id,'a','a',' Meanwhile ou can share your friend and get amazing discount on your next visit :D') 
+        bot.send_button_message(id,'Share',[shareme()])
         #return 'success'
     if output['entry'][0]['messaging'][0]['postback']['payload']=='Bad':
         send_message(id,'a','a','Sorry to hear that \n Please type in what we did wrong ') 
@@ -433,7 +436,7 @@ def updateWaitersInformation(ID, **kwargs):
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     
     return(0)
-def shareme(message):
+def shareme():
     shareit={"type": "element_share","share_contents": { 
     "attachment": {"type": "template",
       "payload": {"template_type": "generic",
