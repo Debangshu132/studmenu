@@ -499,7 +499,7 @@ def updateRestaurantsTablesConsumerInformation(nameOfRestaurant,tableno, name,co
     db = client.get_database("brilu")
     tables=getRestaurantsInformation(nameOfRestaurant,"tables")
     table=tables[tableno]
-    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".consumer."+str(consumer_id):name}},upsert=True);
+    db.restaurants.update({"_id" : "restaurant"}, {"$push":{str(nameOfRestaurant)+".tables."+str(tableno)+".consumer":{consumer_id:name}}},upsert=True);
     return(0)
 
 def updateRestaurantsTablesInformation(nameOfRestaurant,tableno, **kwargs):
