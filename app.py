@@ -614,7 +614,11 @@ def checkout(data):
      for consumer in consumerData:
         idToSend=list(consumer.keys())
         send_message(idToSend[0], "","","You have been checked out!")
-        quickreplyDifferentPayload(idToSend[0],['1','2','3','4','5'],['rating1','rating2','rating3','rating4','rating5'],'Please rate our service')
+        #quickreplyDifferentPayload(idToSend[0],['1','2','3','4','5'],['rating1','rating2','rating3','rating4','rating5'],'Please rate our service')
+        button= [{"type":"postback","title":"Good :D","payload":"Good"},
+                {"type":"postback","title":"Okayish :)","payload":"Okayish"},
+                {"type":"postback","title":"Bad :(","payload":"Bad"}] 
+        bot.send_button_message(id,'How was our service?',button) 
      helpRestaurantCheckout(restaurant,tableno)
      
      print(data)
