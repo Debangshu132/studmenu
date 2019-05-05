@@ -433,6 +433,19 @@ def updateWaitersInformation(ID, **kwargs):
         db.users.update({"_id" : "waiter"}, {"$set":{str(ID)+"."+str(key): kwargs[key]}},upsert=True);
     
     return(0)
+def shareme(message):
+    shareit={"type": "element_share","share_contents": { 
+    "attachment": {"type": "template",
+      "payload": {"template_type": "generic",
+        "elements": [{
+            "title": "Get amazing discount on your next visit to CAD!!",
+            "subtitle": " Use coupon code ABCD",
+            #"image_url": "<IMAGE_URL_TO_DISPLAY>",
+            "default_action": {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot"},
+            "buttons": [
+              {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot", "title": "Activate Offer!"
+              }]}]}}}}
+    return shareit   
 def pushRestaurantsWaitersInformation(restaurant, id,tableno):
     MONGODB_URI = "mongodb://Debangshu:Starrynight.1@ds163694.mlab.com:63694/brilu"
     client = MongoClient(MONGODB_URI, connectTimeoutMS=30000)
@@ -547,6 +560,7 @@ def getConsumerInformation(id,property):
     cursor = col.find()
     consumer = cursor[1]
     return(consumer[id][property])
+   
 
 
 
