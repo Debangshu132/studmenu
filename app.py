@@ -449,7 +449,7 @@ def shareme(id):
         "elements": [{
             "title": "Get amazing discount on your next visit to CAD!!",
             "subtitle": " Upto 20%",
-            "image_url": "https://thumbs.dreamstime.com/t/sale-promotion-17779772.jpg",
+            "image_url": "https://grapevineonline.in/wp-content/uploads/2017/06/Screen-Shot-2017-06-07-at-5.10.10-PM.png?fbclid=IwAR2FgQ1C-Zy3giFrPATUqi2LbHNe-L8vfGCqaqqeQrKXQOIGedRcP40ORmA",
             "default_action": {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot"},
             "buttons": [
               {"type": "web_url","url": "https://www.messenger.com/t/MeallionBot?ref=R"+id, "title": "Activate Offer!"
