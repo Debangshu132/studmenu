@@ -331,6 +331,13 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Steward","payload":"Steward"}] 
        bot.send_button_message(id,instruction,button) 
+       send_message(id, "","","** After the customer eats")
+       send_message(id, "","","You have been checked out!")
+       #quickreplyDifferentPayload(idToSend[0],['1','2','3','4','5'],['rating1','rating2','rating3','rating4','rating5'],'Please rate our service')
+       button= [{"type":"postback","title":"Good","payload":"Good"},
+                {"type":"postback","title":"Okayish","payload":"Okayish"},
+                {"type":"postback","title":"Bad","payload":"Bad"}] 
+       bot.send_button_message(id,'How was our service?',button) 
        
        updateConsumersInformation(id,name=name,currentRestaurant=restaurant,currentTable=tableno)  
 def executeWaiterCode(id,fulladdress,name,restaurant,tableno):
