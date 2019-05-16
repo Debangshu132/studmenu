@@ -331,14 +331,16 @@ def executeConsumerCode(id,fulladdress,name,restaurant,tableno):
                  "title": "Menu","messenger_extensions": True},
                {"type":"postback","title":"Steward","payload":"Steward"}] 
        bot.send_button_message(id,instruction,button) 
-       send_message(id, "","","**After the customer eats,feedback")
-       send_message(id, "","","You have been checked out!")
+       time.sleep(3)
+       send_message(id, "","","**After the customer dines")
+       send_message(id, "","","It was great hosting you")
        #quickreplyDifferentPayload(idToSend[0],['1','2','3','4','5'],['rating1','rating2','rating3','rating4','rating5'],'Please rate our service')
        button= [{"type":"postback","title":"Good","payload":"Good"},
                 {"type":"postback","title":"Okayish","payload":"Okayish"},
                 {"type":"postback","title":"Bad","payload":"Bad"}] 
        bot.send_button_message(id,'How was our service?',button) 
-       send_message(id, "","","**After the customer eats,referal")
+       time.sleep(0.7)
+       send_message(id, "","","**After feedback,referral")
        
        send_message(id,'a','a','I am glad :) \n Refer your friend and earn discount on your next visit to this restaurant') 
        bot.send_button_message(id,'Share',[shareme(id)])
