@@ -1,3 +1,3 @@
 # studmenu
-Digital menu startup that will take over the world
-This repository contains all the code for the chatbot
+Digital menu that runs on AI.
+This repository contains the codes for the chatbot backend
